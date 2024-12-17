@@ -1,0 +1,206 @@
+/* ESKİ BACKGROUND */
+/* .gradient-background {
+    background: linear-gradient(300deg, #00bfff, #0087b4, #809240);
+    background-size: 600% 600%;
+    animation: gradient-animation 4s ease infinite;
+    min-height: 100vh;
+} */
+
+.gradient-background {
+    background: linear-gradient(300deg, #FF6500, #1E3E62, #0B192C, #000000);
+    background-size: 750% 600%;
+    animation: gradient-animation 7s ease infinite;
+    min-height: 100vh;
+}
+
+@keyframes gradient-animation {
+    0% {
+    background-position: 0% 50%;
+}
+    50% {
+    background-position: 100% 50%;
+}
+    100% {
+    background-position: 0% 50%;
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+    font-family: "Lexend Deca", sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    position: relative;
+}
+
+.picture-and-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3%;
+    background-color: hsl(0, 0%, 100%, 0.2);
+    width: 100%;
+    border-radius: 100px;
+    margin-top: 2%;
+}
+
+.link-plus-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+
+.picture-and-links > .link-plus-icon > a {
+    text-decoration: none;
+    color: hsl(0, 0%, 100%, 0.7);
+    border: solid 1px hsl(0, 0%, 100%, 0.7);
+    border-radius: 15px;
+    padding: 8px;
+}
+
+.picture-and-links > a:hover {
+    box-shadow: 0px 0px 30px hsl(0, 0%, 100%, 0.7);
+}
+
+.uygar-pic {
+    width: 125px;
+    border-radius: 100%;
+    box-shadow: 0px 0px 30px hsl(0, 0%, 100%, 0.7);
+    grid-column-start: 2;
+}
+
+.subtitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 2%;
+    color: hsl(0, 0%, 100%, 0.7);
+    padding: 20px;
+}
+
+.icons {
+    width: 50px;
+}
+
+.link-icons {
+    width: 25px;
+}
+
+.contents {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 2fr 2fr 2fr;
+    margin-top: 2%;
+}
+
+.person {
+    display: grid;
+    grid-column: span 2;
+    text-align: center;
+    color: hsl(0, 0%, 100%, 0.7);
+    border-top: solid 8px;
+    padding:20px;
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.first-school {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-bottom: solid 4px hsl(0, 0%, 100%, 0.7);
+    border-right: solid 2px hsl(0, 0%, 100%, 0.7);
+    border-top: solid 8px hsl(0, 0%, 100%, 0.7);
+    color: hsl(0, 0%, 100%, 0.7);
+}
+
+.second-school {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-bottom: solid 4px hsl(0, 0%, 100%, 0.7);
+    border-left: solid 2px hsl(0, 0%, 100%, 0.7);
+    border-top: solid 8px hsl(0, 0%, 100%, 0.7);
+    color: hsl(0, 0%, 100%, 0.7);
+}
+
+.first-school-p {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-bottom: solid 8px hsl(0, 0%, 100%, 0.7);
+    border-right: solid 2px hsl(0, 0%, 100%, 0.7);
+    color: hsl(0, 0%, 100%, 0.7);
+    font-weight: bold;
+    padding: 20px;
+}
+
+.first-school-p > a {
+    text-decoration: none;
+    color: hsl(0, 0%, 100%, 0.7);
+}
+
+.second-school-p {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-bottom: solid 8px hsl(0, 0%, 100%, 0.7);
+    border-left: solid 2px hsl(0, 0%, 100%, 0.7);
+    color: hsl(0, 0%, 100%, 0.7);
+    font-weight: bold;
+    padding: 20px;
+}
+
+.second-school-p > a {
+    text-decoration: none;
+    color: hsl(0, 0%, 100%, 0.7);
+}
+
+.footer-text {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+    background-color: hsl(0, 0%, 100%, 0.2);
+    color: hsl(0, 0%, 100%, 0.7);
+    font-size: 12px;
+}
+
+@media (max-width: 500px) {
+    .contents {
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr; 
+    }
+
+    .first-school, .second-school {
+        padding: 20px;
+    }
+} 
