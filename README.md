@@ -44,7 +44,7 @@ Bu proje, **Uygar Yılanlı**'nın kişisel bilgilerini, eğitim geçmişini ve 
 
 ## 🌐 Canlı Önizleme
 
-Proje, GitHub Pages veya yerel bir sunucuda çalıştırılabilir. Websitenin adresi:
+Projemi Hostinger isimli domain sağlayıcısı üzerinden bir domain satın alarak, GitHub sitesinin'de ücretsiz host özelliğini kullanarak uygaryilanli.com isimli sitede yayınlamış bulunmaktayım. Websiteye erişim linki:
 
 **[Siteye Git](https://www.uygaryilanli.com/)**
 
