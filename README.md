@@ -32,7 +32,7 @@ Bu proje, **Uygar Yılanlı**'nın kişisel bilgilerini, eğitim geçmişini ve 
 │── style.css           # Stil dosyası
 │── /assets
 │   ├── /images
-│   │   └── uygar.jfif  # Profil fotoğrafı
+│   │   └── uygar-new.jpeg  # Profil fotoğrafı
 │   └── /icons
 │       ├── github.png  # GitHub simgesi
 │       ├── linkedin.png# LinkedIn simgesi
