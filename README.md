@@ -1,26 +1,29 @@
+# 🌟 Uygar Yılanlı | Kişisel Web Sitesi
 
-# Uygar Yılanlı Kişisel Web Sitesi
-
-Bu proje, **Uygar Yılanlı**'nın kişisel bilgilerini, eğitim geçmişini ve sosyal medya profillerini içeren bir web sitesidir. Web sitesi, modern tasarım ve kullanıcı dostu arayüz kullanarak hazırlanmıştır.
+Bu proje, **Uygar Yılanlı**'nın kişisel bilgilerini, eğitim geçmişini, projelerini ve sosyal medya profillerini içeren modern bir web sitesidir. Kullanıcı dostu bir arayüz ve şık bir tasarım ile ziyaretçilere keyifli bir deneyim sunmayı amaçlamaktadır.
 
 ---
 
 ## 🚀 Proje Özellikleri
 
-- **Hakkımda**: Kişisel bilgiler ve kariyer hedefleriniz.
-- **Eğitim**: Üniversite ve program bilgileri.
-- **Sosyal Medya**: GitHub ve LinkedIn bağlantıları.
-- **Responsive Tasarım**: Mobil cihazlarda uyumlu görünüm.
-- **Modern CSS Animasyonları**: Arka plan geçiş efektleri.
+✅ **Hakkımda**: Kişisel bilgiler, kariyer hedefleri ve ilgi alanları.  
+✅ **Eğitim Geçmişi**: Üniversite bilgileri ve bölümler.  
+✅ **Projeler**: Geliştirilmiş ve geliştirilmekte olan projelerin tanıtımı.  
+✅ **Sosyal Medya**: GitHub ve LinkedIn gibi platformlara bağlantılar.  
+✅ **Responsive Tasarım**: Mobil cihazlarla uyumlu modern arayüz.  
+✅ **CSS Animasyonları**: Dinamik ve etkileyici kullanıcı deneyimi.  
+✅ **Hafif ve Hızlı**: Minimalist ve performans dostu yapı.  
 
 ---
 
 ## 🛠️ Kullanılan Teknolojiler
 
-1. **HTML5**: Sayfa yapısının oluşturulması.
-2. **CSS3**: Sayfanın stil ve düzenlemesi.
-3. **Google Fonts**: Özel fontlar ile modern tipografi.
-4. **GitHub ve LinkedIn API'leri**: Harici bağlantılar.
+- **HTML5**: Sayfanın temel yapısı.
+- **CSS3**: Şık tasarım ve animasyonlar.
+- **JavaScript**: Etkileşimli öğeler.
+- **Google Fonts**: Modern tipografi.
+- **GitHub & LinkedIn API'leri**: Sosyal medya bağlantıları.
+- **Responsive Design**: Her cihazda mükemmel uyum.
 
 ---
 
@@ -29,11 +32,12 @@ Bu proje, **Uygar Yılanlı**'nın kişisel bilgilerini, eğitim geçmişini ve 
 ```plaintext
 .
 │── index.html          # Ana HTML dosyası
+│── archive.html        # Arşiv sayfası
 │── style.css           # Stil dosyası
-│── /assets
-│   ├── /images
-│   │   └── uygar-new.jpeg  # Profil fotoğrafı
-│   └── /icons
+│── /assets             # Medya ve ikonlar
+│   ├── /images         # Resimler
+│   │   ├── uygar-new.jpeg  # Profil fotoğrafı
+│   └── /icons          # İkonlar
 │       ├── github.png  # GitHub simgesi
 │       ├── linkedin.png# LinkedIn simgesi
 │       └── school.svg  # Okul simgesi
@@ -44,7 +48,19 @@ Bu proje, **Uygar Yılanlı**'nın kişisel bilgilerini, eğitim geçmişini ve 
 
 ## 🌐 Canlı Önizleme
 
-Proje, GitHub Pages veya yerel bir sunucuda çalıştırılabilir. Websitenin adresi:
+Proje, GitHub Pages veya yerel bir sunucu aracılığıyla çalıştırılabilir. 
+Web sitesine erişmek için aşağıdaki bağlantıyı kullanabilirsiniz:
 
-**[Siteye Git](https://www.uygaryilanli.com/)**
+🔗 **[Siteye Git](https://www.uygaryilanli.com/)**
 
+---
+
+## 📬 İletişim
+
+📧 Email: **uygaryilanli@example.com**  
+🐙 GitHub: **[uygaryilanli](https://github.com/uygaryilanli)**  
+🔗 LinkedIn: **[Uygar Yılanlı](https://www.linkedin.com/in/uygaryilanli/)**  
+
+---
+
+🎯 **Not:** Proje sürekli güncellenmektedir. Geri bildirim ve katkılarınız için teşekkürler! 🙌
