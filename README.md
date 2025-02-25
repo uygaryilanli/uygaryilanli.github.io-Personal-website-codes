@@ -20,7 +20,6 @@ Bu proje, **Uygar Yılanlı**'nın kişisel bilgilerini, eğitim geçmişini, pr
 
 - **HTML5**: Sayfanın temel yapısı.
 - **CSS3**: Şık tasarım ve animasyonlar.
-- **JavaScript**: Etkileşimli öğeler.
 - **Google Fonts**: Modern tipografi.
 - **GitHub & LinkedIn API'leri**: Sosyal medya bağlantıları.
 - **Responsive Design**: Her cihazda mükemmel uyum.
