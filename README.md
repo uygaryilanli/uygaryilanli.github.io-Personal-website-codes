@@ -56,7 +56,7 @@ Web sitesine erişmek için aşağıdaki bağlantıyı kullanabilirsiniz:
 
 ## 📬 İletişim
 
-📧 Email: **uygaryilanli@example.com**  
+📧 Email: **u.yilanli2000@gmail.com**  
 🐙 GitHub: **[uygaryilanli](https://github.com/uygaryilanli)**  
 🔗 LinkedIn: **[Uygar Yılanlı](https://www.linkedin.com/in/uygaryilanli/)**  
 
