@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Snakely - Kelime Kartı</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .card {
+      perspective: 1000px;
+    }
+
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+
+    .card.flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      border-radius: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-front {
+      background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+    }
+
+    .card-back {
+      transform: rotateY(180deg);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+
+    .button-hover {
+      transition: all 0.3s ease;
+    }
+
+    .button-hover:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-6">
+
+  <!-- Ana Kapsayıcı -->
+  <div class="w-80 mx-auto flex flex-col items-center gap-6">
+
+    <!-- Kart -->
+    <div class="card w-full h-52" id="wordCard">
+      <div class="card-inner">
+        <div class="card-front shadow-2xl">
+          <h1 id="wordText" class="text-4xl font-bold text-white tracking-wide">Love</h1>
+        </div>
+        <div class="card-back shadow-2xl">
+          <h1 id="backText" class="text-4xl font-bold text-white tracking-wide">Aşk</h1>
+        </div>
+      </div>
+    </div>
+
+    <!-- Butonlar -->
+    <div class="flex justify-between w-full gap-4">
+      <button
+        id="flipBtn"
+        class="button-hover flex-1 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-4 rounded-xl shadow-lg border-2 border-emerald-400 focus:outline-none focus:ring-4 focus:ring-emerald-300"
+        onclick="flipCard()"
+      >
+        🔄 Flip
+      </button>
+
+      <button
+        id="passBtn"
+        class="button-hover flex-1 bg-orange-500 hover:bg-orange-600 text-white font-semibold py-4 rounded-xl shadow-lg border-2 border-orange-400 focus:outline-none focus:ring-4 focus:ring-orange-300"
+        onclick="passCard()"
+      >
+        ⏭️ Pass
+      </button>
+    </div>
+
+    <!-- Açıklama -->
+    <p class="mt-2 text-gray-600 text-sm text-center">
+      Kartı çevirmek için <strong>Flip</strong>, yeni kelime için <strong>Pass</strong> butonunu kullanın.<br />
+      Klavye kısayolları: <kbd>Space</kbd> (Flip), <kbd>→</kbd> veya <kbd>Enter</kbd> (Pass)
+    </p>
+
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    const words = [
+      { english: "Love", turkish: "Aşk" },
+      { english: "Hope", turkish: "Umut" },
+      { english: "Dream", turkish: "Rüya" },
+      { english: "Peace", turkish: "Barış" },
+      { english: "Joy", turkish: "Neşe" },
+      { english: "Light", turkish: "Işık" },
+      { english: "Heart", turkish: "Kalp" },
+      { english: "Soul", turkish: "Ruh" }
+    ];
+
+    let currentWordIndex = 0;
+    let isFlipped = false;
+
+    function flipCard() {
+      const card = document.getElementById("wordCard");
+      card.classList.toggle("flipped");
+      isFlipped = !isFlipped;
+    }
+
+    function passCard() {
+      const card = document.getElementById("wordCard");
+      if (isFlipped) {
+        flipCard();
+        setTimeout(showNextWord, 600); // Flip animasyonu sonrası kelime değiştir
+      } else {
+        showNextWord();
+      }
+    }
+
+    function showNextWord() {
+      currentWordIndex = (currentWordIndex + 1) % words.length;
+      const currentWord = words[currentWordIndex];
+
+      const frontText = document.getElementById("wordText");
+      const backText = document.getElementById("backText");
+      const card = document.getElementById("wordCard");
+
+      card.style.transform = "scale(0.95)";
+      setTimeout(() => {
+        if (frontText && backText) {
+          frontText.textContent = currentWord.english;
+          backText.textContent = currentWord.turkish;
+        }
+        card.style.transform = "scale(1)";
+      }, 150);
+    }
+
+    // Klavye kısayolları
+    document.addEventListener("keydown", function (event) {
+      if (event.code === "Space") {
+        event.preventDefault();
+        flipCard();
+      } else if (event.code === "ArrowRight" || event.code === "Enter") {
+        event.preventDefault();
+        passCard();
+      }
+    });
+  </script>
+</body>
+</html>
