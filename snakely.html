@@ -51,7 +51,7 @@
   }
 
   .logo{
-    position:fixed; left:12px; top:12px; z-index: var(--z-logo);;
+    position:fixed; left:12px; top:12px; z-index: var(--z-logo);
     width:72px; height:72px; object-fit:cover;
     border-radius:50%;
     padding:8px;
@@ -105,7 +105,6 @@
     transform-style:preserve-3d; -webkit-transform-style:preserve-3d;
     border-radius:20px;
     transition:transform .8s cubic-bezier(.4,.2,.2,1);
-    /* fadeIn kaldırıldı: dikey zıplama engellendi */
     transform: translateZ(0); will-change: transform;
   }
 
@@ -264,18 +263,15 @@
   }
 
   .choice {
-  padding: 16px;       
-  font-size: 15px;    
-  min-height: unset;  
-  line-height: 1.2;   
-}
+    padding: 16px;
+    font-size: 15px;
+    min-height: unset;
+    line-height: 1.2;
+  }
 
   @media (max-width: 600px){
     body{ padding:16px; gap:14px; justify-content: flex-start;}
-    .wrap{ 
-    /* Serbest Gezinim ve Test sarmalayıcılarının üstüne dinamik boşluk */
-    margin-top: calc(var(--tabsH, 56px) + 10px);
-    }
+    .wrap{ margin-top: calc(var(--tabsH, 56px) + 10px); }
     #test-wrap{ margin-top: calc(var(--tabsH, 56px) + 10px); }
     .tabs{ width:100%; flex-direction:column; gap:8px; border-radius:14px; position: sticky; top: calc(84px + env(safe-area-inset-top)); z-index: var(--z-tabs); margin-top: 8px; }
     .tab{ width:100%; text-align:center; }
@@ -357,15 +353,20 @@
   .toast-container{
     position: fixed;
     top: calc(12px + env(safe-area-inset-top));
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
+    right: 0;
+    transform: none;
+    margin: 0 auto;
+    width: min(520px, 94vw);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
     z-index: calc(var(--z-modal) + 10);
     display: grid;
     gap: 8px;
-    width: min(94vw, 520px);
-    pointer-events: none; /* tıklamayı engellemez */
+    pointer-events: none;
   }
   .toast{
+    box-sizing: border-box;
     pointer-events: auto;
     border-radius: 12px;
     padding: 10px 14px;
@@ -376,6 +377,9 @@
     background: rgba(255,255,255,.96);
     color: #0f172a;
     animation: toastIn .24s ease both;
+    max-width: 100%;
+    overflow: hidden;
+    margin-inline: 8px; /* dar cihazlarda kenar tamponu */
   }
   body[data-theme="dark"] .toast{
     background: rgba(17,24,39,.96);
@@ -393,11 +397,25 @@
   }
   .toast .row{
     display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    min-width: 0;
+  }
+  /* Mesaj metni büzülebilsin ve satır kırsın */
+  .toast .row > div:first-child{
+    flex: 1 1 auto;
+    min-width: 0;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    hyphens: auto;
   }
 
-  @keyframes toastIn{ from{opacity:0; transform: translate(-50%,-6px)} to{opacity:1; transform: translate(-50%,0)} }
-  @keyframes toastOut{ to{opacity:0; transform: translate(-50%,-6px)} }
-
+  /* Animasyonlar: yalnız Y ekseninde hareket */
+  @keyframes toastIn{
+    from{ opacity:0; transform: translateY(-6px); }
+    to  { opacity:1; transform: translateY(0); }
+  }
+  @keyframes toastOut{
+    to{ opacity:0; transform: translateY(-6px); }
+  }
 </style>
 </head>
 <body data-theme="light">
@@ -700,7 +718,7 @@
   let answered = false;
   let lock = false;
   let removedIdx = [];
-  let fiftyLeft = Infinity;    // İpuçlarına dokunmuyoruz, sen nasıl bıraktıysan öyle
+  let fiftyLeft = Infinity;    // ipuçlarına dokunmuyoruz
   let usedCheckOrClue = false;
   let isPassing = false;
   let suppressClick = false;
