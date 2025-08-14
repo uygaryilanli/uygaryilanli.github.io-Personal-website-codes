@@ -98,8 +98,8 @@
     /* fadeIn kaldırıldı: dikey zıplama engellendi */
     transform: translateZ(0); will-change: transform;
   }
-  .card-inner.animating{ transition:none !important; } /* flip/pass sırasında başka geçiş yok */
-  .flipped{ transform:rotateY(180deg); }
+
+  .card-inner.flipped{ transform:rotateY(180deg) translateZ(0); }
 
   .face{
     position:absolute; inset:0; border-radius:20px;
@@ -113,12 +113,15 @@
     -webkit-font-smoothing: antialiased;
   }
   /* flip/pass sırasında gradient & parıltı tamamen kapalı → renk sönmesi yok */
-  .card-inner.animating .face{ animation:none !important; background-image:none !important; }
-  .card-inner.animating .face::after{ animation:none !important; opacity:0 !important; }
+  .card-inner.animating .face{ animation-play-state: paused !important; }
+  .card-inner.animating .face::after{ animation-play-state: paused !important; opacity: 1 !important; }
 
   .back{ transform:rotateY(180deg); }
-  .card-inner:not(.flipped) .back { visibility:hidden; }
-  .card-inner.flipped .front { visibility:hidden; }
+
+  .front, .back{
+    -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+  }
   .card-inner:not(.flipped) .front { transform:translateZ(1px); }
   .card-inner.flipped .back { transform:rotateY(180deg) translateZ(1px); }
 
@@ -654,31 +657,20 @@
     inner.addEventListener("animationend", () => inner.classList.remove("enter-right"), { once:true });
   }
 
-  function flipCard(){
-    if (suppressClick || isPassing) { suppressClick = false; return; }
+function flipCard(){
+  if (suppressClick || isPassing) { suppressClick = false; return; }
 
-    // 1) animating bayrağı → CSS tarafı parıltı/gradient kapatıyor
-    inner.classList.add('animating');
+  inner.classList.add('animating');   // sadece play-state: paused için
+  Sound.flip();
+  inner.classList.toggle('flipped');
 
-    // 2) gradient'i JS ile de kesin kapat (flicker kalmasın)
-    const prevFrontBG = front.style.backgroundImage;
-    const prevBackBG  = back.style.backgroundImage;
-    front.style.backgroundImage = 'none';
-    back.style.backgroundImage  = 'none';
-
-    Sound.flip();
-    inner.classList.toggle('flipped');
-
-    const onEnd = (e)=>{
-      if(e.propertyName!=='transform') return;
-      inner.classList.remove('animating');
-      // 3) flip bitti → gradient geri
-      front.style.backgroundImage = _bgFront;
-      back .style.backgroundImage = _bgBack;
-      inner.removeEventListener('transitionend', onEnd);
-    };
-    inner.addEventListener('transitionend', onEnd);
-  }
+  const onEnd = (e)=>{
+    if(e.propertyName!=='transform') return;
+    inner.classList.remove('animating');
+    inner.removeEventListener('transitionend', onEnd);
+  };
+  inner.addEventListener('transitionend', onEnd);
+}
 
   function passCard(e){
     if (e) e.stopPropagation();
