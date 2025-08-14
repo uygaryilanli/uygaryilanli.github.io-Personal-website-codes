@@ -1,65 +1,318 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Uygar Yılanlı</title>
-    <meta name="keywords" content="Uygar Yılanlı, full-stack developer, yazılım, teknoloji, blog, Portfolio, Portfolyo, kendini tanıt, yazılımcı, Uygar, Yılanlı, kimdir?, developer">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend+Deca:wght@100..900&family=Parkinsans:wght@300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Uygar Yılanlı</title>
+  <meta name="description" content="Uygar Yılanlı — Business (EN) & Computer Programming student. Creator of Snakely (language learning app) and hydroponic projects." />
+  <meta name="keywords" content="Uygar Yılanlı, full-stack developer, yazılım, teknoloji, blog, portfolio, portfolyo, Snakely, hydroponics" />
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="Uygar Yılanlı — Portfolio" />
+  <meta property="og:description" content="Creator of Snakely. Business & Computer Programming student. Hydroponics projects." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="./assets/images/uygar-new2.jpeg" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..900&family=Lexend+Deca:wght@200..800&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="deneme.css" />
+
+  <!-- Google Identity (optional) -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <!-- JSON-LD: Person -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Uygar Yılanlı",
+    "image": "./assets/images/uygar-new2.jpeg",
+    "url": "https://your-domain.example",
+    "sameAs": [
+      "https://github.com/uygaryilanli",
+      "https://www.linkedin.com/in/uygaryilanli/"
+    ],
+    "jobTitle": "Student / App Creator",
+    "alumniOf": [
+      "Çanakkale Onsekiz Mart University",
+      "Istanbul University (Open Education)"
+    ],
+    "knowsAbout": ["Software", "Hydroponics", "Sustainable Agriculture"]
+  }
+  </script>
 </head>
+
 <body class="gradient-background">
-    <!-- CONTAINER -->
-    <div draggable="true" class="container">
-        <div class="picture-and-links">
-            <div class="link-plus-icon">
-                <a href="https://github.com/uygaryilanli" rel="noopener noreferrer"><img class="link-icons" src="./assets/icons/github.png" alt="git-png">Github</a>
-            </div>
-            <img class="uygar-pic" src="./assets/images/uygar-new2.jpeg" alt="uygar-picture">
-            <div class="link-plus-icon">
-                <a href="https://www.linkedin.com/in/uygaryilanli/" rel="noopener noreferrer"><img class="link-icons" src="./assets/icons/linkedin.png" alt="linkedin-png">Linkedin</a>
-            </div>
-        </div>
-        <div class="subtitle">
-            <h1>Someone who dares to dream big and works tirelessly to bring ideas to life.</h1>
-        </div>
-        <!-- SCHOOL -->
-        <div class="contents">
-            <div class="person">
-                <h2>Uygar Yılanlı</h2>
-                <p>I was born in 2000 in Çorlu, Tekirdağ. Throughout my education, I have always placed great importance on learning, exploring, and developing. I am the creator of a language learning app called Snakely, which focuses on making vocabulary acquisition more interactive and enjoyable. In addition, I design projects related to hydroponic (soilless) farming, aiming to contribute to sustainable agriculture and innovative food production methods. I am a research enthusiast and open to innovation. In the time left after my academic life, I actively work on my personal projects and enjoy discovering new technologies. Watching movies and playing computer games are among the other activities I enjoy. While constantly focusing on personal growth, I also dedicate time to design practices to strengthen my skills in user experience and visual development.</p>
-            </div>
-            <div class="first-school">
-                <a href="https://www.comu.edu.tr/"><img class="icons" src="./assets/icons/school_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="school.icon"></a>
-                <h2>Çanakkale Onsekiz Mart University</h2>
-            </div>
-            <div class="second-school">
-                <a href="https://www.istanbul.edu.tr/tr/_"><img class="icons" src="./assets/icons/school_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="school.icon"></a>
-                <h2>İstanbul University (Open Education)</h2>
-            </div>
-            <div class="first-school-p">
-                <a href="http://isletme.sbf.comu.edu.tr/"><h3>Bachelor's Degree (Business Administration - English) - Active</h3></a>
-                <p>4rd Year</p>
-                <p class="aciklama">I am studying English to understand the global dynamics of the business world and to develop management skills.</p>
-            </div>
-            <div class="second-school-p">
-                <a href="https://auzef.istanbul.edu.tr/tr/content/bilgisayar-programciligi-acikogretim-onlisans-programi/program-hakkinda"><h3>Associate Degree (Computer Programming) - Active</h3></a>
-                <p>2rd Year</p>
-                <p class="aciklama">I have worked, am working, and will continue to work to gain a strong background in software development and programming languages.</p>
-            </div>
-        </div>
-        <!-- SCHOOL -->
-        <!-- FOOTER -->
-        <footer>
-            <div class="footer-text">
-                <p>© 2025 Uygar Yılanlı. All rights reserved.</p>
-            </div>
-        </footer>
-        <!-- FOOTER -->
+  <!-- Skip link (a11y) -->
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Header / Nav -->
+  <header class="site-header">
+    <div class="wrapper">
+      <a href="#" class="brand" aria-label="Uygar Yılanlı Home">
+        <span class="dot"></span> Uygar Yılanlı
+      </a>
+
+      <!-- Primary nav (desktop/tablet) -->
+      <nav class="nav" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#projects">Projects</a>
+        <a class="btn btn-sm" href="#contact">Contact</a>
+      </nav>
+
+      <!-- Mobile menu trigger (mobile only) -->
+      <button id="menuBtn" class="mobile-menu-trigger btn btn-sm" aria-label="Open menu" aria-haspopup="dialog" aria-controls="sheet" aria-expanded="false">
+        ☰
+      </button>
     </div>
-    <!-- CONTAINER -->
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrapper">
+        <div class="hero-card glass">
+          <div class="hero-left">
+            <div class="avatar-wrap">
+              <!-- <img class="avatar" src="./assets/images/uygar-new2.jpeg" alt="Portrait of Uygar Yılanlı" width="160" height="160" /> -->
+            <div class="avatar" role="img" aria-label="Portrait of Uygar Yılanlı"></div>
+            </div>
+
+            <div class="socials">
+              <a class="chip" href="snakely.html" aria-label="Snakely">
+                🐍 Snakely
+              </a>
+              <a class="chip" href="https://www.linkedin.com/in/uygaryilanli/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <img src="./assets/icons/linkedin.png" alt="" class="chip-icon" /> LinkedIn
+              </a>
+            </div>
+          </div>
+
+          <div class="hero-right">
+            <h1 class="headline">
+              Someone who dares to dream big and works tirelessly to bring ideas to life.
+            </h1>
+            <p class="lede">
+              I’m the creator of <strong>Snakely</strong>, a language-learning app focused on fun, interactive vocabulary.
+              I also design hydroponic (soilless) farming projects to contribute to sustainable food systems.
+            </p>
+            <p class="muted" style="margin-top:6px">
+              A working <strong>prototype</strong> of Snakely is available. To try it, click the <strong>🐍 Snakely</strong> button on the side.
+            </p>
+            <div class="cta-row">
+              <a href="#projects" class="btn">See Projects</a>
+              <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <div class="wrapper">
+        <div class="section-title">
+          <h2>About</h2>
+          <p>Quick intro</p>
+        </div>
+        <article class="about glass">
+          <h3>Uygar Yılanlı</h3>
+          <p>
+            I was born in 2000 in Çorlu, Tekirdağ. Throughout my education, I have always placed great importance on learning,
+            exploring, and developing. I am the creator of a language learning app called Snakely, which focuses on making vocabulary acquisition more interactive and enjoyable.
+            In addition, I design projects related to hydroponic (soilless) farming, aiming to contribute to sustainable agriculture and innovative food production methods. I am a
+            research enthusiast and open to innovation. In the time left after my academic life, I actively work on my personal projects and enjoy discovering new technologies.
+            Watching movies and playing computer games are among the other activities I enjoy. While constantly focusing on personal growth, I also dedicate time to design practices
+            to strengthen my skills in user experience and visual development.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" class="section">
+      <div class="wrapper">
+        <div class="section-title">
+          <h2>Education</h2>
+          <p>Current programs & focus</p>
+        </div>
+
+        <div class="edu-grid">
+          <article class="card glass">
+            <div class="edu-icon">
+              <img class="icon-48" src="./assets/icons/school_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="" />
+            </div>
+            <h3>Çanakkale Onsekiz Mart University</h3>
+            <p class="meta">Bachelor's Degree — Business Administration (English) • <strong>4th Year</strong></p>
+            <p class="muted">
+              I am studying Business Administration to understand global markets and develop leadership skills.
+            </p>
+            <a class="link" href="http://isletme.sbf.comu.edu.tr/" target="_blank" rel="noopener noreferrer">Program Page →</a>
+          </article>
+
+          <article class="card glass">
+            <div class="edu-icon">
+              <img class="icon-48" src="./assets/icons/school_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="" />
+            </div>
+            <h3>İstanbul University (Open Education)</h3>
+            <p class="meta">Associate Degree — Computer Programming • <strong>2nd Year</strong></p>
+            <p class="muted">
+              I have worked, am working, and will continue working to build a strong background in software development and programming languages.
+            </p>
+            <a class="link" href="https://auzef.istanbul.edu.tr/tr/content/bilgisayar-programciligi-acikogretim-onlisans-programi/program-hakkinda" target="_blank" rel="noopener noreferrer">Program Page →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="section">
+      <div class="wrapper">
+        <div class="section-title">
+          <h2>Projects</h2>
+          <p>Selected work</p>
+        </div>
+
+        <div class="proj-grid">
+          <article class="card project glass">
+            <h3>Snakely — Language Learning App</h3>
+            <p class="muted">
+              Experience vocabulary-first learning, colorful free exploration, and engaging story-translation. To try the prototype, click the 🐍 Snakely button below.
+            </p>
+            <div class="tags">
+              <span class="tag">JS</span><span class="tag">HTML/CSS</span><span class="tag">UX</span>
+            </div>
+            <a class="btn btn-sm" href="snakely.html">🐍 Snakely</a>
+          </article>
+
+          <article class="card project glass">
+            <h3>Hydroponic Farm Prototype</h3>
+            <p class="muted">
+              I have this idea in mind and plan to build it in the future — a compact soilless farming setup designed for efficiency and affordability.
+            </p>
+            <div class="tags">
+              <span class="tag">IoT</span><span class="tag">Sustainability</span><span class="tag">R&amp;D</span>
+            </div>
+            <a class="btn btn-sm" href="#" aria-disabled="true">Details (soon)</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <div class="wrapper">
+        <div class="cta glass">
+          <h2>Let’s build something great</h2>
+          <p class="muted">Open to internship opportunities, collaborations and feedback.</p>
+          <div class="cta-actions">
+            <a class="btn btn-ghost" href="https://www.linkedin.com/in/uygaryilanli/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="wrapper">
+      <p>© 2025 Uygar Yılanlı. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ==== Bottom Sheet (mobile menu) ==== -->
+  <div id="sheet" class="sheet" hidden aria-hidden="true">
+    <div class="sheet-overlay" data-close="true"></div>
+    <section class="sheet-panel glass" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+      <header class="sheet-header">
+        <h3 id="sheet-title" class="sheet-title">Menu</h3>
+        <button class="sheet-close btn btn-sm" type="button" aria-label="Close" data-close="true">✕</button>
+      </header>
+      <nav id="mobileMenu" class="menu-list" aria-label="Mobile">
+      </nav>
+    </section>
+  </div>
+
+  <!-- ==== Mobile Menu Script ==== -->
+  <script>
+    (function () {
+      const mq = window.matchMedia('(max-width: 800px)');
+      const menuBtn = document.getElementById('menuBtn');
+      const sheet = document.getElementById('sheet');
+      const panel = sheet.querySelector('.sheet-panel');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const desktopLinks = document.querySelectorAll('.nav a');
+
+      function buildMobileMenu() {
+        mobileMenu.innerHTML = '';
+        desktopLinks.forEach(link => {
+          const a = document.createElement('a');
+          a.className = 'btn menu-item';
+          a.textContent = link.textContent;
+          a.href = link.getAttribute('href') || '#';
+
+          a.addEventListener('click', (e) => {
+            const href = a.getAttribute('href') || '#';
+            if (href.startsWith('#')) {
+              e.preventDefault();
+              const target = document.querySelector(href);
+              closeSheet(() => {
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              });
+            } else {
+              closeSheet(() => window.open(href, '_blank', 'noopener,noreferrer'));
+            }
+          });
+
+          mobileMenu.appendChild(a);
+        });
+      }
+
+      function openSheet() {
+        sheet.hidden = false;
+        sheet.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        requestAnimationFrame(() => panel.classList.add('open'));
+        menuBtn.setAttribute('aria-expanded', 'true');
+      }
+
+      function closeSheet(after) {
+        panel.classList.remove('open');
+        setTimeout(() => {
+          sheet.hidden = true;
+          sheet.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+          menuBtn.setAttribute('aria-expanded', 'false');
+          if (typeof after === 'function') after();
+        }, 200);
+      }
+
+      menuBtn.addEventListener('click', () => {
+        if (!mq.matches) return;
+        buildMobileMenu();
+        openSheet();
+      });
+
+      sheet.addEventListener('click', (e) => {
+        if (e.target.dataset.close === 'true') closeSheet();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !sheet.hidden) closeSheet();
+      });
+
+      mq.addEventListener('change', () => {
+        if (!mq.matches) {
+          if (!sheet.hidden) closeSheet();
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
