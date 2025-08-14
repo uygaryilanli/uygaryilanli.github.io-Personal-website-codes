@@ -120,11 +120,14 @@
     display:grid; grid-template-rows:42px 1fr;
     box-shadow:0 18px 40px rgba(0,0,0,.25);
     overflow:hidden; background-size:220% 220%; animation:gradientShift 6s ease infinite; color:#fff;
-    backface-visibility:hidden; -webkit-backface-visibility:hidden;
+    backface-visibility:hidden; 
+    -webkit-backface-visibility:hidden;
+    transform: translateZ(0);
+    will-change: transform; 
   }
   .back{ transform:rotateY(180deg); }
-  .card-inner:not(.flipped):not(.animating) .back { visibility:hidden; }
-  .card-inner.flipped:not(.animating) .front { visibility:hidden; }
+  .card-inner:not(.flipped) .back { visibility:hidden; }
+  .card-inner.flipped .front { visibility:hidden; }
   .card-inner:not(.flipped) .front { transform:translateZ(1px); }
   .card-inner.flipped .back { transform:rotateY(180deg) translateZ(1px); }
 
@@ -815,7 +818,7 @@
   drawerBtn.onclick = () => {
     const isHidden = (drawer.style.display==='none' || drawer.style.display==='');
     drawer.style.display = isHidden ? 'block' : 'none';
-    if (chestIcon) chestIcon.src = isHidden ? './assets/images/open-chest.png' : 'off-chest.png';
+    if (chestIcon) chestIcon.src = isHidden ? './assets/images/open-chest.png' : './assets/images/off-chest.png';
   };
 
   /* ================== LEVEL RINGS LOGIC ================== */
