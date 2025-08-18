@@ -535,7 +535,7 @@
   const cap = s => s ? s.charAt(0).toUpperCase()+s.slice(1) : "";
   const shuffle = (arr)=>{ for(let i=arr.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; };
   const nonEmpty = (x)=> x!=null && String(x).trim()!=="";
-  const joinMeanings = (w)=> [w.tr1, w.tr2, w.tr3].filter(nonEmpty).join(" • ");
+  const joinMeanings = (w)=> (w.meanings || []).filter(nonEmpty).join(" • ");
   const toTypeKey = (t)=>{ const s=(t||"").toLowerCase(); if(s.includes("verb")) return "verb"; if(s.includes("adj")) return "adjective"; if(s.includes("noun")) return "noun"; return "noun"; };
 
   // 1) Normalize: TR karakterleri, diakritikler, noktalama, fazla boşluklar
@@ -568,12 +568,12 @@
     return dp[n];
   }
 
-  // 3) Yeni matchesAnswer: substring YOK; {ok,typo,suggestion} döndürür (suggestion orijinal TR ile)
+  // 3) Yeni matchesAnswer: meanings üzerinden kontrol
   function matchesAnswer(ans, w){
     const a = normalize(ans);
     if(!a) return {ok:false, typo:false, suggestion:null};
 
-    const raw = [w.tr1, w.tr2, w.tr3].filter(x=>x && String(x).trim()!=="");
+    const raw = (w.meanings || []).filter(x=>x && String(x).trim()!=="");
     const poolPairs = raw.map(r => ({ orig: r.trim(), norm: normalize(r) }));
 
     // 2–3 harflik cevaplar: SADECE tam eşleşme
@@ -670,7 +670,7 @@
   };
 
   /* ================== STATE ================== */
-  let words = []; // {id,en,tr1,tr2,tr3,type,level,tries,correct}
+  let words = []; // {id,en,meanings[],type,level,tries,correct}
   let freeQueue = []; // Serbest Gezinim kuyruğu
   let testQueue = []; // Test kuyruğu
   let idToIdx = new Map();
@@ -718,23 +718,21 @@
   let answered = false;
   let lock = false;
   let removedIdx = [];
-  let fiftyLeft = Infinity;    // ipuçlarına dokunmuyoruz
+  let fiftyLeft = Infinity;    // ipuçlarına dokunmuyoruz (sınırsız veya sen sonra sınırlarsın)
   let usedCheckOrClue = false;
   let isPassing = false;
   let suppressClick = false;
 
   const LEVELS = ["A1","A2","B1","B2","C1"];
 
-  /* ========== words.json yükle ========== */
+  /* ========== words.json yükle (meanings uyumlu) ========== */
   fetch('words.json')
     .then(r=>r.json())
     .then(list=>{
       words = list.map((w,i)=>({
         id: i+1,
         en: w.en,
-        tr1: w.tr1 ?? "",
-        tr2: w.tr2 ?? "",
-        tr3: w.tr3 ?? "",
+        meanings: (w.meanings || []).filter(nonEmpty),
         type: (w.type||"").toLowerCase(),
         level: (w.level || "").toUpperCase(),
         tries: 0, correct: 0
@@ -924,8 +922,11 @@
   function currentTestWord(){ const id=currentTestId(); return words[idToIdx.get(id)]; }
 
   function makeMCQuestion(w){
-    const correct = w.tr1 || w.tr2 || w.tr3 || "";
-    const othersPool = words.filter(x=>x.id!==w.id).map(x=> x.tr1 || x.tr2 || x.tr3).filter(nonEmpty);
+    const correct = (w.meanings && w.meanings[0]) || "";
+    const othersPool = words
+      .filter(x=>x.id!==w.id)
+      .flatMap(x=> x.meanings || [])
+      .filter(nonEmpty);
     shuffle(othersPool);
     const opts = [correct];
     for(const o of othersPool){ if(opts.length>=4) break; if(!opts.includes(o)) opts.push(o); }
@@ -934,7 +935,7 @@
   }
 
   function makeTypingQuestion(w){
-    const answers = [w.tr1,w.tr2,w.tr3].filter(nonEmpty);
+    const answers = (w.meanings || []).filter(nonEmpty);
     return { word:w, ask:'foreign', answerSet:answers, answer:answers[0] || "" };
   }
 
