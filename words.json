@@ -3535,7 +3535,7 @@
     { "en": "regard", "meanings": ["saymak", "dikkate almak"], "type": "verb", "level": "B2" },
     { "en": "region", "meanings": ["bölge"], "type": "noun", "level": "A2" },
     { "en": "regional", "meanings": ["bölgesel"], "type": "adjective", "level": "B2" },
-    { "en": "register", "meanings": ["kaydolmak", "kayıt yapmak"], "type": "verb", "level": "B1" },
+    { "en": "register", "meanings": ["kayıt", "kaydolmak", "kayıt yapmak", "sicil"], "type": "verb", "level": "B1" },
     { "en": "regret", "meanings": ["pişman olmak"], "type": "verb", "level": "B1" },
     { "en": "regular", "meanings": ["düzenli"], "type": "adjective", "level": "A2" },
     { "en": "regularly", "meanings": ["düzenli olarak"], "type": "adverb", "level": "A2" },
