@@ -286,7 +286,7 @@
 {"en": "ceiling", "meanings": ["tavan"], "type": "noun", "level": "A1"},
 {"en": "celebrate", "meanings": ["kutlamak"], "type": "verb", "level": "A2"},
 {"en": "celebration", "meanings": ["kutlama"], "type": "noun", "level": "A2"},
-{"en": "celebrity", "meanings": ["ünlü kişi"], "type": "noun", "level": "C1"},
+{"en": "celebrity", "meanings": ["ünlü", "ünlü kişi"], "type": "noun", "level": "C1"},
 {"en": "cell", "meanings": ["hücre", "cep telefonu"], "type": "noun", "level": "A2"},
 {"en": "cent", "meanings": ["sent (para birimi)", "sent"], "type": "noun", "level": "A1"},
 {"en": "center", "meanings": ["merkez"], "type": "noun", "level": "A1"},
