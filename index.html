@@ -1,1370 +1,318 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Snakely</title>
-<style>
-  /* ================== THEME ================== */
-  :root{
-    --bg1:#a8edea; --bg2:#fed6e3;
-    --ink:#0f172a;
-    --glass-bg: rgba(255,255,255,.22);
-    --glass-brd: rgba(255,255,255,.38);
-    --chip: rgba(255,255,255,.7);
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    --noun:#3b82f6; --verb:#ef4444; --adj:#8b5cf6;
-    --btn-5050-start:#f59e0b; --btn-5050-end:#fbbf24;
-    --btn-next-start:#10b981; --btn-next-end:#34d399;
-    --btn-flip-start:#6366f1; --btn-flip-end:#818cf8;
-    --btn-pass-start:#ef4444; --btn-pass-end:#f87171;
+  <title>Uygar Yılanlı</title>
+  <meta name="description" content="Uygar Yılanlı — Business (EN) & Computer Programming student. Creator of Snakely (language learning app) and hydroponic projects." />
+  <meta name="keywords" content="Uygar Yılanlı, full-stack developer, yazılım, teknoloji, blog, portfolio, portfolyo, Snakely, hydroponics" />
 
-    --accent:#22c55e;
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="Uygar Yılanlı — Portfolio" />
+  <meta property="og:description" content="Creator of Snakely. Business & Computer Programming student. Hydroponics projects." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="./assets/images/uygar-new2.jpeg" />
+  <meta name="twitter:card" content="summary_large_image" />
 
-    --z-base: 0;
-    --z-tabs: 200;
-    --z-title: 220;
-    --z-logo: 300;
-    --z-theme-btn: 350;
-    --z-reselect: 360;
-    --z-chest-btn: 1000;
-    --z-drawer: 1100;
-    --z-modal-backdrop: 2000;
-    --z-modal: 2001;
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..900&family=Lexend+Deca:wght@200..800&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Google Identity (optional) -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <!-- JSON-LD: Person -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Uygar Yılanlı",
+    "image": "./assets/images/uygar-new2.jpeg",
+    "url": "https://your-domain.example",
+    "sameAs": [
+      "https://github.com/uygaryilanli",
+      "https://www.linkedin.com/in/uygaryilanli/"
+    ],
+    "jobTitle": "Student / App Creator",
+    "alumniOf": [
+      "Çanakkale Onsekiz Mart University",
+      "Istanbul University (Open Education)"
+    ],
+    "knowsAbout": ["Software", "Hydroponics", "Sustainable Agriculture"]
   }
-  body[data-theme="dark"]{
-    --bg1:#0f172a; --bg2:#1f2937;
-    --ink:#e5e7eb;
-    --glass-bg: rgba(17,24,39,.35);
-    --glass-brd: rgba(255,255,255,.18);
-    --chip: rgba(17,24,39,.55);
-  }
-
-  /* ===== Level Color System ===== */
-  :root{
-    --A1-grad: linear-gradient(135deg,#00c6ff,#0072ff);
-    --A2-grad: linear-gradient(135deg,#84fab0,#8fd3f4);
-    --B1-grad: linear-gradient(135deg,#f6d365,#fda085);
-    --B2-grad: linear-gradient(135deg,#a18cd1,#fbc2eb);
-    --C1-grad: linear-gradient(135deg,#f5576c,#f093fb);
-
-    --A1-solid:#1f6fff;
-    --A2-solid:#19c28f;
-    --B1-solid:#f59e0b;
-    --B2-solid:#8b5cf6;
-    --C1-solid:#ef4444;
-  }
-
-  /* ================== LAYOUT ================== */
-  html{ -webkit-text-size-adjust:100%; scrollbar-gutter:stable both-edges; }
-  html, body { overscroll-behavior:none; height:100svh; }
-  body{
-    background:linear-gradient(135deg,var(--bg1),var(--bg2));
-    font-family:'Segoe UI',system-ui,-apple-system,Arial,sans-serif;
-    min-height:100svh; margin:0; z-index: var(--z-logo);
-    display:flex; flex-direction:column; align-items:center; justify-content:center;
-    gap:18px; padding:24px; box-sizing:border-box; color:var(--ink);
-  }
-  body.has-reselect{ padding-bottom: 76px; } /* mobilde alt sabit buton için boşluk */
-
-  .logo{
-    position:fixed; left:12px; top:12px; z-index: var(--z-logo);
-    width:72px; height:72px; object-fit:cover;
-    border-radius:50%;
-    padding:8px;
-    background: radial-gradient(120px 120px at 30% 30%, rgba(255,255,255,.9), rgba(255,255,255,.65));
-    border:2px solid rgba(0,0,0,.08);
-    box-shadow: 0 6px 18px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.65);
-  }
-  body[data-theme="dark"] .logo{
-    background: radial-gradient(120px 120px at 30% 30%, rgba(255,255,255,.15), rgba(255,255,255,.06));
-    border:2px solid rgba(255,255,255,.18);
-    box-shadow: 0 10px 24px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.12);
-  }
-
-  .title{
-    position:fixed; top:18px; left:50%; transform:translateX(-50%);
-    font-size:32px; font-weight:900;
-    background:linear-gradient(90deg, #d8d3ce, #cfafbb, #b0d0ec);
-    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-    text-shadow:0 2px 8px rgba(0,0,0,0.25);
-    letter-spacing:1px; z-index: var(--z-title);
-    animation:fadeSlideIn 1s ease-out forwards;
-  }
-  @keyframes fadeSlideIn { from{opacity:0; transform:translate(-50%,-10px)} to{opacity:1; transform:translate(-50%,0)} }
-
-  .tabs{
-    position:relative; display:none; gap:10px; padding:6px;
-    border-radius:14px; backdrop-filter:blur(8px);
-    background:rgba(255,255,255,.2); border:1px solid rgba(255,255,255,.35);
-    overflow:hidden;
-  }
-  .tab-indicator{
-    position:absolute; z-index:1; left:0; top:0; width:0; height:0;
-    background:rgba(0,0,0,.18); border-radius:12px;
-    box-shadow:inset 0 0 0 1px rgba(255,255,255,.35);
-    transition:left .25s ease, top .25s ease, width .25s ease, height .25s ease, border-radius .25s ease;
-  }
-  .tab{ position:relative; z-index:2; padding:10px 16px; font-weight:800; font-size:14px; color:#ffffffee; cursor:pointer; border-radius:10px; transition:opacity .2s ease; user-select:none; }
-  .tab.active{ opacity:1 } .tab:not(.active){ opacity:.85 }
-
-  .wrap{ display:flex; flex-direction:column; align-items:center; gap:14px; }
-
-  /* ================== FREE MODE CARD ================== */
-  .card{
-    width:min(92vw,360px); aspect-ratio:3/2;
-    perspective:1200px; -webkit-perspective:1200px;
-    touch-action: pan-y;
-    transform: translateZ(0); will-change: transform;
-  }
-  .card-inner{
-    position:relative; width:100%; height:100%;
-    transform-style:preserve-3d; -webkit-transform-style:preserve-3d;
-    border-radius:20px;
-    transition:transform .8s cubic-bezier(.4,.2,.2,1), box-shadow .2s ease;
-  }
-  .card-inner.flipped{ transform:rotateY(180deg) translateZ(0); }
-
-  .face{
-    position:absolute; inset:0; border-radius:20px;
-    display:grid; grid-template-rows:42px 1fr;
-    box-shadow:0 18px 40px rgba(0,0,0,.25);
-    overflow:hidden; background-size:220% 220%;
-    animation:gradientShift 6s ease infinite; color:#fff;
-    -webkit-backface-visibility:hidden; backface-visibility:hidden;
-    transform: translateZ(0.1px) rotate(0.02deg);
-    will-change: transform;
-    -webkit-font-smoothing: antialiased;
-  }
-  .card-inner.animating .face{ animation-play-state: paused !important; }
-  .card-inner.animating .face::after{ animation-play-state: paused !important; opacity: 1 !important; }
-
-  .back{ transform:rotateY(180deg); }
-  .front, .back{ -webkit-backface-visibility: hidden; backface-visibility: hidden; }
-  .card-inner:not(.flipped) .front { transform:translateZ(1px); }
-  .card-inner.flipped .back { transform:rotateY(180deg) translateZ(1px); }
-
-  .card-meta{ position:relative; padding:12px 14px; height:42px; }
-  .card-meta .badge{
-    display:inline-block; max-width: calc(100% - 34px - 12px);
-    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
-    font-size:12px; font-weight:700; letter-spacing:.5px; text-transform:uppercase;
-    padding:6px 10px; border-radius:999px; color:#fff; border:1px solid rgba(255,255,255,.35);
-    background:rgba(255,255,255,.18); backdrop-filter:blur(8px);
-    box-shadow:0 6px 14px rgba(0,0,0,.15) inset;
-  }
-  .card-meta .avatar{
-    position:absolute; right:14px; top:50%; transform:translateY(-50%);
-    width:34px; height:34px; display:grid; place-items:center; border-radius:50%;
-    background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.35); backdrop-filter:blur(8px);
-    box-shadow:0 6px 14px rgba(0,0,0,.15) inset; user-select:none;
-  }
-
-  .word{
-    display:grid; place-items:center; padding:0 16px;
-    font-weight:800; font-size:clamp(22px, 6vw, 32px); text-align:center; text-shadow:0 2px 10px rgba(0,0,0,.25);
-    position:relative; line-height:1.15; word-break: break-word; overflow-wrap: anywhere;
-  }
-  .face::after{ content:""; position:absolute; top:0; left:-60%; width:45%; height:100%;
-    background:linear-gradient(120deg,rgba(255,255,255,.35) 0%,rgba(255,255,255,0) 70%);
-    transform:skewX(-25deg); animation:shine 3s infinite;
-  }
-
-  .buttons{ display:flex; gap:18px; flex-wrap:wrap; justify-content:center; }
-  button{
-    position:relative; padding:14px 20px; border:none; border-radius:14px;
-    font-size:15px; font-weight:800; color:#fff; cursor:pointer;
-    box-shadow:0 10px 22px rgba(0,0,0,.20); transition:transform .2s ease, box-shadow .2s ease;
-    overflow:hidden; min-height:44px; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
-  }
-  button::after{ content:""; position:absolute; inset:0; left:-100%;
-    background:linear-gradient(90deg,rgba(255,255,255,.0),rgba(255,255,255,.25),rgba(255,255,255,0));
-    transition:left .45s ease;
-  }
-  button:hover::after{ left:100%; }
-  button:active{ transform:scale(.96); box-shadow:0 6px 14px rgba(0,0,0,.18); }
-  .btn-flip{ background:linear-gradient(45deg,var(--btn-flip-start),var(--btn-flip-end)); }
-  .btn-pass{ background:linear-gradient(45deg,var(--btn-pass-start),var(--btn-pass-end)); }
-  .btn-next{ background:linear-gradient(45deg,var(--btn-next-start),var(--btn-next-end)); }
-  .btn-5050{ background:linear-gradient(45deg,var(--btn-5050-start),var(--btn-5050-end)); color:#1f2937; }
-
-  .panel{
-    width:min(820px,94vw);
-    background:var(--glass-bg);
-    border:1px solid var(--glass-brd);
-    border-radius:18px; padding:18px;
-    backdrop-filter: blur(14px) saturate(120%);
-    box-shadow:0 24px 60px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.25);
-  }
-  .panel-head{ display:flex; align-items:center; gap:12px; padding:6px 8px 12px; border-bottom:1px solid rgba(255,255,255,.28); margin-bottom:12px; }
-  .panel-badge{ font-weight:900; font-size:12px; color:#fff; padding:6px 10px; border-radius:999px; background:linear-gradient(90deg,#6366f1,#22c55e); box-shadow:0 6px 16px rgba(0,0,0,.15); }
-  .panel-title{ font-weight:900; letter-spacing:.4px; color:#fffdfcdd; text-shadow:0 1px 8px rgba(0,0,0,.18); }
-
-  .row{ display:flex; gap:12px; flex-wrap:wrap; align-items:center; } .grow{ flex:1; }
-  .stat{ font-size:13px; color:var(--ink); font-weight:800; background:var(--chip); padding:6px 10px; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,.12); }
-
-  .progress{ height:10px; width:100%; background:rgba(255,255,255,.45); border-radius:999px; overflow:hidden; border:1px solid rgba(0,0,0,.06); }
-  .bar{ height:100%; width:0%; background: linear-gradient(90deg,#22c55e,#84cc16,#a3e635); background-size:200% 100%; animation: progressStripe 1.2s linear infinite; }
-  @keyframes progressStripe{ 0%{ background-position:0% 50% } 100%{ background-position:200% 50% } }
-
-  #qtext{
-    font-size:22px; font-weight:900; text-align:center;
-    margin:16px 0 8px 0;
-    background:linear-gradient(90deg, #4facfe, #00f2fe, #43e97b);
-    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-    text-shadow:0 2px 8px rgba(0,0,0,0.18);
-    letter-spacing:.6px; animation:fadePop .6s ease;
-  }
-  body[data-theme="light"] #qtext{ background:none !important; -webkit-text-fill-color:initial; color:#413c3c !important; text-shadow:none; }
-  @keyframes fadePop { 0%{opacity:0; transform:scale(.96)} 100%{opacity:1; transform:scale(1)} }
-
-  .choices{ display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:12px; }
-  .choice{
-    position:relative; padding:16px; border-radius:14px; background:rgba(255,255,255,.9); border:1px solid rgba(0,0,0,.06);
-    cursor:pointer; text-align:center; font-weight:900; color:#0f172a;
-    transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
-    box-shadow:0 8px 18px rgba(0,0,0,.08);
-  }
-  body[data-theme="dark"] .choice{ background:rgba(31,41,55,.8); color:#f8fafc; }
-  .choice:hover{ transform:translateY(-1px); box-shadow:0 10px 22px rgba(0,0,0,.12); }
-  .choice.correct{ border-color:#22c55e; box-shadow:0 12px 26px rgba(34,197,94,.25); }
-  .choice.wrong{ border-color:#ef4444; box-shadow:0 12px 26px rgba(239,68,68,.25); }
-
-  .answer-row{ display:flex; gap:10px; margin-top:12px; }
-  .input{
-    flex:1; padding:14px 16px; border-radius:12px; border:1px solid rgba(0,0,0,.08);
-    font-size:16px; outline:none; background:rgba(255,255,255,.95);
-    box-shadow:inset 0 2px 6px rgba(0,0,0,.04), 0 6px 16px rgba(0,0,0,.06);
-    transition:border-color .15s ease, box-shadow .15s ease;
-  }
-  body[data-theme="dark"] .input{ background:rgba(17,24,39,.85); color:#e5e7eb; border-color:rgba(255,255,255,.12); }
-  .input:focus{ border-color:#60a5fa; box-shadow:0 0 0 3px rgba(96,165,250,.25), inset 0 2px 6px rgba(0,0,0,.05); }
-
-  .actions{ display:flex; justify-content:flex-end; gap:10px; margin-top:14px; }
-
-  .drawer-btn{
-    position:fixed; top:14px; right:14px; z-index: var(--z-chest-btn);
-    padding:8px; border:none; border-radius:12px; cursor:pointer;
-    background:linear-gradient(45deg,#0ea5e9,#38bdf8);
-    box-shadow:0 10px 22px rgba(0,0,0,.20);
-    display:none; align-items:center; justify-content:center;
-    min-height:44px;
-  }
-  .chest-icon{ width:48px; height:auto; display:block; }
-  .drawer{
-    position:fixed; top:72px; right:14px; z-index: var(--z-drawer);
-    max-width:min(380px,90vw); min-width:260px;
-    background:rgba(255,255,255,.95); border:1px solid rgba(0,0,0,.08); border-radius:14px;
-    padding:12px; box-shadow:0 18px 40px rgba(0,0,0,.25); display:none;
-    color:#0f172a; font-size:14px;
-  }
-  body[data-theme="dark"] .drawer{ background:rgba(17,24,39,.96); color:#e5e7eb; border-color:rgba(255,255,255,.12); }
-
-  .theme-toggle{
-    position:fixed; top:14px; right:74px; z-index: var(--z-theme-btn);
-    padding:10px 12px; border:none; border-radius:12px; cursor:pointer;
-    font-weight:800; font-size:14px; color:#fff;
-    background:linear-gradient(45deg,#6b7280,#111827);
-    box-shadow:0 10px 22px rgba(0,0,0,.20);
-  }
-
-  @media (max-width: 600px){
-    body{ padding:16px; gap:14px; justify-content: flex-start;}
-    .wrap{ margin-top: calc(var(--tabsH, 56px) + 10px); }
-    #test-wrap{ margin-top: calc(var(--tabsH, 56px) + 10px); }
-    .tabs{ width:100%; flex-direction:column; gap:8px; border-radius:14px; position: sticky; top: calc(84px + env(safe-area-inset-top)); z-index: var(--z-tabs); margin-top: 8px; display:flex !important; }
-    .tab{ width:100%; text-align:center; }
-    .row{ flex-direction:column; align-items:stretch; }
-    .stat{ width:100%; text-align:center; }
-    .progress{ height:12px; }
-    .choices{ grid-template-columns:1fr; }
-    .tools-row > button{ width:100%; max-width:320px; margin:0 auto; }
-    .actions{ flex-direction:column; align-items:center; }
-    .actions > button{ width:100%; max-width:320px; }
-    .panel{ padding:14px; }
-    .theme-toggle{ right:70px; }
-    .chest-icon{ width:46px; }
-  }
-
-  /* feedback anim. */
-  .fx-correct{ outline:2px solid #22c55e !important; }
-  .fx-wrong{ outline:2px solid #ef4444 !important; }
-  .flash-correct{ animation: flashOK .55s ease; }
-  @keyframes flashOK{ 0%{box-shadow:0 0 0 rgba(34,197,94,0)} 30%{box-shadow:0 0 0 6px rgba(34,197,94,.25)} 100%{box-shadow:0 0 0 rgba(34,197,94,0)} }
-  .shake-wrong{ animation: shake .35s ease; }
-  @keyframes shake{ 10%{transform:translateX(-3px)} 30%{transform:translateX(3px)} 50%{transform:translateX(-2px)} 70%{transform:translateX(2px)} 90%{transform:translateX(-1px)} 100%{transform:translateX(0)} }
-
-  .pass-left{ animation: passLeft .35s cubic-bezier(.4,.2,.2,1) both; }
-  @keyframes passLeft{ from{transform:translate3d(0,0,0)} to{transform:translate3d(-40px,0,0)} }
-  .enter-right{ animation: enterRight .35s cubic-bezier(.4,.2,.2,1) both; }
-  @keyframes enterRight{ from{transform:translate3d(40px,0,0)} to{transform:translate3d(0,0,0)} }
-
-  /* LEVEL RINGS in drawer */
-  .levels-wrapper{ display:flex; flex-direction:column; gap:10px; align-items:flex-start; margin-bottom:10px; }
-  .level-item{ display:flex; align-items:center; gap:10px; cursor:pointer; padding:6px 8px; border-radius:10px; transition: background .18s ease; }
-  .level-item:hover{ background:rgba(0,0,0,.05); }
-  body[data-theme="dark"] .level-item:hover{ background:rgba(255,255,255,.06); }
-  .level-ring{ width:44px; height:44px; border-radius:50%; position:relative; background:conic-gradient(var(--accent) var(--deg,0deg), rgba(0,0,0,.12) 0deg); box-shadow:inset 0 0 0 2px rgba(0,0,0,.06); display:grid; place-items:center; }
-  body[data-theme="dark"] .level-ring{ background:conic-gradient(var(--accent) var(--deg,0deg), rgba(255,255,255,.12) 0deg); box-shadow:inset 0 0 0 2px rgba(255,255,255,.08); }
-  .level-ring::after{ content:""; position:absolute; inset:4px; border-radius:50%; background:rgba(255,255,255,.92); }
-  body[data-theme="dark"] .level-ring::after{ background:rgba(17,24,39,.9); }
-  .ring-text{ position:relative; font-weight:900; font-size:12px; }
-  .level-meta{ display:flex; flex-direction:column; line-height:1.15; font-size:12.5px; color:var(--ink); }
-  .level-acc{ font-weight:800; } .level-seen{ opacity:.9; }
-
-  @keyframes gradientShift{ 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
-  @keyframes shine{ 0%{left:-60%} 55%{left:130%} 100%{left:130%} }
-
-  .card-inner[data-type="noun"]{ box-shadow:0 18px 40px rgba(0,0,0,.25), 0 0 0 2px var(--noun) inset; }
-  .card-inner[data-type="verb"]{ box-shadow:0 18px 40px rgba(0,0,0,.25), 0 0 0 2px var(--verb) inset; }
-  .card-inner[data-type="adjective"]{ box-shadow:0 18px 40px rgba(0,0,0,.25), 0 0 0 2px var(--adj) inset; }
-
-  @media (prefers-reduced-motion: reduce){
-    .card-inner{ transition:none !important; }
-    .face::after, .bar, .enter-right, .pass-left{ animation:none !important; }
-  }
-
-  /* ===== TOAST ===== */
-  .toast-container{
-    position: fixed;
-    top: calc(12px + env(safe-area-inset-top));
-    left: 0; right: 0;
-    margin: 0 auto;
-    width: min(520px, 94vw);
-    z-index: 5000;
-    display: grid; gap: 8px; pointer-events: none;
-    padding-left: env(safe-area-inset-left);
-    padding-right: env(safe-area-inset-right);
-  }
-  .toast{
-    box-sizing: border-box;
-    pointer-events: auto;
-    border-radius: 12px;
-    padding: 10px 14px;
-    font-weight: 800;
-    font-size: 14px;
-    box-shadow: 0 12px 26px rgba(0,0,0,.22);
-    border: 1px solid rgba(0,0,0,.06);
-    background: rgba(255,255,255,.96);
-    color: #0f172a;
-    animation: toastIn .24s ease both;
-    max-width: 100%;
-    overflow: hidden;
-    margin-inline: 8px;
-  }
-  body[data-theme="dark"] .toast{ background: rgba(17,24,39,.96); border-color: rgba(255,255,255,.12); color: #e5e7eb; }
-  .toast.success{ border-left: 6px solid #22c55e; }
-  .toast.warning{ border-left: 6px solid #f59e0b; }
-  .toast.error{   border-left: 6px solid #ef4444; }
-  .toast .close{ background: transparent; border: none; cursor: pointer; font-weight: 900; font-size: 16px; line-height: 1; color: inherit; opacity: .8; }
-  .toast .row{ display: flex; align-items: center; justify-content: space-between; gap: 10px; min-width: 0; }
-  .toast .row > div:first-child{ flex: 1 1 auto; min-width: 0; word-break: break-word; overflow-wrap: anywhere; hyphens: auto; }
-  @keyframes toastIn{ from{ opacity:0; transform: translateY(-6px); } to{ opacity:1; transform: translateY(0); } }
-  @keyframes toastOut{ to{ opacity:0; transform: translateY(-6px); } }
-
-  /* ===== LEVEL SELECT ===== */
-  .level-select-wrap{
-    display:flex; flex-direction:column; align-items:center; gap:16px;
-    width:100%;
-    margin-top: 84px;
-    animation: fadeInUp .35s ease both;
-  }
-  @keyframes fadeInUp { from{opacity:0; transform: translateY(6px);} to{opacity:1; transform: translateY(0);} }
-
-  .level-badge{
-    font-weight:1000; font-size:12px; letter-spacing:.8px; text-transform:uppercase;
-    color:#0f172a;
-    padding:8px 12px; border-radius:999px;
-    background: linear-gradient(90deg,#34d399,#22d3ee);
-    box-shadow:0 8px 18px rgba(0,0,0,.12), inset 0 1px 0 rgba(255,255,255,.35);
-  }
-
-  .level-grid{
-    display:grid;
-    grid-template-columns: repeat(5, minmax(160px, 1fr));
-    gap:14px;
-    width:min(1100px, 96vw);
-  }
-  @media (max-width: 900px){
-    .level-grid{ grid-template-columns: repeat(3, minmax(140px, 1fr)); }
-  }
-  @media (max-width: 620px){
-    .level-grid{ grid-template-columns: repeat(1, minmax(220px, 1fr)); gap:12px; }
-  }
-
-  .level-card{
-    position:relative;
-    border-radius:16px;
-    padding:16px;
-    min-height:120px;
-    border:1px solid var(--glass-brd);
-    box-shadow:0 16px 38px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.25);
-    color:#fff;
-    display:flex; flex-direction:column; gap:8px; justify-content:center; align-items:flex-start;
-    cursor:pointer; overflow:hidden;
-    backdrop-filter: blur(10px) saturate(120%);
-    transition: transform .14s ease, box-shadow .14s ease, border-color .14s ease, background .14s ease, opacity .35s ease, filter .35s ease;
-  }
-  .level-card:hover{ transform: translateY(-2px); box-shadow:0 22px 48px rgba(0,0,0,.22); }
-  .level-card.A1{ background: var(--A1-grad); }
-  .level-card.A2{ background: var(--A2-grad); }
-  .level-card.B1{ background: var(--B1-grad); }
-  .level-card.B2{ background: var(--B2-grad); }
-  .level-card.C1{ background: var(--C1-grad); }
-
-  .level-name{ font-size:28px; font-weight:1000; letter-spacing:.8px; }
-  .level-count{ font-size:13px; font-weight:800; color:#0f172a; background:var(--chip); padding:6px 10px; border-radius:999px; }
-  .level-card .level-count{ background: rgba(255,255,255,.88) !important; color:#0f172a !important; }
-  body[data-theme="dark"] .level-card .level-count{ background: rgba(255,255,255,.92) !important; color:#0f172a !important; }
-
-  /* yeni: seviye kartlarını yumuşakça söndür */
-  .level-card.fade-away{
-    opacity: 0;
-    transform: translateY(8px) scale(.98);
-    filter: blur(2px);
-  }
-
-  /* Reselect button */
-  .reselect-btn{
-    position: absolute;
-    bottom: calc(12px + env(safe-area-inset-bottom));
-    left: calc(12px + env(safe-area-inset-left));
-    z-index: var(--z-reselect);
-    padding: 10px 12px;
-    border-radius: 12px;
-    border: none;
-    background: linear-gradient(45deg, #ef4444, #f89171);
-    color: #fff;
-    font-weight: 900;
-    font-size: 12px;
-    box-shadow: 0 8px 20px rgba(0,0,0,.22);
-    cursor: pointer;
-    display: none;
-  }
-  .reselect-btn:hover{ filter: brightness(1.05); }
-  .reselect-btn:active{ transform: translateY(1px); }
-
-  /* Mobilde Next butonu gibi, en altta ve ortada */
-  @media (max-width:600px){
-    .reselect-btn{
-      left: 12px; right: 12px;
-      width: auto;
-
-      background: linear-gradient(45deg,var(#ef4444),var(#f89171));
-      font-size: 15px; border-radius:14px; padding:12px 18px;
-    }
-  }
-
-  /* ===== MODAL ===== */
-  .modal-backdrop{ position:fixed; inset:0; background:rgba(0,0,0,.35); display:none; align-items:center; justify-content:center; z-index: var(--z-modal-backdrop); }
-  .modal{
-    width:min(680px,94vw); max-height:min(78vh, 860px); overflow:auto;
-    background:var(--glass-bg); border:1px solid var(--glass-brd);
-    backdrop-filter: blur(14px) saturate(120%);
-    border-radius:16px; padding:14px;
-    box-shadow:0 24px 60px rgba(0,0,0,.35);
-    color:var(--ink); z-index: var(--z-modal);
-  }
-  .modal-head{ display:flex; align-items:center; justify-content:space-between; gap:10px; padding-bottom:8px; border-bottom:1px solid rgba(0,0,0,.08); }
-  body[data-theme="dark"] .modal-head{ border-bottom-color: rgba(255,255,255,.12); }
-  .modal-title{ font-weight:900; }
-  .modal-close{ border:none; background:linear-gradient(45deg,#ef4444,#f87171); color:#fff; font-weight:800; border-radius:10px; padding:8px 12px; cursor:pointer; box-shadow:0 8px 18px rgba(0,0,0,.18); }
-  .words-table{ width:100%; border-collapse:collapse; margin-top:10px; font-size:14px; }
-  .words-table th, .words-table td{ padding:8px 10px; border-bottom:1px solid rgba(0,0,0,.06); text-align:left; }
-  .words-table th{ font-weight:900; }
-  body[data-theme="dark"] .words-table th, body[data-theme="dark"] .words-table td{ border-bottom-color: rgba(255,255,255,.12); }
-
-  .current-level {
-  margin-top: 6px;
-  font-weight: 800;
-  font-size: 14px;
-  padding: 6px 12px;
-  border-radius: 999px;
-  background: linear-gradient(45deg,#10b981,#3b82f6);
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(0,0,0,.15);
-  text-align: center;
-  display: inline-block;
-}
-@media (max-width:600px){
-  .current-level { font-size:13px; padding:5px 10px; }
-}
-
-@keyframes fadeOutSmooth {
-  from { opacity: 1; transform: scale(1); }
-  to   { opacity: 0; transform: scale(0.97); }
-}
-.fade-out {
-  animation: fadeOutSmooth .6s ease forwards;
-}
-
-</style>
+  </script>
 </head>
-<body data-theme="light">
 
-  <img src="../assets/images/Maskot.png" alt="Snakely" class="logo" loading="lazy" decoding="async"/>
-  <div class="title">Snakely</div>
+<body class="gradient-background">
+  <!-- Skip link (a11y) -->
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- LEVEL SELECT -->
-  <div id="levelSelect" class="level-select-wrap" aria-live="polite">
-    <div class="level-badge level-title">Seviye Seç</div>
-    <div id="levelGrid" class="level-grid" role="list"></div>
-  </div>
+  <!-- Header / Nav -->
+  <header class="site-header">
+    <div class="wrapper">
+      <a href="#" class="brand" aria-label="Uygar Yılanlı Home">
+        <span class="dot"></span> Uygar Yılanlı
+      </a>
 
-  <div class="tabs" id="tabs">
-    <span class="tab-indicator" id="tabIndicator"></span>
-    <div id="tab-free" class="tab active">Serbest Gezinim</div>
-    <div id="tab-test" class="tab">Kelime Öğrenimi (Test)</div>
-  </div>
+      <!-- Primary nav (desktop/tablet) -->
+      <nav class="nav" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#projects">Projects</a>
+        <a class="btn btn-sm" href="#contact">Contact</a>
+      </nav>
 
-  <button id="themeToggle" class="theme-toggle">🌙</button>
+      <!-- Mobile menu trigger (mobile only) -->
+      <button id="menuBtn" class="mobile-menu-trigger btn btn-sm" aria-label="Open menu" aria-haspopup="dialog" aria-controls="sheet" aria-expanded="false">
+        ☰
+      </button>
+    </div>
+  </header>
 
-  <!-- reselect -->
-  <button id="reselectBtn" class="reselect-btn" title="Seviyeyi Değiştir">⟵ Seviyeyi Değiştir</button>
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrapper">
+        <div class="hero-card glass">
+          <div class="hero-left">
+            <div class="avatar-wrap">
+              <!-- <img class="avatar" src="./assets/images/uygar-new2.jpeg" alt="Portrait of Uygar Yılanlı" width="160" height="160" /> -->
+            <div class="avatar" role="img" aria-label="Portrait of Uygar Yılanlı"></div>
+            </div>
 
-  <button id="drawerBtn" class="drawer-btn">
-    <img id="chestIcon" src="../assets/images/off-chest.png" alt="Chest" class="chest-icon" loading="lazy" decoding="async">
-  </button>
-
-  <div id="drawer" class="drawer">
-    <div style="font-weight:800; margin-bottom:6px;">Bilinen Kelimeler</div>
-    <div id="levelsWrapper" class="levels-wrapper"></div>
-    <div id="knownBox" style="line-height:1.5; margin-top:8px;"></div>
-  </div>
-
-  <!-- FREE MODE -->
-  <div id="free-wrap" class="wrap" style="display:none;">
-    <div class="card" onclick="flipCard()">
-      <div id="cardInner" class="card-inner">
-        <div id="front" class="face front">
-          <div class="card-meta">
-            <span id="badgeFront" class="badge">Type</span>
-            <div class="avatar">🐍</div>
+            <div class="socials">
+              <a class="chip" href="/snakely/" aria-label="Snakely">
+                🐍 Snakely
+              </a>
+              <a class="chip" href="https://www.linkedin.com/in/uygaryilanli/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <img src="./assets/icons/linkedin.png" alt="" class="chip-icon" /> LinkedIn
+              </a>
+            </div>
           </div>
-          <div class="word"><div id="frontWord">Kelime</div></div>
-        </div>
-        <div id="back" class="face back">
-          <div class="card-meta">
-            <span id="badgeBack" class="badge">Type</span>
-            <div class="avatar">🐍</div>
+
+          <div class="hero-right">
+            <h1 class="headline">
+              Someone who dares to dream big and works tirelessly to bring ideas to life.
+            </h1>
+            <p class="lede">
+              I’m the creator of <strong>Snakely</strong>, a language-learning app focused on fun, interactive vocabulary.
+              I also design hydroponic (soilless) farming projects to contribute to sustainable food systems.
+            </p>
+            <p class="muted" style="margin-top:6px">
+              A working <strong>prototype</strong> of Snakely is available. To try it, click the <strong>🐍 Snakely</strong> button.
+            </p>
+            <div class="cta-row">
+              <a href="#projects" class="btn">See Projects</a>
+              <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+            </div>
           </div>
-          <div class="word"><div id="backWord">Anlam(lar)</div></div>
         </div>
       </div>
-    </div>
-    <div class="buttons">
-      <button class="btn-flip" onclick="flipCard()">Flip</button>
-      <button class="btn-pass" onclick="passCard(event)">Pass</button>
-    </div>
-  </div>
+    </section>
 
-  <!-- TEST MODE -->
-  <div id="test-wrap" class="wrap" style="display:none;">
-    <div class="panel">
-      <div class="panel-head">
-        <span class="panel-badge">QUIZ</span>
-        <div class="panel-title">Kelime Öğrenimi</div>
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <div class="wrapper">
+        <div class="section-title">
+          <h2>About</h2>
+          <p>Quick intro</p>
+        </div>
+        <article class="about glass">
+          <h3>Uygar Yılanlı</h3>
+          <p>
+            I was born in 2000 in Çorlu, Tekirdağ. Throughout my education, I have always placed great importance on learning,
+            exploring, and developing. I am the creator of a language learning app called Snakely, which focuses on making vocabulary acquisition more interactive and enjoyable.
+            In addition, I design projects related to hydroponic (soilless) farming, aiming to contribute to sustainable agriculture and innovative food production methods. I am a
+            research enthusiast and open to innovation. In the time left after my academic life, I actively work on my personal projects and enjoy discovering new technologies.
+            Watching movies and playing computer games are among the other activities I enjoy. While constantly focusing on personal growth, I also dedicate time to design practices
+            to strengthen my skills in user experience and visual development.
+          </p>
+        </article>
       </div>
+    </section>
 
-      <div class="row">
-        <div class="stat">Çalışılan Kelime: <span id="totalWorked">0</span></div>
-        <div class="stat">Doğru Bilinen: <span id="correctKnown">0</span></div>
-        <div class="stat">Yanlış Bilinen: <span id="wrongKnown">0</span></div>
-        <div class="grow"></div>
-        <div class="stat" title="Doğru/Toplam">Oran: <span id="ratio">0%</span></div>
-      </div>
+    <!-- EDUCATION -->
+    <section id="education" class="section">
+      <div class="wrapper">
+        <div class="section-title">
+          <h2>Education</h2>
+          <p>Current programs & focus</p>
+        </div>
 
-      <div class="row" style="margin-top:8px;">
-        <div class="grow progress"><div id="bar" class="bar"></div></div>
-      </div>
+        <div class="edu-grid">
+          <article class="card glass">
+            <div class="edu-icon">
+              <img class="icon-48" src="./assets/icons/school_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="" />
+            </div>
+            <h3>Çanakkale Onsekiz Mart University</h3>
+            <p class="meta">Bachelor's Degree — Business Administration (English) • <strong>4th Year</strong></p>
+            <p class="muted">
+              I am studying Business Administration to understand global markets and develop leadership skills.
+            </p>
+            <a class="link" href="http://isletme.sbf.comu.edu.tr/" target="_blank" rel="noopener noreferrer">Program Page →</a>
+          </article>
 
-      <div class="row tools-row" style="margin-top:12px; gap:10px;">
-        <button class="btn-5050" id="hint5050">⚡ 50/50 (3)</button>
-        <button class="btn-5050" id="clueBtn" style="display:none;">💡 Clue (3)</button>
-        <div class="grow"></div>
-      </div>
-
-      <h2 id="qtext" style="text-align:center;margin:14px 0 6px 0;">—</h2>
-
-      <div id="choices" class="choices" style="display:grid;"></div>
-
-      <div id="typing" style="display:none;">
-        <div class="answer-row">
-          <input id="answer" class="input" placeholder="Türkçe anlamlardan birini yaz..." />
+          <article class="card glass">
+            <div class="edu-icon">
+              <img class="icon-48" src="./assets/icons/school_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg" alt="" />
+            </div>
+            <h3>İstanbul University (Open Education)</h3>
+            <p class="meta">Associate Degree — Computer Programming • <strong>2nd Year</strong></p>
+            <p class="muted">
+              I have worked, am working, and will continue working to build a strong background in software development and programming languages.
+            </p>
+            <a class="link" href="https://auzef.istanbul.edu.tr/tr/content/bilgisayar-programciligi-acikogretim-onlisans-programi/program-hakkinda" target="_blank" rel="noopener noreferrer">Program Page →</a>
+          </article>
         </div>
       </div>
+    </section>
 
-      <div class="actions">
-        <button class="btn-next" id="nextBtn">⏭ Next</button>
-        <button class="btn-next" id="checkBtn">✔ Check</button>
+    <!-- PROJECTS -->
+    <section id="projects" class="section">
+      <div class="wrapper">
+        <div class="section-title">
+          <h2>Projects</h2>
+          <p>Selected work</p>
+        </div>
+
+        <div class="proj-grid">
+          <article class="card project glass">
+            <h3>Snakely — Language Learning App</h3>
+            <p class="muted">
+              Experience vocabulary-first learning, colorful free exploration, and engaging story-translation. To try the prototype, click the 🐍 Snakely button below.
+            </p>
+            <div class="tags">
+              <span class="tag">JS</span><span class="tag">HTML/CSS</span><span class="tag">UX</span>
+            </div>
+            <a class="btn btn-sm" href="/snakely/">🐍 Snakely</a>
+          </article>
+
+          <article class="card project glass">
+            <h3>Hydroponic Farm Prototype</h3>
+            <p class="muted">
+              I have this idea in mind and plan to build it in the future — a compact soilless farming setup designed for efficiency and affordability.
+            </p>
+            <div class="tags">
+              <span class="tag">IoT</span><span class="tag">Sustainability</span><span class="tag">R&amp;D</span>
+            </div>
+            <a class="btn btn-sm" href="#" aria-disabled="true">Details (soon)</a>
+          </article>
+        </div>
       </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section">
+      <div class="wrapper">
+        <div class="cta glass">
+          <h2>Let’s build something great</h2>
+          <p class="muted">Open to internship opportunities, collaborations and feedback.</p>
+          <div class="cta-actions">
+            <a class="btn btn-ghost" href="https://www.linkedin.com/in/uygaryilanli/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="wrapper">
+      <p>© 2025 Uygar Yılanlı. All rights reserved.</p>
     </div>
+  </footer>
+
+  <!-- ==== Bottom Sheet (mobile menu) ==== -->
+  <div id="sheet" class="sheet" hidden aria-hidden="true">
+    <div class="sheet-overlay" data-close="true"></div>
+    <section class="sheet-panel glass" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+      <header class="sheet-header">
+        <h3 id="sheet-title" class="sheet-title">Menu</h3>
+        <button class="sheet-close btn btn-sm" type="button" aria-label="Close" data-close="true">✕</button>
+      </header>
+      <nav id="mobileMenu" class="menu-list" aria-label="Mobile">
+      </nav>
+    </section>
   </div>
 
-  <!-- LEVEL DETAIL MODAL -->
-  <div id="levelModalBackdrop" class="modal-backdrop" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="levelModalTitle">
-      <div class="modal-head">
-        <div id="levelModalTitle" class="modal-title">Seviye</div>
-        <button class="modal-close" id="levelModalClose">Kapat</button>
-      </div>
-      <div id="levelModalBody"></div>
-    </div>
-  </div>
+  <!-- ==== Mobile Menu Script ==== -->
+  <script>
+    (function () {
+      const mq = window.matchMedia('(max-width: 800px)');
+      const menuBtn = document.getElementById('menuBtn');
+      const sheet = document.getElementById('sheet');
+      const panel = sheet.querySelector('.sheet-panel');
+      const mobileMenu = document.getElementById('mobileMenu');
+      const desktopLinks = document.querySelectorAll('.nav a');
 
-  <!-- preload chest icons -->
-  <link rel="preload" as="image" href="../assets/images/open-chest.png">
-  <link rel="preload" as="image" href="../assets/images/off-chest.png">
+      function buildMobileMenu() {
+        mobileMenu.innerHTML = '';
+        desktopLinks.forEach(link => {
+          const a = document.createElement('a');
+          a.className = 'btn menu-item';
+          a.textContent = link.textContent;
+          a.href = link.getAttribute('href') || '#';
 
-  <div id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+          a.addEventListener('click', (e) => {
+            const href = a.getAttribute('href') || '#';
+            if (href.startsWith('#')) {
+              e.preventDefault();
+              const target = document.querySelector(href);
+              closeSheet(() => {
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              });
+            } else {
+              closeSheet(() => window.open(href, '_blank', 'noopener,noreferrer'));
+            }
+          });
 
-  <div class="current-level" id="currentLevelIndicator" style="display:none;">Seviye: —</div>
-
-<script>
-  /* preload */
-  (function(){ const a=new Image();a.src='../assets/images/open-chest.png'; const b=new Image();b.src='../assets/images/off-chest.png'; })();
-
-  /* ================== UTIL ================== */
-  const cap = s => s ? s.charAt(0).toUpperCase()+s.slice(1) : "";
-  const shuffle = (arr)=>{ for(let i=arr.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; };
-  const nonEmpty = (x)=> x!=null && String(x).trim()!=="";
-  const joinMeanings = (w)=> (w.meanings || []).filter(nonEmpty).join(" • ");
-  const toTypeKey = (t)=>{ const s=(t||"").toLowerCase(); if(s.includes("verb")) return "verb"; if(s.includes("adj")) return "adjective"; if(s.includes("noun")) return "noun"; return "noun"; };
-
-  function normalize(s){
-    return (s||"").toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')
-      .replace(/ç/g,'c').replace(/ğ/g,'g').replace(/ı/g,'i')
-      .replace(/ö/g,'o').replace(/ş/g,'s').replace(/ü/g,'u')
-      .replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim();
-  }
-  function editDistance(a,b){
-    const m=a.length,n=b.length; if(!m) return n; if(!n) return m;
-    const dp=new Array(n+1); for(let j=0;j<=n;j++) dp[j]=j;
-    for(let i=1;i<=m;i++){ let prev=dp[0]; dp[0]=i;
-      for(let j=1;j<=n;j++){ const tmp=dp[j];
-        if(a[i-1]===b[j-1]) dp[j]=prev;
-        else dp[j]=Math.min(prev+1, dp[j]+1, dp[j-1]+1);
-        prev=tmp;
-    }} return dp[n];
-  }
-  function matchesAnswer(ans, w){
-    const a = normalize(ans); if(!a) return {ok:false, typo:false, suggestion:null};
-    const pool = (w.meanings || []).filter(nonEmpty).map(r=>({orig:r.trim(), norm:normalize(r)}));
-    if(a.length<=3){ const hit=pool.find(p=>p.norm===a); return {ok:!!hit, typo:false, suggestion:hit?hit.orig:null}; }
-    let best={ok:false,typo:false,suggestion:null,dist:Infinity};
-    for(const p of pool){ const t=p.norm; if(Math.abs(a.length-t.length)>3) continue;
-      const d=editDistance(a,t); const max=t.length<=5?1:t.length<=8?2:t.length<=12?2:3;
-      if(d<=max && d<best.dist) best={ok:true,typo:d>0,suggestion:p.orig,dist:d};
-    }
-    return best.ok?best:{ok:false,typo:false,suggestion:null};
-  }
-
-  /* ================== THEMES ================== */
-  const themes = {
-    noun:["linear-gradient(135deg,#60a5fa,#3b82f6)","linear-gradient(135deg,#3b82f6,#60a5fa)","var(--noun)"],
-    verb:["linear-gradient(135deg,#f87171,#ef4444)","linear-gradient(135deg,#ef4444,#f87171)","var(--verb)"],
-    adjective:["linear-gradient(135deg,#a78bfa,#8b5cf6)","linear-gradient(135deg,#8b5cf6,#a78bfa)","var(--adj)"],
-  };
-  const LEVEL_STYLES = {
-    A1: {solid: 'var(--A1-solid)'},
-    A2: {solid: 'var(--A2-solid)'},
-    B1: {solid: 'var(--B1-solid)'},
-    B2: {solid: 'var(--B2-solid)'},
-    C1: {solid: 'var(--C1-solid)'},
-  };
-
-  /* ================== SOUND ================== */
-  const Sound = (() => {
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    let unlocked = false;
-    function unlock(){ if(unlocked) return; if(ctx.state==='suspended') ctx.resume();
-      const o=ctx.createOscillator(), g=ctx.createGain(); g.gain.value=0.0001; o.connect(g).connect(ctx.destination); o.start(); o.stop(ctx.currentTime+0.01); unlocked=true; }
-    function tone({freq=440, dur=0.12, type='sine', vol=0.15, attack=0.005, release=0.08, startFreq}){
-      const now=ctx.currentTime, o=ctx.createOscillator(), g=ctx.createGain();
-      o.type=type;
-      if(startFreq){ o.frequency.setValueAtTime(startFreq, now); o.frequency.exponentialRampToValueAtTime(freq, now+dur); }
-      else o.frequency.setValueAtTime(freq, now);
-      g.gain.setValueAtTime(0, now);
-      g.gain.linearRampToValueAtTime(vol, now+attack);
-      g.gain.exponentialRampToValueAtTime(0.0001, now+Math.max(attack, dur-release));
-      o.connect(g).connect(ctx.destination); o.start(now); o.stop(now+dur+0.05);
-    }
-    function trink(){ tone({freq:1200,dur:0.10,type:'sine',vol:0.18}); setTimeout(()=>tone({freq:1600,dur:0.10,type:'sine',vol:0.16}),60); }
-    function dat(){ tone({freq:180,dur:0.18,type:'square',vol:0.12}); }
-    function flip(){ tone({startFreq:2200,freq:900,dur:0.08,type:'triangle',vol:0.12}); }
-    function pass(){ tone({startFreq:600,freq:300,dur:0.10,type:'sawtooth',vol:0.10}); }
-    ['click','touchstart','pointerdown','keydown'].forEach(ev=>window.addEventListener(ev, unlock, {once:true,passive:true}));
-    return { trink, dat, flip, pass };
-  })();
-
-  /* ================== TABS ================== */
-  const tabFree = document.getElementById('tab-free');
-  const tabTest = document.getElementById('tab-test');
-  const freeWrap = document.getElementById('free-wrap');
-  const testWrap = document.getElementById('test-wrap');
-  const tabsEl = document.getElementById('tabs');
-  const indicator = document.getElementById('tabIndicator');
-
-  function moveIndicator(target){
-    if(!target) return;
-    const tabsRect = tabsEl.getBoundingClientRect();
-    const tRect = target.getBoundingClientRect();
-    indicator.style.left = (tRect.left - tabsRect.left) + 'px';
-    indicator.style.top  = (tRect.top  - tabsRect.top ) + 'px';
-    indicator.style.width  = tRect.width + 'px';
-    indicator.style.height = tRect.height + 'px';
-    indicator.style.borderRadius = '12px';
-  }
-  window.addEventListener('resize', ()=> moveIndicator(document.querySelector('.tab.active')));
-
-  tabFree.onclick = () => {
-    tabFree.classList.add('active'); tabTest.classList.remove('active');
-    freeWrap.style.display='flex'; testWrap.style.display='none';
-    moveIndicator(tabFree);
-    window.scrollTo({top:0, behavior:'smooth'});   // mobilde her zaman görünür kıl
-  };
-  tabTest.onclick = () => {
-    tabTest.classList.add('active'); tabFree.classList.remove('active');
-    freeWrap.style.display='none'; testWrap.style.display='flex';
-    moveIndicator(tabTest);
-    window.scrollTo({top:0, behavior:'smooth'});   // mobilde her zaman görünür kıl
-  };
-
-  /* ================== THEME TOGGLE ================== */
-  const themeToggle = document.getElementById('themeToggle');
-  themeToggle.onclick = ()=>{
-    const body = document.body;
-    const isLight = (body.getAttribute('data-theme')!=='dark');
-    body.setAttribute('data-theme', isLight ? 'dark' : 'light');
-    themeToggle.textContent = isLight ? '☀️' : '🌙';
-  };
-
-  /* ================== STATE ================== */
-  let words = []; // aktif seviye sözlüğü
-  let freeQueue = [];
-  let testQueue = [];
-  let idToIdx = new Map();
-  let selectedLevel = null;
-
-  // Global (tüm oturum için) bilinen/görülen kelimeler
-  const LEVELS = ["A1","A2","B1","B2","C1"];
-  const globalStats = {};
-  LEVELS.forEach(l=> globalStats[l] = {tries:0, correct:0, seen:0, words:new Map()});
-
-  // UI refs
-  const inner = document.getElementById("cardInner");
-  const fWordDiv = document.getElementById("frontWord");
-  const bWordDiv = document.getElementById("backWord");
-  const fBadge= document.getElementById("badgeFront");
-  const bBadge= document.getElementById("badgeBack");
-
-  const drawerBtn = document.getElementById('drawerBtn');
-  const drawer    = document.getElementById('drawer');
-  const chestIcon = document.getElementById('chestIcon');
-  const levelsWrapper = document.getElementById('levelsWrapper');
-
-  const totalWorkedEl = document.getElementById('totalWorked');
-  const correctKnownEl= document.getElementById('correctKnown');
-  const wrongKnownEl  = document.getElementById('wrongKnown');
-  const barEl    = document.getElementById('bar');
-  const ratioEl  = document.getElementById('ratio');
-  const knownEl  = document.getElementById('knownBox');
-  const qtextEl  = document.getElementById('qtext');
-  const choicesEl= document.getElementById('choices');
-  const typingEl = document.getElementById('typing');
-  const answerEl = document.getElementById('answer');
-  const checkBtn = document.getElementById('checkBtn');
-  const nextBtn  = document.getElementById('nextBtn');
-  const hintBtn  = document.getElementById('hint5050');
-  const clueBtn  = document.getElementById('clueBtn');
-
-  let triesTotal=0, correctTotal=0;
-  let testMode = 'mc';
-  let currentQ = null;
-  let answered = false;
-  let lock = false;
-  let removedIdx = [];
-  let fiftyLeft = Infinity;
-  let usedCheckOrClue = false;
-  let isPassing = false;
-  let suppressClick = false;
-
-  /* ========== LEVEL SELECT ========== */
-  const levelSelectEl = document.getElementById('levelSelect');
-  const levelGridEl   = document.getElementById('levelGrid');
-  const reselectBtn   = document.getElementById('reselectBtn');
-
-  const LEVEL_CANDIDATE_PATHS = ["./", "./data/", "../data/", "./assets/data/"];
-  const LEVEL_TO_FILE = { A1:"a1.json", A2:"a2.json", B1:"b1.json", B2:"b2.json", C1:"c1.json" };
-  const discoveredUrl = {};
-
-  function showToast(message, variant='warning', timeout=2200){
-    const cont = document.getElementById('toastContainer'); if(!cont) return;
-    const el = document.createElement('div');
-    el.className = `toast ${variant}`;
-    el.innerHTML = `<div class="row"><div>${message}</div><button class="close" aria-label="Kapat">×</button></div>`;
-    cont.appendChild(el);
-    const remove = ()=>{ el.style.animation = 'toastOut .22s ease forwards'; setTimeout(()=> el.remove(), 220); };
-    el.querySelector('.close')?.addEventListener('click', remove);
-    if (timeout > 0) setTimeout(remove, timeout);
-  }
-
-  function updateReselectResponsive(){
-    if(reselectBtn.style.display !== 'none'){
-      if(window.innerWidth<=600) document.body.classList.add('has-reselect');
-      else document.body.classList.remove('has-reselect');
-    }else{
-      document.body.classList.remove('has-reselect');
-    }
-  }
-  window.addEventListener('resize', updateReselectResponsive);
-
-  async function tryFetch(url){
-    try{
-      const r = await fetch(url, {cache:'no-store'});
-      if(!r.ok) throw new Error('HTTP '+r.status);
-      const text = await r.text();
-      return text;
-    }catch(e){ return null; }
-  }
-
-  function parseFlexibleJson(text){
-    const trimmed = text.trim();
-    if(trimmed.startsWith('[')){
-      try{ const arr = JSON.parse(trimmed); return Array.isArray(arr) ? arr : []; }catch{}
-    }
-    const lines = trimmed.split(/\r?\n/).map(s=>s.trim()).filter(Boolean);
-    const out = [];
-    for(let line of lines){
-      if(line.endsWith(',')) line = line.slice(0,-1);
-      try{ out.push(JSON.parse(line)); }catch{}
-    }
-    return out;
-  }
-
-  function normalizeWordShape(list){
-    return list.map((w,i)=>({
-      id: i+1,
-      en: w.en,
-      meanings: Array.isArray(w.meanings) ? w.meanings.filter(nonEmpty) : (nonEmpty(w.meanings) ? [String(w.meanings)] : []),
-      type: (w.type||"").toLowerCase(),
-      level: (w.level||selectedLevel||"").toUpperCase(),
-      tries: 0,
-      correct: 0
-    }));
-  }
-
-  async function loadLevelFile(level){
-    if(discoveredUrl[level]){
-      const t = await tryFetch(discoveredUrl[level]);
-      if(t) return parseFlexibleJson(t);
-    }
-    const fname = LEVEL_TO_FILE[level];
-    for(const base of LEVEL_CANDIDATE_PATHS){
-      const url = base + fname;
-      const text = await tryFetch(url);
-      if(text){
-        discoveredUrl[level] = url;
-        return parseFlexibleJson(text);
+          mobileMenu.appendChild(a);
+        });
       }
-    }
-    return null;
-  }
 
-  async function countLevelWords(level){
-    const arr = await loadLevelFile(level);
-    return Array.isArray(arr) ? arr.length : 0;
-  }
+      function openSheet() {
+        sheet.hidden = false;
+        sheet.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        requestAnimationFrame(() => panel.classList.add('open'));
+        menuBtn.setAttribute('aria-expanded', 'true');
+      }
 
-  function renderLevelCards(counts){
-    levelGridEl.innerHTML = "";
-    LEVELS.forEach(lvl=>{
-      const card = document.createElement('div');
-      card.className = `level-card ${lvl}`;
-      card.setAttribute('role','listitem');
-      card.dataset.level = lvl;
-      card.innerHTML = `
-        <div class="level-name">${lvl}</div>
-        <div class="level-count" id="cnt-${lvl}">${counts[lvl] ?? '—'} kelime</div>
-      `;
-      card.onclick = ()=> pickLevel(lvl, card);
-      levelGridEl.appendChild(card);
-    });
-  }
+      function closeSheet(after) {
+        panel.classList.remove('open');
+        setTimeout(() => {
+          sheet.hidden = true;
+          sheet.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+          menuBtn.setAttribute('aria-expanded', 'false');
+          if (typeof after === 'function') after();
+        }, 200);
+      }
 
-  async function buildLevelSelect(){
-    const counts = {};
-    await Promise.all(LEVELS.map(async lvl=>{
-      try{ counts[lvl] = await countLevelWords(lvl); }
-      catch{ counts[lvl] = 0; }
-    }));
-    renderLevelCards(counts);
-  }
-
-  function revealMainUI(){
-    // sekmeler açık ve üstte görünsün
-    tabsEl.style.display = 'flex';
-    tabFree.classList.add('active'); tabTest.classList.remove('active');
-    freeWrap.style.display='flex'; testWrap.style.display='none';
-    drawerBtn.style.display = 'inline-flex';
-    moveIndicator(tabFree);
-    reselectBtn.style.display = 'inline-flex';
-    updateReselectResponsive();
-    window.scrollTo({top:0, behavior:'smooth'});
-  }
-
-async function pickLevel(level, cardEl){
-  if(!level) return;
-  selectedLevel = level;
-
-  const raw = await loadLevelFile(level);
-  if(!raw || !raw.length){
-    showToast(`${level} verisi bulunamadı. Dosya yolunu kontrol et.`, 'error', 3000);
-    return;
-  }
-
-  // aktif sözlüğü hazırla
-  words = normalizeWordShape(raw);
-  idToIdx = new Map(words.map((w,idx)=>[w.id, idx]));
-  freeQueue = shuffle(words.map(w=>w.id));
-  testQueue = shuffle(words.map(w=>w.id));
-  triesTotal = 0; 
-  correctTotal = 0;
-
-  // === YUMUŞAK KAYBOLMA ANİMASYONU ===
-  // Kartları sırayla sol-düşür (mevcut fade-away sınıfını kullanıyoruz)
-  const cards = [...levelGridEl.children];
-  cards.forEach((el, idx) => {
-    setTimeout(()=> el.classList.add('fade-away'), idx*40);
-  });
-
-  // "Seviye Seç" başlığını da aynı anda yumuşakça kaybet
-  const titleEl = document.querySelector('#levelSelect .level-badge');
-  if (titleEl){
-    // CSS eklemeden inline animasyon
-    titleEl.style.willChange = 'opacity, transform, filter';
-    titleEl.style.transition = 'opacity .42s ease, transform .42s ease, filter .42s ease';
-    // bir sonraki frame'de uygula (layout flush)
-    requestAnimationFrame(()=>{
-      titleEl.style.opacity = '0';
-      titleEl.style.transform = 'translateY(6px) scale(.98)';
-      titleEl.style.filter = 'blur(2px)';
-    });
-  }
-
-  // Kartların fade süresine küçük bir pay bırak
-  const totalFade = 420 + cards.length*40;
-
-  setTimeout(()=>{
-    // seçim ekranını kapat ve ana arayüzü aç
-    levelSelectEl.style.display = 'none';
-    revealMainUI();
-    buildLevelRings();
-    renderCard();
-    renderQuestion();
-    updateLevelRings();
-
-    // Seviye göstergesini güncelle (mevcutta varsa)
-    if (typeof setLevelIndicator === 'function'){
-      setLevelIndicator(true, level);
-    } else if (typeof updateCurrentLevelIndicator === 'function'){
-      updateCurrentLevelIndicator(level);
-      const ind = document.getElementById("currentLevelIndicator");
-      if (ind) ind.style.display = "inline-block";
-    }
-
-    // İstersen başarı tostu burada kalabilir / kaldırılmış olabilir
-    // showToast(`${level} yüklendi • ${words.length} kelime`, 'success', 2200);
-  }, totalFade);
-}
-
-
-  // Seviyeyi değiştir → açılış ekranına dön
-  reselectBtn.onclick = async ()=>{
-    tabsEl.style.display = 'none';
-    freeWrap.style.display = 'none';
-    testWrap.style.display = 'none';
-    drawerBtn.style.display = 'none';
-    reselectBtn.style.display = 'none';
-    updateReselectResponsive();
-    await buildLevelSelect();         // kartları taze oluştur (blur/opacity kalıntısı olmasın)
-    levelSelectEl.style.display = 'flex';
-    // "Seviye Seç" rozetini geri görünür yap
-    const titleEl = document.querySelector('#levelSelect .level-badge');
-    if (titleEl){
-      titleEl.style.transition = '';
-      titleEl.style.willChange = '';
-      titleEl.style.opacity = '1';
-      titleEl.style.transform = 'none';
-      titleEl.style.filter = 'none';
-    }
-    setLevelIndicator(false);  // seçim ekranında gizli
-    selectedLevel = null;
-    window.scrollTo({top:0, behavior:'smooth'});
-    updateCurrentLevelIndicator(null);
-    document.getElementById("currentLevelIndicator").style.display = "none";
-  };
-
-  /* ================== FREE MODE ================== */
-  function paintCard(w){
-    const key = toTypeKey(w.type);
-    const [g1,g2] = themes[key];
-    const lvl = (w.level || selectedLevel || 'A1').toUpperCase();
-    const lvlStyle = LEVEL_STYLES[lvl] || LEVEL_STYLES.A1;
-
-    document.getElementById("front").style.backgroundImage = g1;
-    document.getElementById("back").style.backgroundImage  = g2;
-
-    const solidVar = lvlStyle.solid.replace('var(','').replace(')','').trim();
-    const solidColor = getComputedStyle(document.documentElement).getPropertyValue(solidVar) || '#22c55e';
-    document.getElementById("cardInner").style.boxShadow = `0 18px 40px rgba(0,0,0,.25), 0 0 0 3px ${solidColor.trim()}55 inset`;
-
-    fBadge.textContent = `${cap(key)} • ${w.level || (selectedLevel || '-')}`;
-    bBadge.textContent = `${cap(key)} • ${w.level || (selectedLevel || '-')}`;
-    document.getElementById("cardInner").setAttribute("data-type", key);
-  }
-
-  function currentFreeId(){ return freeQueue.length ? freeQueue[0] : 1; }
-  function currentFreeWord(){ const id=currentFreeId(); return words[idToIdx.get(id)]; }
-
-  function renderCard(){
-    const w = currentFreeWord(); if(!w) return;
-    fWordDiv.textContent = w.en;
-    bWordDiv.textContent = joinMeanings(w) || "—";
-    paintCard(w);
-    const inner = document.getElementById("cardInner");
-    inner.classList.remove("flipped","enter-right");
-    void inner.offsetWidth;
-    inner.classList.add("enter-right");
-    inner.addEventListener("animationend", () => inner.classList.remove("enter-right"), { once:true });
-  }
-
-  function flipCard(){
-    if (suppressClick || isPassing) { suppressClick = false; return; }
-    const inner = document.getElementById("cardInner");
-    inner.classList.add('animating');
-    Sound.flip();
-    inner.classList.toggle('flipped');
-    const onEnd = (e)=>{
-      if(e.propertyName!=='transform') return;
-      inner.classList.remove('animating');
-      inner.removeEventListener('transitionend', onEnd);
-    };
-    inner.addEventListener('transitionend', onEnd);
-  }
-
-  function passCard(e){
-    if (e) e.stopPropagation();
-    if (isPassing) return;
-    isPassing = true;
-    Sound.pass();
-
-    const id = freeQueue.shift(); freeQueue.push(id);
-
-    const inner = document.getElementById("cardInner");
-    inner.classList.add('animating');
-    inner.classList.remove('enter-right');
-    inner.classList.add('pass-left');
-
-    const finish = () => {
-      inner.classList.remove('pass-left');
-      renderCard();
-      requestAnimationFrame(()=> inner.classList.remove('animating'));
-      isPassing = false;
-    };
-
-    let done = false;
-    const onEnd = () => {
-      if (done) return; done = true;
-      inner.removeEventListener('animationend', onEnd);
-      finish();
-    };
-    inner.addEventListener('animationend', onEnd);
-    setTimeout(onEnd, 450);
-  }
-
-  (function addSwipe(){
-    const card = document.querySelector('.card');
-    let startX = 0, dx = 0, dragging = false;
-    const THRESH = 60;
-    const onDown = (e)=>{ dragging = true; startX = (e.touches ? e.touches[0].clientX : e.clientX); dx = 0; };
-    const onMove = (e)=>{ if(!dragging) return; const x=(e.touches?e.touches[0].clientX:e.clientX); dx = x - startX; };
-    const onUp = ()=>{ if(!dragging) return; dragging=false; if (dx <= -THRESH){ suppressClick = true; passCard(); } else if (dx >= THRESH){ suppressClick = true; flipCard(); } dx = 0; };
-    card.addEventListener('pointerdown', onDown, {passive:true});
-    card.addEventListener('pointermove', onMove, {passive:true});
-    card.addEventListener('pointerup', onUp);
-    card.addEventListener('pointercancel', onUp);
-    card.addEventListener('touchstart', onDown, {passive:true});
-    card.addEventListener('touchmove', onMove, {passive:true});
-    card.addEventListener('touchend', onUp);
-  })();
-
-  /* ================== DRAWER ================== */
-  drawerBtn.onclick = () => {
-    const isHidden = (drawer.style.display==='none' || drawer.style.display==='');
-    drawer.style.display = isHidden ? 'block' : 'none';
-    if (chestIcon) chestIcon.src = isHidden ? '../assets/images/open-chest.png' : '../assets/images/off-chest.png';
-  };
-
-  /* ================== LEVEL RINGS + MODAL (global stats) ================== */
-  function buildLevelRings(){
-    levelsWrapper.innerHTML = "";
-    LEVELS.forEach(lvl=>{
-      const item = document.createElement('div'); item.className = 'level-item'; item.dataset.level = lvl;
-      const ring = document.createElement('div'); ring.className = 'level-ring'; ring.id = `ring-${lvl}`;
-      const ringTxt = document.createElement('span'); ringTxt.className = 'ring-text'; ringTxt.textContent = lvl; ring.appendChild(ringTxt);
-      const meta = document.createElement('div'); meta.className = 'level-meta';
-      meta.innerHTML = `<div class="level-acc">Doğru: <span id="acc-${lvl}">0/0</span></div><div class="level-seen">Görülen kelime: <span id="seen-${lvl}">0</span></div>`;
-      item.appendChild(ring); item.appendChild(meta);
-      item.addEventListener('click', ()=> openLevelDetail(lvl));
-      levelsWrapper.appendChild(item);
-    });
-    updateLevelRings();
-  }
-
-  function updateLevelRings(){
-    LEVELS.forEach(lvl=>{
-      const gs = globalStats[lvl] || {tries:0,correct:0,seen:0};
-      const acc = document.getElementById(`acc-${lvl}`);
-      const seen= document.getElementById(`seen-${lvl}`);
-      const ring= document.getElementById(`ring-${lvl}`);
-      const total = gs.tries || 0, ok = gs.correct || 0, pct = total ? (ok/total)*100 : 0;
-      acc && (acc.textContent = `${ok}/${total}`);
-      seen && (seen.textContent = gs.seen || 0);
-      if(ring){ const deg = (pct/100)*360; ring.style.setProperty('--deg', `${deg}deg`); }
-    });
-  }
-
-  function openLevelDetail(level){
-    const gs = globalStats[level] || {words:new Map()};
-    const arr = [...gs.words.values()].sort((a,b)=> (b.tries||0) - (a.tries||0) || a.en.localeCompare(b.en));
-    document.getElementById('levelModalTitle').textContent = `${level} • Kelime Geçmişi`;
-    const rows = arr.map(w=>{
-      const wrong = Math.max(0,(w.tries||0) - (w.correct||0));
-      return `<tr><td><span class="pill">${(w.level||'-')}</span></td><td><strong>${w.en}</strong></td><td>${(w.meanings||[]).filter(nonEmpty).join(" • ") || "—"}</td><td>${w.tries||0}</td><td>${w.correct||0}</td><td>${wrong}</td></tr>`;
-    }).join("");
-    document.getElementById('levelModalBody').innerHTML =
-      `<table class="words-table"><thead><tr><th>Seviye</th><th>Kelime (EN)</th><th>Anlam(lar)</th><th>Çıkma</th><th>Doğru</th><th>Yanlış</th></tr></thead><tbody>${rows || `<tr><td colspan="6">Bu seviyede henüz veri yok.</td></tr>`}</tbody></table>`;
-    const bd = document.getElementById('levelModalBackdrop');
-    bd.style.display = 'flex'; bd.setAttribute('aria-hidden','false');
-  }
-  function closeLevelDetail(){
-    const bd = document.getElementById('levelModalBackdrop');
-    bd.style.display = 'none'; bd.setAttribute('aria-hidden','true');
-  }
-  document.getElementById('levelModalClose').addEventListener('click', closeLevelDetail);
-  document.getElementById('levelModalBackdrop').addEventListener('click', (e)=>{ if(e.target.id==='levelModalBackdrop') closeLevelDetail(); });
-
-  /* ================== TEST MODE ================== */
-  function feedback(ok){
-    const panel = document.querySelector('.panel'); if(!panel) return;
-    panel.classList.remove('flash-correct','shake-wrong');
-    panel.classList.add(ok ? 'flash-correct' : 'shake-wrong');
-    setTimeout(()=> panel.classList.remove('flash-correct','shake-wrong'), ok ? 650 : 500);
-  }
-
-  function updateStatsBar(){
-    const r = triesTotal? Math.round(100*correctTotal/triesTotal) : 0;
-    totalWorkedEl.textContent = triesTotal; correctKnownEl.textContent = correctTotal; wrongKnownEl.textContent = Math.max(0, triesTotal - correctTotal);
-    ratioEl.textContent = r+"%"; barEl.style.width = r+"%";
-    const known = words.filter(w=> w.tries>=3 && (w.correct/w.tries)>=1.0 );
-    knownEl.textContent = known.map(w=> `${w.en} (${joinMeanings(w)})`).join(", ") || "—";
-    updateLevelRings();
-  }
-
-  function currentTestId(){ return testQueue.length ? testQueue[0] : 1; }
-  function currentTestWord(){ const id=currentTestId(); return words[idToIdx.get(id)]; }
-
-  function makeMCQuestion(w){
-    const correct = (w.meanings && w.meanings[0]) || "";
-    const othersPool = words
-      .filter(x=>x.id!==w.id)
-      .flatMap(x=> x.meanings || [])
-      .filter(nonEmpty);
-    shuffle(othersPool);
-    const opts = [correct];
-    for(const o of othersPool){ if(opts.length>=4) break; if(!opts.includes(o)) opts.push(o); }
-    shuffle(opts);
-    return { word:w, ask:'foreign', answer:correct, options:opts };
-  }
-
-  function makeTypingQuestion(w){
-    const answers = (w.meanings || []).filter(nonEmpty);
-    return { word:w, ask:'foreign', answerSet:answers, answer:answers[0] || "" };
-  }
-
-  function toggleHints(){
-    if(testMode==='mc'){ hintBtn.style.display='inline-block'; clueBtn.style.display='none'; checkBtn.style.display='none'; answerEl.blur(); }
-    else{ hintBtn.style.display='none'; clueBtn.style.display='inline-block'; checkBtn.style.display='inline-block'; }
-    hintBtn.textContent = `⚡ 50/50 (${fiftyLeft})`; clueBtn.textContent = `💡 Clue (${fiftyLeft})`;
-    const disableHints = fiftyLeft===0;
-    [hintBtn, clueBtn].forEach(btn=>{ btn.disabled = disableHints; btn.style.filter = disableHints ? "grayscale(1)" : ""; btn.style.cursor  = disableHints ? "not-allowed" : "pointer"; });
-  }
-
-  function renderQuestion(){
-    if(!testQueue.length) return;
-    answered = false; lock=false; removedIdx=[]; usedCheckOrClue = false;
-    checkBtn.textContent = "✔ Check"; checkBtn.style.filter = ""; checkBtn.disabled = false;
-
-    const w = currentTestWord();
-    testMode = (Math.random() < 0.5) ? 'mc' : 'typing';
-
-    if(testMode==='mc'){
-      currentQ = makeMCQuestion(w);
-      qtextEl.textContent = `To Turkish  ➜  ${w.en}`;
-      choicesEl.style.display='grid';
-      typingEl.style.display='none';
-      choicesEl.innerHTML="";
-      currentQ.options.forEach((opt,i)=>{
-        const div = document.createElement('div');
-        div.className='choice'; div.textContent=opt; div.onclick = ()=> choose(i);
-        choicesEl.appendChild(div);
+      menuBtn.addEventListener('click', () => {
+        if (!mq.matches) return;
+        buildMobileMenu();
+        openSheet();
       });
-    }else{
-      currentQ = makeTypingQuestion(w);
-      qtextEl.textContent = `To Turkish  ➜  ${w.en}`;
-      choicesEl.style.display='none';
-      typingEl.style.display='block';
-      answerEl.value=""; answerEl.focus();
-    }
 
-    toggleHints();
-    updateStatsBar();
-  }
+      sheet.addEventListener('click', (e) => {
+        if (e.target.dataset.close === 'true') closeSheet();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !sheet.hidden) closeSheet();
+      });
 
-  function finalize(ok){
-    answered = true; lock = true;
-    const w = currentTestWord();
-    const idx = idToIdx.get(w.id);
-    // lokal istatistikler (aktif seviye)
-    words[idx].tries++; triesTotal++;
-    if(ok){ words[idx].correct++; correctTotal++; }
-
-    // GLOBAL istatistikler
-    const L = (w.level || selectedLevel || '').toUpperCase();
-    if(LEVELS.includes(L)){
-      const gs = globalStats[L];
-      const key = (w.en||'').toLowerCase();
-      let entry = gs.words.get(key);
-      if(!entry){
-        entry = { en: w.en, meanings: (w.meanings||[]).slice(), level: L, tries: 0, correct: 0 };
-        gs.words.set(key, entry);
-        gs.seen += 1; // benzersiz kelime olarak görüldü
-      }
-      entry.tries += 1;
-      gs.tries += 1;
-      if(ok){ entry.correct += 1; gs.correct += 1; }
-    }
-
-    // sıra
-    const id = testQueue.shift();
-    if(ok){ testQueue.push(id); }
-    else{ const pos = Math.min(3, testQueue.length); testQueue.splice(pos, 0, id); }
-
-    updateLevelRings();
-    updateStatsBar();
-  }
-
-  function choose(i){
-    if(lock) return;
-    const nodes = [...choicesEl.children];
-    nodes.forEach(n => n.classList.remove('fx-correct','fx-wrong'));
-    const correctIdx = currentQ.options.findIndex(x=>x===currentQ.answer);
-    const ok = (i===correctIdx);
-    if(ok){ nodes[i].classList.add('correct','fx-correct'); Sound.trink(); }
-    else{ nodes[i].classList.add('wrong','fx-wrong'); nodes[correctIdx]?.classList.add('correct','fx-correct'); Sound.dat(); }
-    feedback(ok); finalize(ok);
-    setTimeout(()=> nodes.forEach(n => n.classList.remove('fx-correct','fx-wrong')), 700);
-  }
-
-  document.getElementById('hint5050').onclick = ()=>{
-    if(testMode!=='mc' || lock || fiftyLeft<=0 || usedCheckOrClue) return;
-    const nodes = [...choicesEl.children];
-    const correctIdx = currentQ.options.findIndex(x=>x===currentQ.answer);
-    const wrongs = nodes.map((n,idx)=>idx).filter(k=>k!==correctIdx && !removedIdx.includes(k));
-    let hidden=0; while(hidden<2 && wrongs.length){
-      const pick = wrongs.splice(Math.floor(Math.random()*(wrongs.length)),1)[0];
-      nodes[pick].style.visibility='hidden';
-      removedIdx.push(pick); hidden++;
-    }
-    usedCheckOrClue = true; hintBtn.disabled = true; hintBtn.style.filter = "grayscale(1)";
-    fiftyLeft = Math.max(0, fiftyLeft-1);
-    hintBtn.textContent = `⚡ 50/50 (${fiftyLeft})`; clueBtn.textContent = `💡 Clue (${fiftyLeft})`;
-    if(fiftyLeft===0){ clueBtn.disabled = true; clueBtn.style.filter = "grayscale(1)"; clueBtn.style.cursor = "not-allowed"; }
-  };
-
-  document.getElementById('clueBtn').onclick = ()=>{
-    if(testMode!=='typing' || lock || fiftyLeft<=0 || usedCheckOrClue) return;
-    const set = currentQ.answerSet || [];
-    const theTruth = (set[0]||"").trim(); if(!theTruth) return;
-    const revealLen = theTruth.length <= 4 ? 2 : 3;
-    answerEl.value = theTruth.slice(0, revealLen);
-    answerEl.focus(); answerEl.setSelectionRange(answerEl.value.length, answerEl.value.length);
-    usedCheckOrClue = true; clueBtn.disabled = true; clueBtn.style.filter = "grayscale(1)";
-    fiftyLeft = Math.max(0, fiftyLeft-1); clueBtn.textContent = `💡 Clue (${fiftyLeft})`;
-  };
-
-  function checkTyping(){
-    if (lock || testMode!=='typing') return;
-    const ans = answerEl.value.trim();
-    if (ans === ""){
-      checkBtn.textContent = "Önce bir cevap yaz 🙂"; answerEl.focus();
-      const prevBorder = answerEl.style.borderColor; answerEl.style.borderColor = "#ef4444";
-      setTimeout(() => { checkBtn.textContent = "✔ Check"; answerEl.style.borderColor = prevBorder || ""; }, 900);
-      return;
-    }
-    clueBtn.disabled = true; clueBtn.style.filter = "grayscale(1)";
-
-    const w = currentTestWord();
-    const { ok, typo, suggestion } = matchesAnswer(ans, w);
-
-    answerEl.classList.remove('fx-correct','fx-wrong');
-    if (ok){
-      answerEl.classList.add('fx-correct');
-      Sound.trink(); feedback(true);
-      if (typo && suggestion){
-        showToast(`✔ Doğru, ama ufak bir yazım hatası: “${ans}” → “${suggestion}”`, 'warning', 2600);
-      }
-      checkBtn.textContent = typo ? "✔ Doğru (ufak yazım hatası)" : "✔ Doğru!";
-      checkBtn.style.filter = "saturate(1.15)";
-    } else {
-      answerEl.classList.add('fx-wrong');
-      Sound.dat(); feedback(false);
-      checkBtn.textContent = `Cevap(lar): ${joinMeanings(w)}`;
-      checkBtn.style.filter = "saturate(0.9)";
-    }
-
-    setTimeout(()=> answerEl.classList.remove('fx-correct','fx-wrong'), ok ? 650 : 500);
-    finalize(ok);
-  }
-  checkBtn && (checkBtn.onclick = checkTyping);
-  answerEl && answerEl.addEventListener('keydown', (e)=>{ if(e.key==='Enter') checkTyping(); });
-
-  nextBtn && (nextBtn.onclick = ()=>{
-    if (!answered) { nextBtn.textContent = "Önce cevap ver!"; setTimeout(() => { nextBtn.textContent = "⏭ Next"; }, 900); return; }
-    renderQuestion();
-  });
-
-  /* ================== FLIP/PASS global ================== */
-  window.flipCard = flipCard;
-  window.passCard = passCard;
-
-  /* ===== INIT ===== */
-  window.addEventListener('load', async ()=>{
-    setLevelIndicator(false);  // başlangıçta gizli
-    await buildLevelSelect();
-  });
-
-
-// Seviye göstergesini görünürlük + metinle birlikte kontrol et
-function setLevelIndicator(visible, levelText){
-  const el = document.getElementById("currentLevelIndicator");
-  if(!el) return;
-  el.style.display = visible ? "inline-block" : "none";
-  if (typeof levelText !== 'undefined') {
-    el.textContent = levelText ? `Seviye: ${levelText}` : "Seviye: —";
-  }
-}
-</script>
+      mq.addEventListener('change', () => {
+        if (!mq.matches) {
+          if (!sheet.hidden) closeSheet();
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
