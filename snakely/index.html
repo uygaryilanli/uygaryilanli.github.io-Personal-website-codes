@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Snakely – Serbest Gezinim + Test Modu</title>
+<title>Snakely</title>
 <style>
   /* ================== THEME ================== */
   :root{
@@ -22,14 +22,15 @@
     --accent:#22c55e;
 
     --z-base: 0;
-    --z-tabs: 200;            /* sekme çubuğu */
-    --z-title: 220;           /* "Snakely" yazısı */
-    --z-logo: 300;            /* yılan logosu - tabs'tan yüksek */
-    --z-theme-btn: 350;       /* tema düğmesi */
-    --z-chest-btn: 1000;      /* chest butonu - logodan da yüksek */
-    --z-drawer: 1100;         /* çekmece (bilinen kelimeler) */
-    --z-modal-backdrop: 2000; /* modal perde */
-    --z-modal: 2001;          /* modal pencere (drawer'ın ÜSTÜNDE) */
+    --z-tabs: 200;
+    --z-title: 220;
+    --z-logo: 300;
+    --z-theme-btn: 350;
+    --z-reselect: 360;
+    --z-chest-btn: 1000;
+    --z-drawer: 1100;
+    --z-modal-backdrop: 2000;
+    --z-modal: 2001;
   }
   body[data-theme="dark"]{
     --bg1:#0f172a; --bg2:#1f2937;
@@ -37,6 +38,21 @@
     --glass-bg: rgba(17,24,39,.35);
     --glass-brd: rgba(255,255,255,.18);
     --chip: rgba(17,24,39,.55);
+  }
+
+  /* ===== Level Color System ===== */
+  :root{
+    --A1-grad: linear-gradient(135deg,#00c6ff,#0072ff);
+    --A2-grad: linear-gradient(135deg,#84fab0,#8fd3f4);
+    --B1-grad: linear-gradient(135deg,#f6d365,#fda085);
+    --B2-grad: linear-gradient(135deg,#a18cd1,#fbc2eb);
+    --C1-grad: linear-gradient(135deg,#f5576c,#f093fb);
+
+    --A1-solid:#1f6fff;
+    --A2-solid:#19c28f;
+    --B1-solid:#f59e0b;
+    --B2-solid:#8b5cf6;
+    --C1-solid:#ef4444;
   }
 
   /* ================== LAYOUT ================== */
@@ -49,6 +65,7 @@
     display:flex; flex-direction:column; align-items:center; justify-content:center;
     gap:18px; padding:24px; box-sizing:border-box; color:var(--ink);
   }
+  body.has-reselect{ padding-bottom: 76px; } /* mobilde alt sabit buton için boşluk */
 
   .logo{
     position:fixed; left:12px; top:12px; z-index: var(--z-logo);
@@ -77,7 +94,7 @@
   @keyframes fadeSlideIn { from{opacity:0; transform:translate(-50%,-10px)} to{opacity:1; transform:translate(-50%,0)} }
 
   .tabs{
-    position:relative; display:flex; gap:10px; padding:6px;
+    position:relative; display:none; gap:10px; padding:6px;
     border-radius:14px; backdrop-filter:blur(8px);
     background:rgba(255,255,255,.2); border:1px solid rgba(255,255,255,.35);
     overflow:hidden;
@@ -104,10 +121,8 @@
     position:relative; width:100%; height:100%;
     transform-style:preserve-3d; -webkit-transform-style:preserve-3d;
     border-radius:20px;
-    transition:transform .8s cubic-bezier(.4,.2,.2,1);
-    transform: translateZ(0); will-change: transform;
+    transition:transform .8s cubic-bezier(.4,.2,.2,1), box-shadow .2s ease;
   }
-
   .card-inner.flipped{ transform:rotateY(180deg) translateZ(0); }
 
   .face{
@@ -118,19 +133,14 @@
     animation:gradientShift 6s ease infinite; color:#fff;
     -webkit-backface-visibility:hidden; backface-visibility:hidden;
     transform: translateZ(0.1px) rotate(0.02deg);
-    will-change: transform; contain: layout paint;
+    will-change: transform;
     -webkit-font-smoothing: antialiased;
   }
-  /* flip/pass sırasında gradient & parıltı tamamen kapalı → renk sönmesi yok */
   .card-inner.animating .face{ animation-play-state: paused !important; }
   .card-inner.animating .face::after{ animation-play-state: paused !important; opacity: 1 !important; }
 
   .back{ transform:rotateY(180deg); }
-
-  .front, .back{
-    -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-  }
+  .front, .back{ -webkit-backface-visibility: hidden; backface-visibility: hidden; }
   .card-inner:not(.flipped) .front { transform:translateZ(1px); }
   .card-inner.flipped .back { transform:rotateY(180deg) translateZ(1px); }
 
@@ -167,8 +177,7 @@
     box-shadow:0 10px 22px rgba(0,0,0,.20); transition:transform .2s ease, box-shadow .2s ease;
     overflow:hidden; min-height:44px; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
   }
-  button::after{
-    content:""; position:absolute; inset:0; left:-100%;
+  button::after{ content:""; position:absolute; inset:0; left:-100%;
     background:linear-gradient(90deg,rgba(255,255,255,.0),rgba(255,255,255,.25),rgba(255,255,255,0));
     transition:left .45s ease;
   }
@@ -215,7 +224,6 @@
     cursor:pointer; text-align:center; font-weight:900; color:#0f172a;
     transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
     box-shadow:0 8px 18px rgba(0,0,0,.08);
-    min-height:44px; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
   }
   body[data-theme="dark"] .choice{ background:rgba(31,41,55,.8); color:#f8fafc; }
   .choice:hover{ transform:translateY(-1px); box-shadow:0 10px 22px rgba(0,0,0,.12); }
@@ -239,8 +247,8 @@
     padding:8px; border:none; border-radius:12px; cursor:pointer;
     background:linear-gradient(45deg,#0ea5e9,#38bdf8);
     box-shadow:0 10px 22px rgba(0,0,0,.20);
-    display:flex; align-items:center; justify-content:center;
-    min-height:44px; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
+    display:none; align-items:center; justify-content:center;
+    min-height:44px;
   }
   .chest-icon{ width:48px; height:auto; display:block; }
   .drawer{
@@ -249,7 +257,6 @@
     background:rgba(255,255,255,.95); border:1px solid rgba(0,0,0,.08); border-radius:14px;
     padding:12px; box-shadow:0 18px 40px rgba(0,0,0,.25); display:none;
     color:#0f172a; font-size:14px;
-    content-visibility:auto; contain: content;
   }
   body[data-theme="dark"] .drawer{ background:rgba(17,24,39,.96); color:#e5e7eb; border-color:rgba(255,255,255,.12); }
 
@@ -259,32 +266,21 @@
     font-weight:800; font-size:14px; color:#fff;
     background:linear-gradient(45deg,#6b7280,#111827);
     box-shadow:0 10px 22px rgba(0,0,0,.20);
-    min-height:44px; touch-action: manipulation; -webkit-tap-highlight-color: transparent;
-  }
-
-  .choice {
-    padding: 16px;
-    font-size: 15px;
-    min-height: unset;
-    line-height: 1.2;
   }
 
   @media (max-width: 600px){
     body{ padding:16px; gap:14px; justify-content: flex-start;}
     .wrap{ margin-top: calc(var(--tabsH, 56px) + 10px); }
     #test-wrap{ margin-top: calc(var(--tabsH, 56px) + 10px); }
-    .tabs{ width:100%; flex-direction:column; gap:8px; border-radius:14px; position: sticky; top: calc(84px + env(safe-area-inset-top)); z-index: var(--z-tabs); margin-top: 8px; }
+    .tabs{ width:100%; flex-direction:column; gap:8px; border-radius:14px; position: sticky; top: calc(84px + env(safe-area-inset-top)); z-index: var(--z-tabs); margin-top: 8px; display:flex !important; }
     .tab{ width:100%; text-align:center; }
     .row{ flex-direction:column; align-items:stretch; }
     .stat{ width:100%; text-align:center; }
     .progress{ height:12px; }
     .choices{ grid-template-columns:1fr; }
-    .tools-row{ justify-content:center !important; }
     .tools-row > button{ width:100%; max-width:320px; margin:0 auto; }
     .actions{ flex-direction:column; align-items:center; }
     .actions > button{ width:100%; max-width:320px; }
-    .buttons{ gap:12px; }
-    button{ padding:12px 18px; font-size:15px; }
     .panel{ padding:14px; }
     .theme-toggle{ right:70px; }
     .chest-icon{ width:46px; }
@@ -298,16 +294,14 @@
   .shake-wrong{ animation: shake .35s ease; }
   @keyframes shake{ 10%{transform:translateX(-3px)} 30%{transform:translateX(3px)} 50%{transform:translateX(-2px)} 70%{transform:translateX(2px)} 90%{transform:translateX(-1px)} 100%{transform:translateX(0)} }
 
-  /* Yalnız X eksenli giriş/çıkış – dikey hareket yok */
-  .pass-left{ animation: passLeft .35s cubic-bezier(.4,.2,.2,1) both; will-change: transform; transform: translateZ(0); }
+  .pass-left{ animation: passLeft .35s cubic-bezier(.4,.2,.2,1) both; }
   @keyframes passLeft{ from{transform:translate3d(0,0,0)} to{transform:translate3d(-40px,0,0)} }
-
-  .enter-right{ animation: enterRight .35s cubic-bezier(.4,.2,.2,1) both; will-change: transform; transform: translateZ(0); }
+  .enter-right{ animation: enterRight .35s cubic-bezier(.4,.2,.2,1) both; }
   @keyframes enterRight{ from{transform:translate3d(40px,0,0)} to{transform:translate3d(0,0,0)} }
 
-  /* LEVEL RINGS */
+  /* LEVEL RINGS in drawer */
   .levels-wrapper{ display:flex; flex-direction:column; gap:10px; align-items:flex-start; margin-bottom:10px; }
-  .level-item{ display:flex; align-items:center; gap:10px; cursor:pointer; padding:6px 8px; border-radius:10px; transition: background .18s ease, transform .08s ease; }
+  .level-item{ display:flex; align-items:center; gap:10px; cursor:pointer; padding:6px 8px; border-radius:10px; transition: background .18s ease; }
   .level-item:hover{ background:rgba(0,0,0,.05); }
   body[data-theme="dark"] .level-item:hover{ background:rgba(255,255,255,.06); }
   .level-ring{ width:44px; height:44px; border-radius:50%; position:relative; background:conic-gradient(var(--accent) var(--deg,0deg), rgba(0,0,0,.12) 0deg); box-shadow:inset 0 0 0 2px rgba(0,0,0,.06); display:grid; place-items:center; }
@@ -318,7 +312,149 @@
   .level-meta{ display:flex; flex-direction:column; line-height:1.15; font-size:12.5px; color:var(--ink); }
   .level-acc{ font-weight:800; } .level-seen{ opacity:.9; }
 
-  /* MODAL */
+  @keyframes gradientShift{ 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+  @keyframes shine{ 0%{left:-60%} 55%{left:130%} 100%{left:130%} }
+
+  .card-inner[data-type="noun"]{ box-shadow:0 18px 40px rgba(0,0,0,.25), 0 0 0 2px var(--noun) inset; }
+  .card-inner[data-type="verb"]{ box-shadow:0 18px 40px rgba(0,0,0,.25), 0 0 0 2px var(--verb) inset; }
+  .card-inner[data-type="adjective"]{ box-shadow:0 18px 40px rgba(0,0,0,.25), 0 0 0 2px var(--adj) inset; }
+
+  @media (prefers-reduced-motion: reduce){
+    .card-inner{ transition:none !important; }
+    .face::after, .bar, .enter-right, .pass-left{ animation:none !important; }
+  }
+
+  /* ===== TOAST ===== */
+  .toast-container{
+    position: fixed;
+    top: calc(12px + env(safe-area-inset-top));
+    left: 0; right: 0;
+    margin: 0 auto;
+    width: min(520px, 94vw);
+    z-index: 5000;
+    display: grid; gap: 8px; pointer-events: none;
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+  .toast{
+    box-sizing: border-box;
+    pointer-events: auto;
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-weight: 800;
+    font-size: 14px;
+    box-shadow: 0 12px 26px rgba(0,0,0,.22);
+    border: 1px solid rgba(0,0,0,.06);
+    background: rgba(255,255,255,.96);
+    color: #0f172a;
+    animation: toastIn .24s ease both;
+    max-width: 100%;
+    overflow: hidden;
+    margin-inline: 8px;
+  }
+  body[data-theme="dark"] .toast{ background: rgba(17,24,39,.96); border-color: rgba(255,255,255,.12); color: #e5e7eb; }
+  .toast.success{ border-left: 6px solid #22c55e; }
+  .toast.warning{ border-left: 6px solid #f59e0b; }
+  .toast.error{   border-left: 6px solid #ef4444; }
+  .toast .close{ background: transparent; border: none; cursor: pointer; font-weight: 900; font-size: 16px; line-height: 1; color: inherit; opacity: .8; }
+  .toast .row{ display: flex; align-items: center; justify-content: space-between; gap: 10px; min-width: 0; }
+  .toast .row > div:first-child{ flex: 1 1 auto; min-width: 0; word-break: break-word; overflow-wrap: anywhere; hyphens: auto; }
+  @keyframes toastIn{ from{ opacity:0; transform: translateY(-6px); } to{ opacity:1; transform: translateY(0); } }
+  @keyframes toastOut{ to{ opacity:0; transform: translateY(-6px); } }
+
+  /* ===== LEVEL SELECT ===== */
+  .level-select-wrap{
+    display:flex; flex-direction:column; align-items:center; gap:16px;
+    width:100%;
+    margin-top: 84px;
+    animation: fadeInUp .35s ease both;
+  }
+  @keyframes fadeInUp { from{opacity:0; transform: translateY(6px);} to{opacity:1; transform: translateY(0);} }
+
+  .level-badge{
+    font-weight:1000; font-size:12px; letter-spacing:.8px; text-transform:uppercase;
+    color:#0f172a;
+    padding:8px 12px; border-radius:999px;
+    background: linear-gradient(90deg,#34d399,#22d3ee);
+    box-shadow:0 8px 18px rgba(0,0,0,.12), inset 0 1px 0 rgba(255,255,255,.35);
+  }
+
+  .level-grid{
+    display:grid;
+    grid-template-columns: repeat(5, minmax(160px, 1fr));
+    gap:14px;
+    width:min(1100px, 96vw);
+  }
+  @media (max-width: 900px){
+    .level-grid{ grid-template-columns: repeat(3, minmax(140px, 1fr)); }
+  }
+  @media (max-width: 620px){
+    .level-grid{ grid-template-columns: repeat(1, minmax(220px, 1fr)); gap:12px; }
+  }
+
+  .level-card{
+    position:relative;
+    border-radius:16px;
+    padding:16px;
+    min-height:120px;
+    border:1px solid var(--glass-brd);
+    box-shadow:0 16px 38px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.25);
+    color:#fff;
+    display:flex; flex-direction:column; gap:8px; justify-content:center; align-items:flex-start;
+    cursor:pointer; overflow:hidden;
+    backdrop-filter: blur(10px) saturate(120%);
+    transition: transform .14s ease, box-shadow .14s ease, border-color .14s ease, background .14s ease, opacity .35s ease, filter .35s ease;
+  }
+  .level-card:hover{ transform: translateY(-2px); box-shadow:0 22px 48px rgba(0,0,0,.22); }
+  .level-card.A1{ background: var(--A1-grad); }
+  .level-card.A2{ background: var(--A2-grad); }
+  .level-card.B1{ background: var(--B1-grad); }
+  .level-card.B2{ background: var(--B2-grad); }
+  .level-card.C1{ background: var(--C1-grad); }
+
+  .level-name{ font-size:28px; font-weight:1000; letter-spacing:.8px; }
+  .level-count{ font-size:13px; font-weight:800; color:#0f172a; background:var(--chip); padding:6px 10px; border-radius:999px; }
+  .level-card .level-count{ background: rgba(255,255,255,.88) !important; color:#0f172a !important; }
+  body[data-theme="dark"] .level-card .level-count{ background: rgba(255,255,255,.92) !important; color:#0f172a !important; }
+
+  /* yeni: seviye kartlarını yumuşakça söndür */
+  .level-card.fade-away{
+    opacity: 0;
+    transform: translateY(8px) scale(.98);
+    filter: blur(2px);
+  }
+
+  /* Reselect button */
+  .reselect-btn{
+    position: fixed;
+    bottom: calc(12px + env(safe-area-inset-bottom));
+    left: calc(12px + env(safe-area-inset-left));
+    z-index: var(--z-reselect);
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(45deg,#16a34a,#06b6d4);
+    color: #fff;
+    font-weight: 900;
+    font-size: 12px;
+    box-shadow: 0 8px 20px rgba(0,0,0,.22);
+    cursor: pointer;
+    display: none;
+  }
+  .reselect-btn:hover{ filter: brightness(1.05); }
+  .reselect-btn:active{ transform: translateY(1px); }
+
+  /* Mobilde Next butonu gibi, en altta ve ortada */
+  @media (max-width:600px){
+    .reselect-btn{
+      left: 12px; right: 12px;
+      width: auto;
+      background: linear-gradient(45deg,var(--btn-next-start),var(--btn-next-end));
+      font-size: 15px; border-radius:14px; padding:12px 18px;
+    }
+  }
+
+  /* ===== MODAL ===== */
   .modal-backdrop{ position:fixed; inset:0; background:rgba(0,0,0,.35); display:none; align-items:center; justify-content:center; z-index: var(--z-modal-backdrop); }
   .modal{
     width:min(680px,94vw); max-height:min(78vh, 860px); overflow:auto;
@@ -337,91 +473,42 @@
   .words-table th{ font-weight:900; }
   body[data-theme="dark"] .words-table th, body[data-theme="dark"] .words-table td{ border-bottom-color: rgba(255,255,255,.12); }
 
-  @keyframes gradientShift{ 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
-  @keyframes shine{ 0%{left:-60%} 55%{left:130%} 100%{left:130%} }
+  .current-level {
+  margin-top: 6px;
+  font-weight: 800;
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: linear-gradient(45deg,#10b981,#3b82f6);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+  text-align: center;
+  display: inline-block;
+}
+@media (max-width:600px){
+  .current-level { font-size:13px; padding:5px 10px; }
+}
 
-  .card-inner[data-type="noun"]{ box-shadow:0 18px 40px rgba(0,0,0,.25), 0 0 0 2px var(--noun) inset; }
-  .card-inner[data-type="verb"]{ box-shadow:0 18px 40px rgba(0,0,0,.25), 0 0 0 2px var(--verb) inset; }
-  .card-inner[data-type="adjective"]{ box-shadow:0 18px 40px rgba(0,0,0,.25), 0 0 0 2px var(--adj) inset; }
+@keyframes fadeOutSmooth {
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0; transform: scale(0.97); }
+}
+.fade-out {
+  animation: fadeOutSmooth .6s ease forwards;
+}
 
-  @media (prefers-reduced-motion: reduce){
-    .card-inner{ transition:none !important; }
-    .face::after, .bar, .enter-right, .pass-left{ animation:none !important; }
-  }
-
-  /* ===== TOAST ===== */
-  .toast-container{
-    position: fixed;
-    top: calc(12px + env(safe-area-inset-top));
-    left: 0;
-    right: 0;
-    transform: none;
-    margin: 0 auto;
-    width: min(520px, 94vw);
-    padding-left: env(safe-area-inset-left);
-    padding-right: env(safe-area-inset-right);
-    z-index: calc(var(--z-modal) + 10);
-    display: grid;
-    gap: 8px;
-    pointer-events: none;
-  }
-  .toast{
-    box-sizing: border-box;
-    pointer-events: auto;
-    border-radius: 12px;
-    padding: 10px 14px;
-    font-weight: 800;
-    font-size: 14px;
-    box-shadow: 0 12px 26px rgba(0,0,0,.22);
-    border: 1px solid rgba(0,0,0,.06);
-    background: rgba(255,255,255,.96);
-    color: #0f172a;
-    animation: toastIn .24s ease both;
-    max-width: 100%;
-    overflow: hidden;
-    margin-inline: 8px; /* dar cihazlarda kenar tamponu */
-  }
-  body[data-theme="dark"] .toast{
-    background: rgba(17,24,39,.96);
-    border-color: rgba(255,255,255,.12);
-    color: #e5e7eb;
-  }
-  .toast.success{ border-left: 6px solid #22c55e; }
-  .toast.warning{ border-left: 6px solid #f59e0b; }
-  .toast.error{   border-left: 6px solid #ef4444; }
-
-  .toast .close{
-    background: transparent; border: none; cursor: pointer;
-    font-weight: 900; font-size: 16px; line-height: 1;
-    color: inherit; opacity: .8;
-  }
-  .toast .row{
-    display: flex; align-items: center; justify-content: space-between; gap: 10px;
-    min-width: 0;
-  }
-  /* Mesaj metni büzülebilsin ve satır kırsın */
-  .toast .row > div:first-child{
-    flex: 1 1 auto;
-    min-width: 0;
-    word-break: break-word;
-    overflow-wrap: anywhere;
-    hyphens: auto;
-  }
-
-  /* Animasyonlar: yalnız Y ekseninde hareket */
-  @keyframes toastIn{
-    from{ opacity:0; transform: translateY(-6px); }
-    to  { opacity:1; transform: translateY(0); }
-  }
-  @keyframes toastOut{
-    to{ opacity:0; transform: translateY(-6px); }
-  }
 </style>
 </head>
 <body data-theme="light">
 
   <img src="../assets/images/Maskot.png" alt="Snakely" class="logo" loading="lazy" decoding="async"/>
   <div class="title">Snakely</div>
+
+  <!-- LEVEL SELECT -->
+  <div id="levelSelect" class="level-select-wrap" aria-live="polite">
+    <div class="level-badge level-title">Seviye Seç</div>
+    <div id="levelGrid" class="level-grid" role="list"></div>
+  </div>
 
   <div class="tabs" id="tabs">
     <span class="tab-indicator" id="tabIndicator"></span>
@@ -430,6 +517,9 @@
   </div>
 
   <button id="themeToggle" class="theme-toggle">🌙</button>
+
+  <!-- reselect -->
+  <button id="reselectBtn" class="reselect-btn" title="Seviyeyi Değiştir">⟵ Seviyeyi Değiştir</button>
 
   <button id="drawerBtn" class="drawer-btn">
     <img id="chestIcon" src="../assets/images/off-chest.png" alt="Chest" class="chest-icon" loading="lazy" decoding="async">
@@ -442,7 +532,7 @@
   </div>
 
   <!-- FREE MODE -->
-  <div id="free-wrap" class="wrap">
+  <div id="free-wrap" class="wrap" style="display:none;">
     <div class="card" onclick="flipCard()">
       <div id="cardInner" class="card-inner">
         <div id="front" class="face front">
@@ -527,8 +617,10 @@
 
   <div id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></div>
 
+  <div class="current-level" id="currentLevelIndicator" style="display:none;">Seviye: —</div>
+
 <script>
-  // Görselleri önceden yükle
+  /* preload */
   (function(){ const a=new Image();a.src='../assets/images/open-chest.png'; const b=new Image();b.src='../assets/images/off-chest.png'; })();
 
   /* ================== UTIL ================== */
@@ -538,63 +630,32 @@
   const joinMeanings = (w)=> (w.meanings || []).filter(nonEmpty).join(" • ");
   const toTypeKey = (t)=>{ const s=(t||"").toLowerCase(); if(s.includes("verb")) return "verb"; if(s.includes("adj")) return "adjective"; if(s.includes("noun")) return "noun"; return "noun"; };
 
-  // 1) Normalize: TR karakterleri, diakritikler, noktalama, fazla boşluklar
   function normalize(s){
-    return (s||"")
-      .toLowerCase()
-      .normalize('NFD').replace(/[\u0300-\u036f]/g,'') // diakritik sil
+    return (s||"").toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')
       .replace(/ç/g,'c').replace(/ğ/g,'g').replace(/ı/g,'i')
       .replace(/ö/g,'o').replace(/ş/g,'s').replace(/ü/g,'u')
-      .replace(/[^a-z0-9\s]/g,' ') // noktalama → boşluk
-      .replace(/\s+/g,' ')
-      .trim();
+      .replace(/[^a-z0-9\s]/g,' ').replace(/\s+/g,' ').trim();
   }
-
-  // 2) Levenshtein (basit, hızlı)
   function editDistance(a,b){
-    const m=a.length,n=b.length;
-    if(!m) return n; if(!n) return m;
-    const dp=new Array(n+1);
-    for(let j=0;j<=n;j++) dp[j]=j;
-    for(let i=1;i<=m;i++){
-      let prev=dp[0]; dp[0]=i;
-      for(let j=1;j<=n;j++){
-        const tmp=dp[j];
+    const m=a.length,n=b.length; if(!m) return n; if(!n) return m;
+    const dp=new Array(n+1); for(let j=0;j<=n;j++) dp[j]=j;
+    for(let i=1;i<=m;i++){ let prev=dp[0]; dp[0]=i;
+      for(let j=1;j<=n;j++){ const tmp=dp[j];
         if(a[i-1]===b[j-1]) dp[j]=prev;
         else dp[j]=Math.min(prev+1, dp[j]+1, dp[j-1]+1);
         prev=tmp;
-      }
-    }
-    return dp[n];
+    }} return dp[n];
   }
-
-  // 3) Yeni matchesAnswer: meanings üzerinden kontrol
   function matchesAnswer(ans, w){
-    const a = normalize(ans);
-    if(!a) return {ok:false, typo:false, suggestion:null};
-
-    const raw = (w.meanings || []).filter(x=>x && String(x).trim()!=="");
-    const poolPairs = raw.map(r => ({ orig: r.trim(), norm: normalize(r) }));
-
-    // 2–3 harflik cevaplar: SADECE tam eşleşme
-    if(a.length <= 3){
-      const hit = poolPairs.find(p => p.norm === a);
-      return { ok: !!hit, typo: false, suggestion: hit ? hit.orig : null };
+    const a = normalize(ans); if(!a) return {ok:false, typo:false, suggestion:null};
+    const pool = (w.meanings || []).filter(nonEmpty).map(r=>({orig:r.trim(), norm:normalize(r)}));
+    if(a.length<=3){ const hit=pool.find(p=>p.norm===a); return {ok:!!hit, typo:false, suggestion:hit?hit.orig:null}; }
+    let best={ok:false,typo:false,suggestion:null,dist:Infinity};
+    for(const p of pool){ const t=p.norm; if(Math.abs(a.length-t.length)>3) continue;
+      const d=editDistance(a,t); const max=t.length<=5?1:t.length<=8?2:t.length<=12?2:3;
+      if(d<=max && d<best.dist) best={ok:true,typo:d>0,suggestion:p.orig,dist:d};
     }
-
-    // Daha uzun cevaplarda ufak yazım hatasına tolerans
-    let best = {ok:false, typo:false, suggestion:null, dist:Infinity};
-    for(const p of poolPairs){
-      const t = p.norm;
-      if (Math.abs(a.length - t.length) > 3) continue; // bariz uzunluk farkı
-
-      const dist = editDistance(a, t);
-      const maxDist = t.length <= 5 ? 1 : t.length <= 8 ? 2 : t.length <= 12 ? 2 : 3;
-      if(dist <= maxDist && dist < best.dist){
-        best = { ok:true, typo: dist>0, suggestion: p.orig, dist };
-      }
-    }
-    return best.ok ? best : {ok:false, typo:false, suggestion:null};
+    return best.ok?best:{ok:false,typo:false,suggestion:null};
   }
 
   /* ================== THEMES ================== */
@@ -602,6 +663,13 @@
     noun:["linear-gradient(135deg,#60a5fa,#3b82f6)","linear-gradient(135deg,#3b82f6,#60a5fa)","var(--noun)"],
     verb:["linear-gradient(135deg,#f87171,#ef4444)","linear-gradient(135deg,#ef4444,#f87171)","var(--verb)"],
     adjective:["linear-gradient(135deg,#a78bfa,#8b5cf6)","linear-gradient(135deg,#8b5cf6,#a78bfa)","var(--adj)"],
+  };
+  const LEVEL_STYLES = {
+    A1: {solid: 'var(--A1-solid)'},
+    A2: {solid: 'var(--A2-solid)'},
+    B1: {solid: 'var(--B1-solid)'},
+    B2: {solid: 'var(--B2-solid)'},
+    C1: {solid: 'var(--C1-solid)'},
   };
 
   /* ================== SOUND ================== */
@@ -646,18 +714,19 @@
     indicator.style.height = tRect.height + 'px';
     indicator.style.borderRadius = '12px';
   }
-  window.addEventListener('load', ()=> moveIndicator(document.querySelector('.tab.active')));
   window.addEventListener('resize', ()=> moveIndicator(document.querySelector('.tab.active')));
 
   tabFree.onclick = () => {
     tabFree.classList.add('active'); tabTest.classList.remove('active');
     freeWrap.style.display='flex'; testWrap.style.display='none';
     moveIndicator(tabFree);
+    window.scrollTo({top:0, behavior:'smooth'});   // mobilde her zaman görünür kıl
   };
   tabTest.onclick = () => {
     tabTest.classList.add('active'); tabFree.classList.remove('active');
     freeWrap.style.display='none'; testWrap.style.display='flex';
     moveIndicator(tabTest);
+    window.scrollTo({top:0, behavior:'smooth'});   // mobilde her zaman görünür kıl
   };
 
   /* ================== THEME TOGGLE ================== */
@@ -670,33 +739,29 @@
   };
 
   /* ================== STATE ================== */
-  let words = []; // {id,en,meanings[],type,level,tries,correct}
-  let freeQueue = []; // Serbest Gezinim kuyruğu
-  let testQueue = []; // Test kuyruğu
+  let words = []; // aktif seviye sözlüğü
+  let freeQueue = [];
+  let testQueue = [];
   let idToIdx = new Map();
+  let selectedLevel = null;
 
-  // UI refs (free)
+  // Global (tüm oturum için) bilinen/görülen kelimeler
+  const LEVELS = ["A1","A2","B1","B2","C1"];
+  const globalStats = {};
+  LEVELS.forEach(l=> globalStats[l] = {tries:0, correct:0, seen:0, words:new Map()});
+
+  // UI refs
   const inner = document.getElementById("cardInner");
-  const front = document.getElementById("front");
-  const back  = document.getElementById("back");
   const fWordDiv = document.getElementById("frontWord");
   const bWordDiv = document.getElementById("backWord");
   const fBadge= document.getElementById("badgeFront");
   const bBadge= document.getElementById("badgeBack");
 
-  // drawer & level UI
   const drawerBtn = document.getElementById('drawerBtn');
   const drawer    = document.getElementById('drawer');
   const chestIcon = document.getElementById('chestIcon');
   const levelsWrapper = document.getElementById('levelsWrapper');
 
-  // modal
-  const modalBackdrop = document.getElementById('levelModalBackdrop');
-  const modalTitle    = document.getElementById('levelModalTitle');
-  const modalBody     = document.getElementById('levelModalBody');
-  const modalCloseBtn = document.getElementById('levelModalClose');
-
-  // test refs
   const totalWorkedEl = document.getElementById('totalWorked');
   const correctKnownEl= document.getElementById('correctKnown');
   const wrongKnownEl  = document.getElementById('wrongKnown');
@@ -718,55 +783,244 @@
   let answered = false;
   let lock = false;
   let removedIdx = [];
-  let fiftyLeft = Infinity;    // ipuçlarına dokunmuyoruz (sınırsız veya sen sonra sınırlarsın)
+  let fiftyLeft = Infinity;
   let usedCheckOrClue = false;
   let isPassing = false;
   let suppressClick = false;
 
-  const LEVELS = ["A1","A2","B1","B2","C1"];
+  /* ========== LEVEL SELECT ========== */
+  const levelSelectEl = document.getElementById('levelSelect');
+  const levelGridEl   = document.getElementById('levelGrid');
+  const reselectBtn   = document.getElementById('reselectBtn');
 
-  /* ========== words.json yükle (meanings uyumlu) ========== */
-  fetch('../words.json')
-    .then(r=>r.json())
-    .then(list=>{
-      words = list.map((w,i)=>({
-        id: i+1,
-        en: w.en,
-        meanings: (w.meanings || []).filter(nonEmpty),
-        type: (w.type||"").toLowerCase(),
-        level: (w.level || "").toUpperCase(),
-        tries: 0, correct: 0
-      }));
-      idToIdx = new Map(words.map((w,idx)=>[w.id, idx]));
-      freeQueue = shuffle(words.map(w=>w.id));
-      testQueue = shuffle(words.map(w=>w.id));
-      buildLevelRings();
-      renderCard();
-      renderQuestion();
-      updateLevelRings();
-    })
-    .catch(err=>{ console.error('words.json yüklenemedi:', err); });
+  const LEVEL_CANDIDATE_PATHS = ["./", "./data/", "../data/", "./assets/data/"];
+  const LEVEL_TO_FILE = { A1:"a1.json", A2:"a2.json", B1:"b1.json", B2:"b2.json", C1:"c1.json" };
+  const discoveredUrl = {};
+
+  function showToast(message, variant='warning', timeout=2200){
+    const cont = document.getElementById('toastContainer'); if(!cont) return;
+    const el = document.createElement('div');
+    el.className = `toast ${variant}`;
+    el.innerHTML = `<div class="row"><div>${message}</div><button class="close" aria-label="Kapat">×</button></div>`;
+    cont.appendChild(el);
+    const remove = ()=>{ el.style.animation = 'toastOut .22s ease forwards'; setTimeout(()=> el.remove(), 220); };
+    el.querySelector('.close')?.addEventListener('click', remove);
+    if (timeout > 0) setTimeout(remove, timeout);
+  }
+
+  function updateReselectResponsive(){
+    if(reselectBtn.style.display !== 'none'){
+      if(window.innerWidth<=600) document.body.classList.add('has-reselect');
+      else document.body.classList.remove('has-reselect');
+    }else{
+      document.body.classList.remove('has-reselect');
+    }
+  }
+  window.addEventListener('resize', updateReselectResponsive);
+
+  async function tryFetch(url){
+    try{
+      const r = await fetch(url, {cache:'no-store'});
+      if(!r.ok) throw new Error('HTTP '+r.status);
+      const text = await r.text();
+      return text;
+    }catch(e){ return null; }
+  }
+
+  function parseFlexibleJson(text){
+    const trimmed = text.trim();
+    if(trimmed.startsWith('[')){
+      try{ const arr = JSON.parse(trimmed); return Array.isArray(arr) ? arr : []; }catch{}
+    }
+    const lines = trimmed.split(/\r?\n/).map(s=>s.trim()).filter(Boolean);
+    const out = [];
+    for(let line of lines){
+      if(line.endsWith(',')) line = line.slice(0,-1);
+      try{ out.push(JSON.parse(line)); }catch{}
+    }
+    return out;
+  }
+
+  function normalizeWordShape(list){
+    return list.map((w,i)=>({
+      id: i+1,
+      en: w.en,
+      meanings: Array.isArray(w.meanings) ? w.meanings.filter(nonEmpty) : (nonEmpty(w.meanings) ? [String(w.meanings)] : []),
+      type: (w.type||"").toLowerCase(),
+      level: (w.level||selectedLevel||"").toUpperCase(),
+      tries: 0,
+      correct: 0
+    }));
+  }
+
+  async function loadLevelFile(level){
+    if(discoveredUrl[level]){
+      const t = await tryFetch(discoveredUrl[level]);
+      if(t) return parseFlexibleJson(t);
+    }
+    const fname = LEVEL_TO_FILE[level];
+    for(const base of LEVEL_CANDIDATE_PATHS){
+      const url = base + fname;
+      const text = await tryFetch(url);
+      if(text){
+        discoveredUrl[level] = url;
+        return parseFlexibleJson(text);
+      }
+    }
+    return null;
+  }
+
+  async function countLevelWords(level){
+    const arr = await loadLevelFile(level);
+    return Array.isArray(arr) ? arr.length : 0;
+  }
+
+  function renderLevelCards(counts){
+    levelGridEl.innerHTML = "";
+    LEVELS.forEach(lvl=>{
+      const card = document.createElement('div');
+      card.className = `level-card ${lvl}`;
+      card.setAttribute('role','listitem');
+      card.dataset.level = lvl;
+      card.innerHTML = `
+        <div class="level-name">${lvl}</div>
+        <div class="level-count" id="cnt-${lvl}">${counts[lvl] ?? '—'} kelime</div>
+      `;
+      card.onclick = ()=> pickLevel(lvl, card);
+      levelGridEl.appendChild(card);
+    });
+  }
+
+  async function buildLevelSelect(){
+    const counts = {};
+    await Promise.all(LEVELS.map(async lvl=>{
+      try{ counts[lvl] = await countLevelWords(lvl); }
+      catch{ counts[lvl] = 0; }
+    }));
+    renderLevelCards(counts);
+  }
+
+  function revealMainUI(){
+    // sekmeler açık ve üstte görünsün
+    tabsEl.style.display = 'flex';
+    tabFree.classList.add('active'); tabTest.classList.remove('active');
+    freeWrap.style.display='flex'; testWrap.style.display='none';
+    drawerBtn.style.display = 'inline-flex';
+    moveIndicator(tabFree);
+    reselectBtn.style.display = 'inline-flex';
+    updateReselectResponsive();
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+async function pickLevel(level, cardEl){
+  if(!level) return;
+  selectedLevel = level;
+
+  const raw = await loadLevelFile(level);
+  if(!raw || !raw.length){
+    showToast(`${level} verisi bulunamadı. Dosya yolunu kontrol et.`, 'error', 3000);
+    return;
+  }
+
+  // aktif sözlüğü hazırla
+  words = normalizeWordShape(raw);
+  idToIdx = new Map(words.map((w,idx)=>[w.id, idx]));
+  freeQueue = shuffle(words.map(w=>w.id));
+  testQueue = shuffle(words.map(w=>w.id));
+  triesTotal = 0; 
+  correctTotal = 0;
+
+  // === YUMUŞAK KAYBOLMA ANİMASYONU ===
+  // Kartları sırayla sol-düşür (mevcut fade-away sınıfını kullanıyoruz)
+  const cards = [...levelGridEl.children];
+  cards.forEach((el, idx) => {
+    setTimeout(()=> el.classList.add('fade-away'), idx*40);
+  });
+
+  // "Seviye Seç" başlığını da aynı anda yumuşakça kaybet
+  const titleEl = document.querySelector('#levelSelect .level-badge');
+  if (titleEl){
+    // CSS eklemeden inline animasyon
+    titleEl.style.willChange = 'opacity, transform, filter';
+    titleEl.style.transition = 'opacity .42s ease, transform .42s ease, filter .42s ease';
+    // bir sonraki frame'de uygula (layout flush)
+    requestAnimationFrame(()=>{
+      titleEl.style.opacity = '0';
+      titleEl.style.transform = 'translateY(6px) scale(.98)';
+      titleEl.style.filter = 'blur(2px)';
+    });
+  }
+
+  // Kartların fade süresine küçük bir pay bırak
+  const totalFade = 420 + cards.length*40;
+
+  setTimeout(()=>{
+    // seçim ekranını kapat ve ana arayüzü aç
+    levelSelectEl.style.display = 'none';
+    revealMainUI();
+    buildLevelRings();
+    renderCard();
+    renderQuestion();
+    updateLevelRings();
+
+    // Seviye göstergesini güncelle (mevcutta varsa)
+    if (typeof setLevelIndicator === 'function'){
+      setLevelIndicator(true, level);
+    } else if (typeof updateCurrentLevelIndicator === 'function'){
+      updateCurrentLevelIndicator(level);
+      const ind = document.getElementById("currentLevelIndicator");
+      if (ind) ind.style.display = "inline-block";
+    }
+
+    // İstersen başarı tostu burada kalabilir / kaldırılmış olabilir
+    // showToast(`${level} yüklendi • ${words.length} kelime`, 'success', 2200);
+  }, totalFade);
+}
+
+
+  // Seviyeyi değiştir → açılış ekranına dön
+  reselectBtn.onclick = async ()=>{
+    tabsEl.style.display = 'none';
+    freeWrap.style.display = 'none';
+    testWrap.style.display = 'none';
+    drawerBtn.style.display = 'none';
+    reselectBtn.style.display = 'none';
+    updateReselectResponsive();
+    await buildLevelSelect();         // kartları taze oluştur (blur/opacity kalıntısı olmasın)
+    levelSelectEl.style.display = 'flex';
+    // "Seviye Seç" rozetini geri görünür yap
+    const titleEl = document.querySelector('#levelSelect .level-badge');
+    if (titleEl){
+      titleEl.style.transition = '';
+      titleEl.style.willChange = '';
+      titleEl.style.opacity = '1';
+      titleEl.style.transform = 'none';
+      titleEl.style.filter = 'none';
+    }
+    setLevelIndicator(false);  // seçim ekranında gizli
+    selectedLevel = null;
+    window.scrollTo({top:0, behavior:'smooth'});
+    updateCurrentLevelIndicator(null);
+    document.getElementById("currentLevelIndicator").style.display = "none";
+  };
 
   /* ================== FREE MODE ================== */
-  let _bgFront="", _bgBack="";
   function paintCard(w){
     const key = toTypeKey(w.type);
-    const [g1,g2,solid] = themes[key];
+    const [g1,g2] = themes[key];
+    const lvl = (w.level || selectedLevel || 'A1').toUpperCase();
+    const lvlStyle = LEVEL_STYLES[lvl] || LEVEL_STYLES.A1;
 
-    _bgFront = g1; _bgBack = g2;
-    front.style.backgroundImage = g1.replace('linear-gradient','linear-gradient');
-    back.style.backgroundImage  = g2.replace('linear-gradient','linear-gradient');
+    document.getElementById("front").style.backgroundImage = g1;
+    document.getElementById("back").style.backgroundImage  = g2;
 
-    const root = getComputedStyle(document.documentElement);
-    const solidColor = key==='noun' ? root.getPropertyValue('--noun') : key==='verb' ? root.getPropertyValue('--verb') : root.getPropertyValue('--adj');
-    front.style.backgroundColor = (solidColor||'#1f2937').trim();
-    back.style.backgroundColor  = (solidColor||'#1f2937').trim();
+    const solidVar = lvlStyle.solid.replace('var(','').replace(')','').trim();
+    const solidColor = getComputedStyle(document.documentElement).getPropertyValue(solidVar) || '#22c55e';
+    document.getElementById("cardInner").style.boxShadow = `0 18px 40px rgba(0,0,0,.25), 0 0 0 3px ${solidColor.trim()}55 inset`;
 
-    fBadge.textContent = `${cap(key)} • ${w.level || '-'}`;
-    bBadge.textContent = `${cap(key)} • ${w.level || '-'}`;
-    fBadge.style.boxShadow = `0 0 0 9999px rgba(255,255,255,.0) inset, 0 0 0 1px ${solid}`;
-    bBadge.style.boxShadow = `0 0 0 9999px rgba(255,255,255,.0) inset, 0 0 0 1px ${solid}`;
-    inner.setAttribute("data-type", key);
+    fBadge.textContent = `${cap(key)} • ${w.level || (selectedLevel || '-')}`;
+    bBadge.textContent = `${cap(key)} • ${w.level || (selectedLevel || '-')}`;
+    document.getElementById("cardInner").setAttribute("data-type", key);
   }
 
   function currentFreeId(){ return freeQueue.length ? freeQueue[0] : 1; }
@@ -777,7 +1031,7 @@
     fWordDiv.textContent = w.en;
     bWordDiv.textContent = joinMeanings(w) || "—";
     paintCard(w);
-
+    const inner = document.getElementById("cardInner");
     inner.classList.remove("flipped","enter-right");
     void inner.offsetWidth;
     inner.classList.add("enter-right");
@@ -786,6 +1040,7 @@
 
   function flipCard(){
     if (suppressClick || isPassing) { suppressClick = false; return; }
+    const inner = document.getElementById("cardInner");
     inner.classList.add('animating');
     Sound.flip();
     inner.classList.toggle('flipped');
@@ -805,6 +1060,7 @@
 
     const id = freeQueue.shift(); freeQueue.push(id);
 
+    const inner = document.getElementById("cardInner");
     inner.classList.add('animating');
     inner.classList.remove('enter-right');
     inner.classList.add('pass-left');
@@ -826,7 +1082,6 @@
     setTimeout(onEnd, 450);
   }
 
-  // SWIPE: sola=pass, sağa=flip
   (function addSwipe(){
     const card = document.querySelector('.card');
     let startX = 0, dx = 0, dragging = false;
@@ -850,7 +1105,7 @@
     if (chestIcon) chestIcon.src = isHidden ? '../assets/images/open-chest.png' : '../assets/images/off-chest.png';
   };
 
-  /* ================== LEVEL RINGS LOGIC ================== */
+  /* ================== LEVEL RINGS + MODAL (global stats) ================== */
   function buildLevelRings(){
     levelsWrapper.innerHTML = "";
     LEVELS.forEach(lvl=>{
@@ -863,43 +1118,41 @@
       item.addEventListener('click', ()=> openLevelDetail(lvl));
       levelsWrapper.appendChild(item);
     });
-  }
-
-  function calcLevelStats(){
-    const stats = {}; LEVELS.forEach(l=> stats[l] = {tries:0, correct:0, seen:0, words:[]});
-    for(const w of words){
-      const L = (w.level||"").toUpperCase(); if(!LEVELS.includes(L)) continue;
-      stats[L].tries += (w.tries||0);
-      stats[L].correct += (w.correct||0);
-      if((w.tries||0) > 0){ stats[L].seen += 1; stats[L].words.push(w); }
-    }
-    LEVELS.forEach(l=> stats[l].words.sort((a,b)=> (b.tries||0) - (a.tries||0) || a.en.localeCompare(b.en)));
-    return stats;
+    updateLevelRings();
   }
 
   function updateLevelRings(){
-    const stats = calcLevelStats();
     LEVELS.forEach(lvl=>{
-      const s = stats[lvl]; const acc = document.getElementById(`acc-${lvl}`); const seen= document.getElementById(`seen-${lvl}`); const ring= document.getElementById(`ring-${lvl}`);
-      const total = s.tries || 0, ok = s.correct || 0, pct = total ? (ok/total)*100 : 0;
-      acc && (acc.textContent = `${ok}/${total}`); seen && (seen.textContent = s.seen);
+      const gs = globalStats[lvl] || {tries:0,correct:0,seen:0};
+      const acc = document.getElementById(`acc-${lvl}`);
+      const seen= document.getElementById(`seen-${lvl}`);
+      const ring= document.getElementById(`ring-${lvl}`);
+      const total = gs.tries || 0, ok = gs.correct || 0, pct = total ? (ok/total)*100 : 0;
+      acc && (acc.textContent = `${ok}/${total}`);
+      seen && (seen.textContent = gs.seen || 0);
       if(ring){ const deg = (pct/100)*360; ring.style.setProperty('--deg', `${deg}deg`); }
     });
   }
 
   function openLevelDetail(level){
-    const s = calcLevelStats()[level] || {words:[]};
-    modalTitle.textContent = `${level} • Kelime Geçmişi`;
-    const rows = s.words.map(w=>{
+    const gs = globalStats[level] || {words:new Map()};
+    const arr = [...gs.words.values()].sort((a,b)=> (b.tries||0) - (a.tries||0) || a.en.localeCompare(b.en));
+    document.getElementById('levelModalTitle').textContent = `${level} • Kelime Geçmişi`;
+    const rows = arr.map(w=>{
       const wrong = Math.max(0,(w.tries||0) - (w.correct||0));
-      return `<tr><td><span class="pill">${(w.level||'-')}</span></td><td><strong>${w.en}</strong></td><td>${joinMeanings(w) || "—"}</td><td>${w.tries||0}</td><td>${w.correct||0}</td><td>${wrong}</td></tr>`;
+      return `<tr><td><span class="pill">${(w.level||'-')}</span></td><td><strong>${w.en}</strong></td><td>${(w.meanings||[]).filter(nonEmpty).join(" • ") || "—"}</td><td>${w.tries||0}</td><td>${w.correct||0}</td><td>${wrong}</td></tr>`;
     }).join("");
-    modalBody.innerHTML = `<table class="words-table"><thead><tr><th>Seviye</th><th>Kelime (EN)</th><th>Anlam(lar)</th><th>Çıkma</th><th>Doğru</th><th>Yanlış</th></tr></thead><tbody>${rows || `<tr><td colspan="6">Bu seviyede henüz veri yok.</td></tr>`}</tbody></table>`;
-    modalBackdrop.style.display = 'flex'; modalBackdrop.setAttribute('aria-hidden','false');
+    document.getElementById('levelModalBody').innerHTML =
+      `<table class="words-table"><thead><tr><th>Seviye</th><th>Kelime (EN)</th><th>Anlam(lar)</th><th>Çıkma</th><th>Doğru</th><th>Yanlış</th></tr></thead><tbody>${rows || `<tr><td colspan="6">Bu seviyede henüz veri yok.</td></tr>`}</tbody></table>`;
+    const bd = document.getElementById('levelModalBackdrop');
+    bd.style.display = 'flex'; bd.setAttribute('aria-hidden','false');
   }
-  function closeLevelDetail(){ modalBackdrop.style.display = 'none'; modalBackdrop.setAttribute('aria-hidden','true'); }
-  modalCloseBtn.addEventListener('click', closeLevelDetail);
-  modalBackdrop.addEventListener('click', (e)=>{ if(e.target === modalBackdrop) closeLevelDetail(); });
+  function closeLevelDetail(){
+    const bd = document.getElementById('levelModalBackdrop');
+    bd.style.display = 'none'; bd.setAttribute('aria-hidden','true');
+  }
+  document.getElementById('levelModalClose').addEventListener('click', closeLevelDetail);
+  document.getElementById('levelModalBackdrop').addEventListener('click', (e)=>{ if(e.target.id==='levelModalBackdrop') closeLevelDetail(); });
 
   /* ================== TEST MODE ================== */
   function feedback(ok){
@@ -911,7 +1164,7 @@
 
   function updateStatsBar(){
     const r = triesTotal? Math.round(100*correctTotal/triesTotal) : 0;
-    totalWorkedEl.textContent = triesTotal; correctKnownEl.textContent= correctTotal; wrongKnownEl.textContent  = Math.max(0, triesTotal - correctTotal);
+    totalWorkedEl.textContent = triesTotal; correctKnownEl.textContent = correctTotal; wrongKnownEl.textContent = Math.max(0, triesTotal - correctTotal);
     ratioEl.textContent = r+"%"; barEl.style.width = r+"%";
     const known = words.filter(w=> w.tries>=3 && (w.correct/w.tries)>=1.0 );
     knownEl.textContent = known.map(w=> `${w.en} (${joinMeanings(w)})`).join(", ") || "—";
@@ -958,8 +1211,8 @@
     if(testMode==='mc'){
       currentQ = makeMCQuestion(w);
       qtextEl.textContent = `To Turkish  ➜  ${w.en}`;
-      typingEl.style.display='none';
       choicesEl.style.display='grid';
+      typingEl.style.display='none';
       choicesEl.innerHTML="";
       currentQ.options.forEach((opt,i)=>{
         const div = document.createElement('div');
@@ -982,20 +1235,40 @@
     answered = true; lock = true;
     const w = currentTestWord();
     const idx = idToIdx.get(w.id);
+    // lokal istatistikler (aktif seviye)
     words[idx].tries++; triesTotal++;
     if(ok){ words[idx].correct++; correctTotal++; }
 
+    // GLOBAL istatistikler
+    const L = (w.level || selectedLevel || '').toUpperCase();
+    if(LEVELS.includes(L)){
+      const gs = globalStats[L];
+      const key = (w.en||'').toLowerCase();
+      let entry = gs.words.get(key);
+      if(!entry){
+        entry = { en: w.en, meanings: (w.meanings||[]).slice(), level: L, tries: 0, correct: 0 };
+        gs.words.set(key, entry);
+        gs.seen += 1; // benzersiz kelime olarak görüldü
+      }
+      entry.tries += 1;
+      gs.tries += 1;
+      if(ok){ entry.correct += 1; gs.correct += 1; }
+    }
+
+    // sıra
     const id = testQueue.shift();
     if(ok){ testQueue.push(id); }
     else{ const pos = Math.min(3, testQueue.length); testQueue.splice(pos, 0, id); }
+
+    updateLevelRings();
     updateStatsBar();
   }
 
   function choose(i){
     if(lock) return;
     const nodes = [...choicesEl.children];
-    const correctIdx = currentQ.options.findIndex(x=>x===currentQ.answer);
     nodes.forEach(n => n.classList.remove('fx-correct','fx-wrong'));
+    const correctIdx = currentQ.options.findIndex(x=>x===currentQ.answer);
     const ok = (i===correctIdx);
     if(ok){ nodes[i].classList.add('correct','fx-correct'); Sound.trink(); }
     else{ nodes[i].classList.add('wrong','fx-wrong'); nodes[correctIdx]?.classList.add('correct','fx-correct'); Sound.dat(); }
@@ -1033,7 +1306,7 @@
   function checkTyping(){
     if (lock || testMode!=='typing') return;
     const ans = answerEl.value.trim();
-    if (ans === "") {
+    if (ans === ""){
       checkBtn.textContent = "Önce bir cevap yaz 🙂"; answerEl.focus();
       const prevBorder = answerEl.style.borderColor; answerEl.style.borderColor = "#ef4444";
       setTimeout(() => { checkBtn.textContent = "✔ Check"; answerEl.style.borderColor = prevBorder || ""; }, 900);
@@ -1048,11 +1321,9 @@
     if (ok){
       answerEl.classList.add('fx-correct');
       Sound.trink(); feedback(true);
-
       if (typo && suggestion){
-        showToast(`✔ Doğru, ama ufak bir yazım hatası var: “${ans}” → “${suggestion}”`, 'warning', 2600);
+        showToast(`✔ Doğru, ama ufak bir yazım hatası: “${ans}” → “${suggestion}”`, 'warning', 2600);
       }
-
       checkBtn.textContent = typo ? "✔ Doğru (ufak yazım hatası)" : "✔ Doğru!";
       checkBtn.style.filter = "saturate(1.15)";
     } else {
@@ -1077,29 +1348,22 @@
   window.flipCard = flipCard;
   window.passCard = passCard;
 
-  // TOAST helper
-  function showToast(message, variant='warning', timeout=2200){
-    const cont = document.getElementById('toastContainer');
-    if(!cont) return;
-    const el = document.createElement('div');
-    el.className = `toast ${variant}`;
-    el.innerHTML = `
-      <div class="row">
-        <div>${message}</div>
-        <button class="close" aria-label="Kapat">×</button>
-      </div>
-    `;
-    cont.appendChild(el);
+  /* ===== INIT ===== */
+  window.addEventListener('load', async ()=>{
+    setLevelIndicator(false);  // başlangıçta gizli
+    await buildLevelSelect();
+  });
 
-    const remove = ()=>{
-      el.style.animation = 'toastOut .22s ease forwards';
-      setTimeout(()=> el.remove(), 220);
-    };
-    el.querySelector('.close')?.addEventListener('click', remove);
-    if (timeout > 0){
-      setTimeout(remove, timeout);
-    }
+
+// Seviye göstergesini görünürlük + metinle birlikte kontrol et
+function setLevelIndicator(visible, levelText){
+  const el = document.getElementById("currentLevelIndicator");
+  if(!el) return;
+  el.style.display = visible ? "inline-block" : "none";
+  if (typeof levelText !== 'undefined') {
+    el.textContent = levelText ? `Seviye: ${levelText}` : "Seviye: —";
   }
+}
 </script>
 </body>
 </html>
