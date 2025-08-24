@@ -273,21 +273,9 @@ body[data-theme="dark"] .drawer{ background:rgba(17,24,39,.96); color:#e5e7eb; b
    ======================================================= */
 @media (max-width: 600px){
   body{ padding:16px; gap:14px; justify-content: flex-start;}
-
-  /* ↓↓↓ Güncelleme: kart ve test alanını daha aşağıdan başlat */
-  .wrap{ margin-top: calc(var(--tabsH, 56px) + 90px); }       /* eski: +10px */
-  #test-wrap{ margin-top: calc(var(--tabsH, 56px) + 90px); }  /* eski: +10px */
-
-  /* ↓↓↓ Güncelleme: tabs'ı daha aşağıya sabitle, maskot/sandıkla çakışmasın */
-  .tabs{ 
-    width:100%; flex-direction:column; gap:8px; border-radius:14px; 
-    position: sticky; 
-    top: calc(120px + env(safe-area-inset-top));  /* eski: 84px */
-    z-index: var(--z-tabs); 
-    margin-top: 16px;                              /* eski: 8px */
-    display:flex !important; 
-  }
-
+  .wrap{ margin-top: calc(var(--tabsH, 56px) + 10px); }
+  #test-wrap{ margin-top: calc(var(--tabsH, 56px) + 10px); }
+  .tabs{ width:100%; flex-direction:column; gap:8px; border-radius:14px; position: sticky; top: calc(84px + env(safe-area-inset-top)); z-index: var(--z-tabs); margin-top: 8px; display:flex !important; }
   .tab{ width:100%; text-align:center; }
   .row{ flex-direction:column; align-items:stretch; }
   .stat{ width:100%; text-align:center; }
@@ -625,7 +613,7 @@ const CONFIG = {
    ======================================================= */
 const cap = s => s ? s.charAt(0).toUpperCase()+s.slice(1) : "";
 const shuffle = (arr)=>{ for(let i=arr.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [arr[i],arr[j]]=[arr[j],arr[i]]; } return arr; };
-const nonEmpty = (x)=> x!=null && String(x).trim()!==""; 
+const nonEmpty = (x)=> x!=null && String(x).trim()!=="";
 const qs = (id)=> document.getElementById(id);
 const joinMeanings = (w)=> (w.meanings || []).filter(nonEmpty).join(" • ");
 const toTypeKey = (t)=>{ const s=(t||"").toLowerCase(); if(s.includes("verb")) return "verb"; if(s.includes("adj")) return "adjective"; if(s.includes("noun")) return "noun"; return "noun"; };
@@ -1034,7 +1022,7 @@ function passCard(e){
 })();
 
 /* =========================================================
-   TEST MODE (+ HINT NEGATIVE WEIGHT)
+   TEST MODE (kural: < %60 MC, ≥ %60 yazmalı)
    ======================================================= */
 function feedback(ok){
   const panel = document.querySelector('.panel'); if(!panel) return;
@@ -1092,13 +1080,9 @@ function renderQuestion(){
 
   const w = currentTestWord();
 
-  /* ====== GÜNCELLEME: Test modu seçim kuralı ======
-     Doğruluk oranı < %60 → Çoktan Seçmeli (mc)
-     Doğruluk oranı ≥ %60 → Yazmalı (typing)
-  */
+  // === YENİ KURAL ===
   const acc = triesTotal ? (correctTotal / triesTotal) * 100 : 0;
   testMode = (acc < 60) ? 'mc' : 'typing';
-  /* =============================================== */
 
   if(testMode==='mc'){
     currentQ = makeMCQuestion(w);
