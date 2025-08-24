@@ -70,11 +70,11 @@ body{
 }
 body.has-reselect{ padding-bottom: 76px; }
 
-/* ====== STAGE LOCK (YENİ) ====== */
-body.stage-select .tabs{ display:none !important; }
+/* --- STAGE LOCK: başlangıçta sadece seviye seçimi görünsün --- */
+body.stage-select .tabs,
 body.stage-select #free-wrap,
 body.stage-select #test-wrap,
-body.stage-select .drawer-btn{ display:none !important; }
+body.stage-select .drawer-btn { display:none !important; }
 body.stage-select #levelSelect{ display:flex !important; }
 
 .logo{
@@ -282,7 +282,14 @@ body[data-theme="dark"] .drawer{ background:rgba(17,24,39,.96); color:#e5e7eb; b
   body{ padding:16px; gap:14px; justify-content: flex-start;}
   .wrap{ margin-top: calc(var(--tabsH, 56px) + 10px); }
   #test-wrap{ margin-top: calc(var(--tabsH, 56px) + 10px); }
-  .tabs{ width:100%; flex-direction:column; gap:8px; border-radius:14px; position: sticky; top: calc(84px + env(safe-area-inset-top)); z-index: var(--z-tabs); margin-top: 8px; display:flex !important; }
+
+  /* Tabs sadece stage-select DEĞİLSE görünsün */
+  body:not(.stage-select) .tabs{
+    width:100%; flex-direction:column; gap:8px; border-radius:14px;
+    position: sticky; top: calc(84px + env(safe-area-inset-top));
+    z-index: var(--z-tabs); margin-top: 8px; display:flex !important;
+  }
+
   .tab{ width:100%; text-align:center; }
   .row{ flex-direction:column; align-items:stretch; }
   .stat{ width:100%; text-align:center; }
@@ -476,7 +483,8 @@ body[data-theme="dark"] .words-table th, body[data-theme="dark"] .words-table td
 </style>
 </head>
 
-<body data-theme="light">
+<!-- Başlangıçta stage-select sınıfı eklendi -->
+<body data-theme="light" class="stage-select">
 
   <img src="../assets/images/Maskot.png" alt="Snakely" class="logo" loading="lazy" decoding="async"/>
   <div class="title">Snakely</div>
@@ -843,8 +851,9 @@ async function pickLevel(level){
   const totalFade = 420 + cards.length*40;
 
   setTimeout(()=>{
+    // stage-select bitti: ana UI'yi aç
+    document.body.classList.remove('stage-select');
     levelSelectEl.style.display = 'none';
-    document.body.classList.remove('stage-select');   // <<< EKLENDİ
     revealMainUI();
     buildLevelRings();
     renderCard();
@@ -861,9 +870,10 @@ reselectBtn.onclick = async ()=>{
   testWrap.style.display = 'none';
   drawerBtn.style.display = 'none';
   reselectBtn.style.display = 'none';
-  document.body.classList.add('stage-select');        // <<< EKLENDİ
   updateReselectResponsive();
   await buildLevelSelect();
+  // yeniden seviye seçimine döndük
+  document.body.classList.add('stage-select');
   levelSelectEl.style.display = 'flex';
   const titleEl = document.querySelector('#levelSelect .level-badge');
   if (titleEl){
@@ -1257,7 +1267,6 @@ function setLevelIndicator(visible, levelText){
 function updateCurrentLevelIndicator(level){ setLevelIndicator(!!level, level); }
 
 window.addEventListener('load', async ()=>{
-  document.body.classList.add('stage-select');   // <<< EKLENDİ
   setLevelIndicator(false);
   await buildLevelSelect();
 });
