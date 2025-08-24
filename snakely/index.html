@@ -532,7 +532,7 @@ body[data-theme="dark"] .words-table th, body[data-theme="dark"] .words-table td
             <span id="badgeBack" class="badge">Type</span>
             <div class="avatar">🐍</div>
           </div>
-          <div class="word"><div id="backWord">Anlam(lar)</div></div>
+          <div class="word"><div id="backWord">Anlamlar</div></div>
         </div>
       </div>
     </div>
@@ -658,6 +658,21 @@ function matchesAnswer(ans, w){
     if(d<=max && d<best.dist) best={ok:true,typo:d>0,suggestion:p.orig,dist:d};
   }
   return best.ok?best:{ok:false,typo:false,suggestion:null};
+}
+
+// === GENEL ORAN (SEVİYE ORTALAMASI) ===
+// Her kelimenin (w.correct / w.tries) oranını 0..1 aralığında alıp
+// görülmeyenleri 0 kabul ederek seviye toplamına bölür.
+function computeGeneralAccPct(){
+  const total = words.length || 0;
+  if (!total) return 0;
+  let sum = 0;
+  for (const w of words){
+    if (w && w.tries > 0){
+      sum += Math.max(0, Math.min(1, (w.correct || 0) / w.tries));
+    }
+  }
+  return (sum / total) * 100; // 0..100
 }
 
 /* =========================================================
@@ -1041,7 +1056,7 @@ function passCard(e){
 })();
 
 /* =========================================================
-   TEST MODE (kural: < %60 MC, ≥ %60 yazmalı)
+   TEST MODE (olasılıksal: genel oran eşiğine göre)
    ======================================================= */
 function feedback(ok){
   const panel = document.querySelector('.panel'); if(!panel) return;
@@ -1050,11 +1065,17 @@ function feedback(ok){
   setTimeout(()=> panel.classList.remove('flash-correct','shake-wrong'), ok ? 650 : 500);
 }
 function updateStatsBar(){
-  const r = triesTotal? Math.round(100*correctTotal/triesTotal) : 0;
+  // Sayaçlar
   totalWorkedEl.textContent = triesTotal;
   correctKnownEl.textContent = correctTotal.toFixed(1);
   wrongKnownEl.textContent = Math.max(0, triesTotal - Math.round(correctTotal)).toString();
-  ratioEl.textContent = r+"%"; barEl.style.width = r+"%";
+
+  // Oran: seviye genel ortalaması
+  const r = Math.round(computeGeneralAccPct());
+  ratioEl.textContent = r+"%";
+  barEl.style.width = r+"%";
+
+  // Bilinen kelimeler
   const known = words.filter(w=> w.tries>=3 && (w.correct/w.tries)>=1.0 );
   knownEl.textContent = known.map(w=> `${w.en} (${joinMeanings(w)})`).join(", ") || "—";
   updateLevelRings();
@@ -1099,9 +1120,12 @@ function renderQuestion(){
 
   const w = currentTestWord();
 
-  // === YENİ KURAL ===
-  const acc = triesTotal ? (correctTotal / triesTotal) * 100 : 0;
-  testMode = (acc < 60) ? 'mc' : 'typing';
+  // === OLASILIKLI SEÇİM: seviye GENEL oranına göre
+  const genAcc = computeGeneralAccPct();   // 0..100
+  const pMcWhenLow  = 0.60;                // genel < %60 ise MC %60
+  const pMcWhenHigh = 0.40;                // genel ≥ %60 ise MC %40
+  const pMC = (genAcc < 60) ? pMcWhenLow : pMcWhenHigh;
+  testMode = (Math.random() < pMC) ? 'mc' : 'typing';
 
   if(testMode==='mc'){
     currentQ = makeMCQuestion(w);
