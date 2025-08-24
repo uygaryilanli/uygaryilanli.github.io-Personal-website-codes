@@ -70,6 +70,13 @@ body{
 }
 body.has-reselect{ padding-bottom: 76px; }
 
+/* ====== STAGE LOCK (YENİ) ====== */
+body.stage-select .tabs{ display:none !important; }
+body.stage-select #free-wrap,
+body.stage-select #test-wrap,
+body.stage-select .drawer-btn{ display:none !important; }
+body.stage-select #levelSelect{ display:flex !important; }
+
 .logo{
   position:fixed; left:12px; top:12px; z-index: var(--z-logo);
   width:72px; height:72px; object-fit:cover; border-radius:50%; padding:8px;
@@ -837,6 +844,7 @@ async function pickLevel(level){
 
   setTimeout(()=>{
     levelSelectEl.style.display = 'none';
+    document.body.classList.remove('stage-select');   // <<< EKLENDİ
     revealMainUI();
     buildLevelRings();
     renderCard();
@@ -853,6 +861,7 @@ reselectBtn.onclick = async ()=>{
   testWrap.style.display = 'none';
   drawerBtn.style.display = 'none';
   reselectBtn.style.display = 'none';
+  document.body.classList.add('stage-select');        // <<< EKLENDİ
   updateReselectResponsive();
   await buildLevelSelect();
   levelSelectEl.style.display = 'flex';
@@ -1248,6 +1257,7 @@ function setLevelIndicator(visible, levelText){
 function updateCurrentLevelIndicator(level){ setLevelIndicator(!!level, level); }
 
 window.addEventListener('load', async ()=>{
+  document.body.classList.add('stage-select');   // <<< EKLENDİ
   setLevelIndicator(false);
   await buildLevelSelect();
 });
