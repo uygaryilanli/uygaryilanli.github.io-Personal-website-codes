@@ -310,12 +310,20 @@ body[data-theme="dark"] .drawer{ background:rgba(17,24,39,.96); color:#e5e7eb; b
   .progress{ height:12px; }
   .choices{ grid-template-columns:1fr; }
   .tools-row > button{ width:100%; max-width:320px; margin:0 auto; }
-  .actions{ flex-direction:column; align-items:center; }
-  .actions > button{ width:100%; max-width:320px; }
+  .actions{
+    flex-direction: row;          /* yan yana dizilsin */
+    justify-content: center;      /* ortalansın */
+    gap: 10px;                    /* aralarına boşluk */
+  }
+  .actions > button{
+    flex: 1;                      /* eşit genişlik (istersen kaldırabilirsin) */
+    max-width: 200px;             /* çok genişlemesin diye sınır */
+  }
+}
   .panel{ padding:14px; }
   .theme-toggle{ right:70px; }
   .chest-icon{ width:46px; }
-}
+
 
 /* feedback */
 .fx-correct{ outline:2px solid #22c55e !important; }
