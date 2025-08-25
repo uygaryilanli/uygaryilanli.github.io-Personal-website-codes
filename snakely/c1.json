@@ -1052,7 +1052,7 @@
 {"en": "holiday", "meanings": ["tatil", "bayram"], "type": "noun", "level": "A1"},
 {"en": "holy", "meanings": ["kutsal"], "type": "adjective", "level": "C1"},
 {"en": "home", "meanings": ["ev", "yurt"], "type": "noun", "level": "A1"},
-{"en": "homework", "meanings": ["ödev"], "type": "noun", "level": "C1"},
+{"en": "homework", "meanings": ["ödev", "ev ödevi"], "type": "noun", "level": "A1"},
 {"en": "honest", "meanings": ["dürüst"], "type": "adjective", "level": "A2"},
 {"en": "honour", "meanings": ["onur"], "type": "noun", "level": "A2"},
 {"en": "hook", "meanings": ["kanca", "çengel"], "type": "noun/verb", "level": "C1"},

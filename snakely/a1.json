@@ -452,7 +452,7 @@
 {"en": "far", "meanings": ["uzak"], "type": "adjective", "level": "A1"},
 {"en": "university", "meanings": ["üniversite"], "type": "noun", "level": "A1"},
 {"en": "subject", "meanings": ["konu", "ders"], "type": "noun", "level": "A1"},
-{"en": "homework", "meanings": ["ödev"], "type": "noun", "level": "A1"},
+{"en": "homework", "meanings": ["ödev", "ev ödevi"], "type": "noun", "level": "A1"},
 {"en": "exam", "meanings": ["sınav"], "type": "noun", "level": "A1"},
 {"en": "test", "meanings": ["test", "sınamak"], "type": "noun/verb", "level": "A1"},
 {"en": "page", "meanings": ["sayfa"], "type": "noun", "level": "A1"},

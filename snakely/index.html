@@ -47,6 +47,10 @@
   --B1-solid:#f59e0b;
   --B2-solid:#8b5cf6;
   --C1-solid:#ef4444;
+
+  /* Navbar & Tabs ölçümü için */
+  --navH: 68px;     /* JS ile güncellenecek */
+  --tabsH: 56px;    /* JS ile güncellenecek */
 }
 body[data-theme="dark"]{
   --bg1:#0f172a; --bg2:#1f2937;
@@ -100,6 +104,7 @@ body[data-theme="dark"] .logo{
 }
 @keyframes fadeSlideIn { from{opacity:0; transform:translate(-50%,-10px)} to{opacity:1; transform:translate(-50%,0)} }
 
+/* ==== TABS (mobilde üstte, sticky) ==== */
 .tabs{
   position:relative; display:none; gap:10px; padding:6px;
   border-radius:14px; backdrop-filter:blur(8px);
@@ -122,6 +127,7 @@ body[data-theme="dark"] .logo{
 .card{
   width:min(92vw,360px); aspect-ratio:3/2; perspective:1200px; -webkit-perspective:1200px;
   touch-action: pan-y; transform: translateZ(0); will-change: transform;
+  margin-top: 5px;
 }
 .card-inner{
   position:relative; width:100%; height:100%;
@@ -199,6 +205,7 @@ button:active{ transform:scale(.96); box-shadow:0 6px 14px rgba(0,0,0,.18); }
   border-radius:18px; padding:18px;
   backdrop-filter: blur(14px) saturate(120%);
   box-shadow:0 24px 60px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.25);
+  margin-top: 5px;
 }
 .panel-head{ display:flex; align-items:center; gap:12px; padding:6px 8px 12px; border-bottom:1px solid rgba(255,255,255,.28); margin-bottom:12px; }
 .panel-badge{ font-weight:900; font-size:12px; color:#fff; padding:6px 10px; border-radius:999px; background:linear-gradient(90deg,#6366f1,#22c55e); box-shadow:0 6px 16px rgba(0,0,0,.15); }
@@ -280,17 +287,24 @@ body[data-theme="dark"] .drawer{ background:rgba(17,24,39,.96); color:#e5e7eb; b
    ======================================================= */
 @media (max-width: 600px){
   body{ padding:16px; gap:14px; justify-content: flex-start;}
-  .wrap{ margin-top: calc(var(--tabsH, 56px) + 10px); }
-  #test-wrap{ margin-top: calc(var(--tabsH, 56px) + 10px); }
-
-  /* Tabs sadece stage-select DEĞİLSE görünsün */
+  /* Mobil üst tabs: navbar altına yapışkan */
   body:not(.stage-select) .tabs{
-    width:100%; flex-direction:column; gap:8px; border-radius:14px;
-    position: sticky; top: calc(84px + env(safe-area-inset-top));
-    z-index: var(--z-tabs); margin-top: 8px; display:flex !important;
+    width:100%;
+    display:flex !important;
+    flex-direction:row;
+    gap:8px;
+    border-radius:14px;
+    position: sticky;
+    top: calc(var(--navH, 68px) + env(safe-area-inset-top) + 8px);
+    z-index: var(--z-tabs);
+    margin-top: 8px;
+    min-height: 40px;
   }
+  .tab{ flex:1; text-align:center; }
 
-  .tab{ width:100%; text-align:center; }
+  /* Tabs’in altında içerik güvenli boşluk */
+  .wrap, #test-wrap{ margin-top: calc(var(--tabsH, 56px) + 16px); }
+
   .row{ flex-direction:column; align-items:stretch; }
   .stat{ width:100%; text-align:center; }
   .progress{ height:12px; }
@@ -436,7 +450,7 @@ body[data-theme="dark"] .level-card .level-count{ background: rgba(255,255,255,.
   left: calc(12px + env(safe-area-inset-left));
   z-index: var(--z-reselect);
   padding: 10px 12px; border-radius: 12px; border: none;
-  background: linear-gradient(45deg, #ef4444, #f89171); /* FIXED */
+  background: linear-gradient(45deg, #ef4444, #f89171);
   color: #fff; font-weight: 900; font-size: 12px;
   box-shadow: 0 8px 20px rgba(0,0,0,.22); cursor: pointer; display: none;
 }
@@ -445,7 +459,7 @@ body[data-theme="dark"] .level-card .level-count{ background: rgba(255,255,255,.
 @media (max-width:600px){
   .reselect-btn{
     left: 12px; right: 12px; width: auto;
-    background: linear-gradient(45deg, #ef4444, #f89171); /* FIXED */
+    background: linear-gradient(45deg, #ef4444, #f89171);
     font-size: 15px; border-radius:14px; padding:12px 18px;
   }
 }
@@ -480,10 +494,125 @@ body[data-theme="dark"] .words-table th, body[data-theme="dark"] .words-table td
 
 @keyframes fadeOutSmooth { from { opacity: 1; transform: scale(1); } to { opacity: 0; transform: scale(0.97); } }
 .fade-out { animation: fadeOutSmooth .6s ease forwards; }
+
+/* ===== NAVBAR ===== */
+:root{ --z-navbar: 260; }
+.navbar{
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: var(--z-navbar);
+  backdrop-filter: blur(14px) saturate(120%);
+  background: var(--glass-bg);
+  border-bottom: 1px solid var(--glass-brd);
+  box-shadow: 0 10px 28px rgba(0,0,0,.18);
+}
+body{ padding-top: 68px; }
+
+.nav-inner{
+  max-width: 1100px; margin: 0 auto; padding: 10px 14px;
+  display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center;
+}
+.brand{ display:flex; align-items:center; gap:10px; text-decoration:none; }
+.brand-logo{ width:38px; height:38px; border-radius:50%; object-fit:cover; }
+.brand-text{ font-weight:1000; letter-spacing:.4px; font-size:18px; color: var(--ink); }
+.brand-beta{ font-size:11px; font-weight:900; color:#fff; padding:3px 8px; border-radius:999px;
+  background: linear-gradient(45deg,#06b6d4,#22c55e); box-shadow:0 6px 16px rgba(0,0,0,.15);
+}
+
+.nav-links{ display:flex; gap:8px; align-items:center; justify-content:center; }
+.nav-link{
+  font-weight:900; font-size:14px; padding:8px 12px; border-radius:10px; border:1px solid transparent;
+  background: transparent; color: var(--ink); cursor: pointer;
+}
+.nav-link:hover{ background: rgba(255,255,255,.35); border-color: var(--glass-brd); }
+.nav-link.active{ background: rgba(255,255,255,.55); border-color: var(--glass-brd); box-shadow: 0 10px 22px rgba(0,0,0,.08); }
+
+.nav-dropdown{ position:relative; }
+.nav-dd-btn{ display:flex; align-items:center; gap:8px; }
+.nav-pill{
+  font-size:11px; font-weight:900; color:#0f172a; background:rgba(255,255,255,.88);
+  padding:3px 8px; border-radius:999px; border:1px solid rgba(0,0,0,.06);
+}
+body[data-theme="dark"] .nav-pill{ color:#0f172a; }
+
+.nav-dd{
+  position:absolute; top: calc(100% + 6px); left: 0; min-width: 180px;
+  background: rgba(255,255,255,.96); color:#0f172a; border:1px solid rgba(0,0,0,.08); border-radius:12px;
+  box-shadow: 0 18px 40px rgba(0,0,0,.25); padding:8px; display:none;
+}
+body[data-theme="dark"] .nav-dd{ background: rgba(17,24,39,.96); color:#e5e7eb; border-color: rgba(255,255,255,.12); }
+.nav-dd-item{
+  width:100%; text-align:left; padding:10px 10px; border-radius:10px; border:none; background:transparent; color:inherit; cursor:pointer; font-weight:900;
+}
+.nav-dd-item:hover{ background: rgba(0,0,0,.06); }
+body[data-theme="dark"] .nav-dd-item:hover{ background: rgba(255,255,255,.08); }
+
+.nav-cta{ display:flex; align-items:center; gap:10px; }
+.icon-btn{
+  padding:8px 10px; border-radius:10px; border:none; cursor:pointer; font-size:16px; font-weight:900; color:#fff;
+  background: linear-gradient(45deg,#6b7280,#111827); box-shadow:0 10px 22px rgba(0,0,0,.2);
+}
+.icon-chest{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:44px; height:44px; border-radius:12px;
+  border:1px solid var(--glass-brd);
+  background: rgba(255,255,255,.25);
+  box-shadow: 0 10px 22px rgba(0,0,0,.12);
+  cursor:pointer;
+}
+body[data-theme="dark"] .icon-chest{ background: rgba(31,41,55,.55); }
+.icon-chest img{ width:28px; height:auto; display:block; }
+
+.pill-btn{
+  padding:8px 12px; border-radius:999px; border:none; cursor:pointer; font-weight:900; color:#fff;
+  background: linear-gradient(45deg,#10b981,#34d399); box-shadow:0 10px 22px rgba(0,0,0,.2);
+}
+
+.burger{
+  display:none; width:40px; height:40px; border-radius:10px; border:1px solid var(--glass-brd);
+  background:rgba(255,255,255,.25); box-shadow:0 10px 22px rgba(0,0,0,.12);
+  align-items:center; justify-content:center; gap:4px; flex-direction:column; cursor:pointer;
+}
+.burger span{ display:block; width:20px; height:2px; background: var(--ink); border-radius:2px; }
+
+.nav-drawer{
+  display:none; padding:12px; border-top:1px solid var(--glass-brd);
+  background: var(--glass-bg); backdrop-filter: blur(14px) saturate(120%);
+}
+.drawer-item{
+  width:100%; text-align:left; padding:12px; border-radius:12px; border:1px solid var(--glass-brd);
+  background: rgba(255,255,255,.75); color:#0f172a; font-weight:900; margin-bottom:8px; cursor:pointer;
+}
+body[data-theme="dark"] .drawer-item{ background: rgba(17,24,39,.85); color:#e5e7eb; }
+.drawer-sep{ height:1px; background: var(--glass-brd); margin:8px 0; }
+.drawer-group-title{ font-weight:1000; font-size:12px; opacity:.9; margin-bottom:6px; }
+.drawer-levels{ display:flex; flex-wrap:wrap; gap:8px; }
+.lvl-chip{
+  border:none; cursor:pointer; padding:8px 10px; border-radius:999px; font-weight:900;
+  background: rgba(255,255,255,.88); color:#0f172a; border:1px solid rgba(0,0,0,.06);
+}
+.drawer-actions{ display:flex; gap:8px; margin-top:10px; }
+
+@media (max-width: 900px){
+  .nav-inner{ grid-template-columns: auto auto 1fr; }
+  .nav-links{ display:none; }
+  .burger{ display:flex; margin-left:auto; }
+  .nav-cta .pill-btn{ display:none; }
+}
+@media (max-width: 600px){
+  body{ padding-top: 0; } /* navbar fixed; üst boşluk body'den kaldırıldı */
+}
+
+@media (max-width: 900px){
+  .nav-inner{ grid-template-columns: auto 1fr auto; }
+}
+
+/* Eski üst öğeleri gizle (yeni navbar ile çakışmasın) */
+/* .tabs artık MOBİLDE GÖRÜNECEK, bu yüzden listeden çıkardık */
+.logo, .title, .theme-toggle, .drawer-btn, .reselect-btn{ display:none !important; }
 </style>
 </head>
 
-<!-- Başlangıçta stage-select sınıfı eklendi -->
 <body data-theme="light" class="stage-select">
 
   <img src="../assets/images/Maskot.png" alt="Snakely" class="logo" loading="lazy" decoding="async"/>
@@ -495,13 +624,78 @@ body[data-theme="dark"] .words-table th, body[data-theme="dark"] .words-table td
     <div id="levelGrid" class="level-grid" role="list"></div>
   </div>
 
+  <!-- Mobil üst tabs (modlar arası gezinim) -->
   <div class="tabs" id="tabs" role="tablist" aria-label="Mod Seç">
     <span class="tab-indicator" id="tabIndicator"></span>
     <div id="tab-free" class="tab active" role="tab" aria-selected="true" tabindex="0">Serbest Gezinim</div>
-    <div id="tab-test" class="tab" role="tab" aria-selected="false" tabindex="0">Kelime Öğrenimi (Test)</div>
+    <div id="tab-test" class="tab" role="tab" aria-selected="false" tabindex="0">Kelime Öğrenimi</div>
   </div>
 
   <button id="themeToggle" class="theme-toggle" aria-label="Tema Değiştir">🌙</button>
+
+  <!-- NAVBAR -->
+<header class="navbar" role="banner">
+  <div class="nav-inner">
+    <a class="brand" href="#" aria-label="Snakely Ana Sayfa">
+      <img src="../assets/images/Maskot.png" alt="" class="brand-logo" decoding="async" loading="lazy">
+      <span class="brand-text">Snakely</span>
+      <span class="brand-beta">beta</span>
+    </a>
+
+    <nav class="nav-links" role="navigation" aria-label="Ana menü">
+      <button id="nav-free" class="nav-link" type="button">Serbest Gezinim</button>
+      <button id="nav-test" class="nav-link" type="button">Kelime Öğrenimi</button>
+    </nav>
+
+    <div class="nav-cta">
+      <button id="nav-theme" class="icon-btn" type="button" title="Tema Değiştir" aria-label="Tema Değiştir">🌙</button>
+
+      <button id="nav-known-icon" class="icon-chest" type="button" aria-label="Bilinen Kelimeler">
+        <img id="nav-chest-img" src="../assets/images/off-chest.png" alt="" width="36" height="36" decoding="async" loading="lazy">
+      </button>
+
+      <div class="nav-dropdown">
+        <!-- <button id="nav-level" class="nav-link nav-dd-btn" type="button" aria-haspopup="true" aria-expanded="false">
+          Seviye <span id="nav-level-badge" class="nav-pill">—</span>
+        </button> -->
+        <div class="nav-dd" role="menu" aria-label="Seviye seç">
+          <button class="nav-dd-item" data-lvl="A1" role="menuitem">A1</button>
+          <button class="nav-dd-item" data-lvl="A2" role="menuitem">A2</button>
+          <button class="nav-dd-item" data-lvl="B1" role="menuitem">B1</button>
+          <button class="nav-dd-item" data-lvl="B2" role="menuitem">B2</button>
+          <button class="nav-dd-item" data-lvl="C1" role="menuitem">C1</button>
+        </div>
+      </div>
+
+      <button id="nav-burger" class="burger" type="button" aria-label="Menüyü aç/kapat" aria-expanded="false" aria-controls="nav-drawer">
+        <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+
+  <div id="nav-drawer" class="nav-drawer" role="dialog" aria-modal="false" aria-label="Mobil menü">
+    <button class="drawer-item" id="md-free" type="button">Serbest Gezinim</button>
+    <button class="drawer-item" id="md-test" type="button">Kelime Öğrenimi</button>
+
+    <div class="drawer-sep"></div>
+
+    <div class="drawer-group">
+      <div class="drawer-group-title">Seviye</div>
+      <div class="drawer-levels">
+        <button class="lvl-chip" data-lvl="A1">A1</button>
+        <button class="lvl-chip" data-lvl="A2">A2</button>
+        <button class="lvl-chip" data-lvl="B1">B1</button>
+        <button class="lvl-chip" data-lvl="B2">B2</button>
+        <button class="lvl-chip" data-lvl="C1">C1</button>
+      </div>
+    </div>
+
+    <div class="drawer-actions">
+      <button id="md-reselect" class="pill-btn" type="button">Seviye Seçim Ekranı</button>
+      <button id="md-theme" class="icon-btn" type="button" title="Tema Değiştir">🌙</button>
+    </div>
+  </div>
+</header>
 
   <!-- reselect -->
   <button id="reselectBtn" class="reselect-btn" title="Seviyeyi Değiştir" aria-label="Seviyeyi Değiştir">⟵ Seviyeyi Değiştir</button>
@@ -574,7 +768,7 @@ body[data-theme="dark"] .words-table th, body[data-theme="dark"] .words-table td
 
       <div id="typing" style="display:none;">
         <div class="answer-row">
-          <input id="answer" class="input" placeholder="Türkçe anlamlardan birini yaz..." aria-label="Cevap kutusu"/>
+          <input id="answer" class="input" placeholder="Türkçe anlamını yaz..." aria-label="Cevap kutusu"/>
         </div>
       </div>
 
@@ -615,9 +809,9 @@ body[data-theme="dark"] .words-table th, body[data-theme="dark"] .words-table td
    ======================================================= */
 const CONFIG = {
   swipeThreshold: 60,
-  infiniteHints: true,                   // sınırsız hak
-  hintWeightOnCorrect: 0.5,             // ipucu kullanıldıysa doğru = 0.5 puan
-  allowMultipleHintsPerQuestion: false, // aynı soruda yalnızca 1 ipucu
+  infiniteHints: true,
+  hintWeightOnCorrect: 0.5,
+  allowMultipleHintsPerQuestion: false,
   levelFiles: { A1:"a1.json", A2:"a2.json", B1:"b1.json", B2:"b2.json", C1:"c1.json" },
   levelPaths: ["./", "./data/", "../data/", "./assets/data/"],
   animations: { passTimeout: 450 }
@@ -660,9 +854,7 @@ function matchesAnswer(ans, w){
   return best.ok?best:{ok:false,typo:false,suggestion:null};
 }
 
-// === GENEL ORAN (SEVİYE ORTALAMASI) ===
-// Her kelimenin (w.correct / w.tries) oranını 0..1 aralığında alıp
-// görülmeyenleri 0 kabul ederek seviye toplamına bölür.
+// === GENEL ORAN ===
 function computeGeneralAccPct(){
   const total = words.length || 0;
   if (!total) return 0;
@@ -672,7 +864,7 @@ function computeGeneralAccPct(){
       sum += Math.max(0, Math.min(1, (w.correct || 0) / w.tries));
     }
   }
-  return (sum / total) * 100; // 0..100
+  return (sum / total) * 100;
 }
 
 /* =========================================================
@@ -730,7 +922,7 @@ const checkBtn=qs('checkBtn'), nextBtn=qs('nextBtn'), hintBtn=qs('hint5050'), cl
 
 let triesTotal=0, correctTotal=0;
 let testMode='mc'; let currentQ=null; let answered=false; let lock=false; let removedIdx=[];
-let usedHintThisQuestion=false; // tek ipucu kuralı
+let usedHintThisQuestion=false;
 let isPassing=false; let suppressClick=false;
 
 const levelSelectEl=qs('levelSelect'), levelGridEl=qs('levelGrid'), reselectBtn=qs('reselectBtn');
@@ -826,6 +1018,8 @@ function revealMainUI(){
   moveIndicator(tabFree);
   reselectBtn.style.display = 'inline-flex';
   updateReselectResponsive();
+  // Yeni: yükseklik ölç, çakışma olmasın
+  updateHeights();
   window.scrollTo({top:0, behavior:'smooth'});
 }
 function updateReselectResponsive(){
@@ -836,7 +1030,7 @@ function updateReselectResponsive(){
     document.body.classList.remove('has-reselect');
   }
 }
-window.addEventListener('resize', updateReselectResponsive);
+window.addEventListener('resize', ()=>{ updateReselectResponsive(); updateHeights(); });
 
 async function pickLevel(level){
   if(!level) return;
@@ -850,7 +1044,6 @@ async function pickLevel(level){
   testQueue = shuffle(words.map(w=>w.id));
   triesTotal = 0; correctTotal = 0;
 
-  // fade out level cards
   const cards = [...levelGridEl.children];
   cards.forEach((el, idx) => { setTimeout(()=> el.classList.add('fade-away'), idx*40); });
   const titleEl = document.querySelector('#levelSelect .level-badge');
@@ -866,7 +1059,6 @@ async function pickLevel(level){
   const totalFade = 420 + cards.length*40;
 
   setTimeout(()=>{
-    // stage-select bitti: ana UI'yi aç
     document.body.classList.remove('stage-select');
     levelSelectEl.style.display = 'none';
     revealMainUI();
@@ -887,7 +1079,6 @@ reselectBtn.onclick = async ()=>{
   reselectBtn.style.display = 'none';
   updateReselectResponsive();
   await buildLevelSelect();
-  // yeniden seviye seçimine döndük
   document.body.classList.add('stage-select');
   levelSelectEl.style.display = 'flex';
   const titleEl = document.querySelector('#levelSelect .level-badge');
@@ -906,7 +1097,7 @@ reselectBtn.onclick = async ()=>{
    TABS & THEME
    ======================================================= */
 function moveIndicator(target){
-  if(!target) return;
+  if(!target || !tabsEl) return;
   const tabsRect = tabsEl.getBoundingClientRect();
   const tRect = target.getBoundingClientRect();
   indicator.style.left = (tRect.left - tabsRect.left) + 'px';
@@ -914,6 +1105,8 @@ function moveIndicator(target){
   indicator.style.width  = tRect.width + 'px';
   indicator.style.height = tRect.height + 'px';
   indicator.style.borderRadius = '12px';
+  // Yükseklik değişmiş olabilir
+  updateHeights();
 }
 window.addEventListener('resize', ()=> moveIndicator(document.querySelector('.tab.active')));
 
@@ -925,6 +1118,7 @@ themeToggle.onclick = ()=>{
   const body=document.body; const isLight=(body.getAttribute('data-theme')!=='dark');
   body.setAttribute('data-theme', isLight ? 'dark' : 'light');
   themeToggle.textContent = isLight ? '☀️' : '🌙';
+  updateHeights();
 };
 
 /* =========================================================
@@ -948,7 +1142,7 @@ function openLevelDetail(level){
     return `<tr><td><span class="pill">${(w.level||'-')}</span></td><td><strong>${w.en}</strong></td><td>${(w.meanings||[]).filter(nonEmpty).join(" • ") || "—"}</td><td>${w.tries||0}</td><td>${(w.correct||0).toFixed(1)}</td><td>${wrong.toFixed(1)}</td></tr>`;
   }).join("");
   qs('levelModalBody').innerHTML =
-    `<table class="words-table"><thead><tr><th>Seviye</th><th>Kelime (EN)</th><th>Anlam(lar)</th><th>Çıkma</th><th>Doğru(Puan)</th><th>Yanlış</th></tr></thead><tbody>${rows || `<tr><td colspan="6">Bu seviyede henüz veri yok.</td></tr>`}</tbody></table>`;
+    `<table class="words-table"><thead><tr><th>Seviye</th><th>Kelime (EN)</th><th>Anlamlar</th><th>Çıkma</th><th>Doğru(Puan)</th><th>Yanlış</th></tr></thead><tbody>${rows || `<tr><td colspan="6">Bu seviyede henüz veri yok.</td></tr>`}</tbody></table>`;
   const bd = qs('levelModalBackdrop');
   bd.style.display = 'flex'; bd.setAttribute('aria-hidden','false');
   lastFocusEl = document.activeElement; qs('levelModalClose').focus();
@@ -1019,281 +1213,414 @@ function renderCard(){
   c.classList.add("enter-right");
   c.addEventListener("animationend", () => c.classList.remove("enter-right"), { once:true });
 }
-function flipCard(){
-  if (suppressClick || isPassing) { suppressClick = false; return; }
-  const c = qs("cardInner");
-  c.classList.add('animating'); Sound.flip(); c.classList.toggle('flipped');
-  const onEnd = (e)=>{ if(e.propertyName!=='transform') return; c.classList.remove('animating'); c.removeEventListener('transitionend', onEnd); };
-  c.addEventListener('transitionend', onEnd);
-}
-function passCard(e){
-  if (e) e.stopPropagation();
-  if (isPassing) return;
-  isPassing = true; Sound.pass();
-  const id = freeQueue.shift(); freeQueue.push(id);
-  const c = qs("cardInner");
-  c.classList.add('animating'); c.classList.remove('enter-right'); c.classList.add('pass-left');
-  const finish = () => { c.classList.remove('pass-left'); renderCard(); requestAnimationFrame(()=> c.classList.remove('animating')); isPassing = false; };
-  let done = false;
-  const onEnd = () => { if (done) return; done = true; c.removeEventListener('animationend', onEnd); finish(); };
-  c.addEventListener('animationend', onEnd);
-  setTimeout(onEnd, CONFIG.animations.passTimeout);
-}
-(function addSwipe(){
-  const card = document.querySelector('.card');
-  let startX = 0, dx = 0, dragging = false;
-  const THRESH = CONFIG.swipeThreshold;
-  const onDown = (e)=>{ dragging = true; startX = (e.touches ? e.touches[0].clientX : e.clientX); dx = 0; };
-  const onMove = (e)=>{ if(!dragging) return; const x=(e.touches?e.touches[0].clientX:e.clientX); dx = x - startX; };
-  const onUp = ()=>{ if(!dragging) return; dragging=false; if (dx <= -THRESH){ suppressClick = true; passCard(); } else if (dx >= THRESH){ suppressClick = true; flipCard(); } dx = 0; };
-  card.addEventListener('pointerdown', onDown, {passive:true});
-  card.addEventListener('pointermove', onMove, {passive:true});
-  card.addEventListener('pointerup', onUp);
-  card.addEventListener('pointercancel', onUp);
-  card.addEventListener('touchstart', onDown, {passive:true});
-  card.addEventListener('touchmove', onMove, {passive:true});
-  card.addEventListener('touchend', onUp);
-})();
+      function flipCard(){
+        if (suppressClick || isPassing) { suppressClick = false; return; }
+        const c = qs("cardInner");
+        c.classList.add('animating'); Sound.flip(); c.classList.toggle('flipped');
+        const onEnd = (e)=>{ if(e.propertyName!=='transform') return; c.classList.remove('animating'); c.removeEventListener('transitionend', onEnd); };
+        c.addEventListener('transitionend', onEnd);
+      }
+      function passCard(e){
+        if (e) e.stopPropagation();
+        if (isPassing) return;
+        isPassing = true; Sound.pass();
+        const id = freeQueue.shift(); freeQueue.push(id);
+        const c = qs("cardInner");
+        c.classList.add('animating'); c.classList.remove('enter-right'); c.classList.add('pass-left');
+        const finish = () => { c.classList.remove('pass-left'); renderCard(); requestAnimationFrame(()=> c.classList.remove('animating')); isPassing = false; };
+        let done = false;
+        const onEnd = () => { if (done) return; done = true; c.removeEventListener('animationend', onEnd); finish(); };
+        c.addEventListener('animationend', onEnd);
+        setTimeout(onEnd, CONFIG.animations.passTimeout);
+      }
+      (function addSwipe(){
+        const card = document.querySelector('.card');
+        let startX = 0, dx = 0, dragging = false;
+        const THRESH = CONFIG.swipeThreshold;
+        const onDown = (e)=>{ dragging = true; startX = (e.touches ? e.touches[0].clientX : e.clientX); dx = 0; };
+        const onMove = (e)=>{ if(!dragging) return; const x=(e.touches?e.touches[0].clientX:e.clientX); dx = x - startX; };
+        const onUp = ()=>{ if(!dragging) return; dragging=false; if (dx <= -THRESH){ suppressClick = true; passCard(); } else if (dx >= THRESH){ suppressClick = true; flipCard(); } dx = 0; };
+        card.addEventListener('pointerdown', onDown, {passive:true});
+        card.addEventListener('pointermove', onMove, {passive:true});
+        card.addEventListener('pointerup', onUp);
+        card.addEventListener('pointercancel', onUp);
+        card.addEventListener('touchstart', onDown, {passive:true});
+        card.addEventListener('touchmove', onMove, {passive:true});
+        card.addEventListener('touchend', onUp);
+      })();
 
-/* =========================================================
-   TEST MODE (olasılıksal: genel oran eşiğine göre)
-   ======================================================= */
-function feedback(ok){
-  const panel = document.querySelector('.panel'); if(!panel) return;
-  panel.classList.remove('flash-correct','shake-wrong');
-  panel.classList.add(ok ? 'flash-correct' : 'shake-wrong');
-  setTimeout(()=> panel.classList.remove('flash-correct','shake-wrong'), ok ? 650 : 500);
-}
-function updateStatsBar(){
-  // Sayaçlar
-  totalWorkedEl.textContent = triesTotal;
-  correctKnownEl.textContent = correctTotal.toFixed(1);
-  wrongKnownEl.textContent = Math.max(0, triesTotal - Math.round(correctTotal)).toString();
+      /* =========================================================
+         TEST MODE
+         ======================================================= */
+      function feedback(ok){
+        const panel = document.querySelector('.panel'); if(!panel) return;
+        panel.classList.remove('flash-correct','shake-wrong');
+        panel.classList.add(ok ? 'flash-correct' : 'shake-wrong');
+        setTimeout(()=> panel.classList.remove('flash-correct','shake-wrong'), ok ? 650 : 500);
+      }
+      function updateStatsBar(){
+        totalWorkedEl.textContent = triesTotal;
+        correctKnownEl.textContent = correctTotal.toFixed(1);
+        wrongKnownEl.textContent = Math.max(0, triesTotal - Math.round(correctTotal)).toString();
 
-  // Oran: seviye genel ortalaması
-  const r = Math.round(computeGeneralAccPct());
-  ratioEl.textContent = r+"%";
-  barEl.style.width = r+"%";
+        const r = Math.round(computeGeneralAccPct());
+        ratioEl.textContent = r+"%";
+        barEl.style.width = r+"%";
 
-  // Bilinen kelimeler
-  const known = words.filter(w=> w.tries>=3 && (w.correct/w.tries)>=1.0 );
-  knownEl.textContent = known.map(w=> `${w.en} (${joinMeanings(w)})`).join(", ") || "—";
-  updateLevelRings();
-}
-function currentTestId(){ return testQueue.length ? testQueue[0] : 1; }
-function currentTestWord(){ const id=currentTestId(); return words[idToIdx.get(id)]; }
+        const known = words.filter(w=> w.tries>=3 && (w.correct/w.tries)>=1.0 );
+        knownEl.textContent = known.map(w=> `${w.en} (${joinMeanings(w)})`).join(", ") || "—";
+        updateLevelRings();
+      }
+      function currentTestId(){ return testQueue.length ? testQueue[0] : 1; }
+      function currentTestWord(){ const id=currentTestId(); return words[idToIdx.get(id)]; }
 
-function makeMCQuestion(w){
-  const correct = (w.meanings && w.meanings[0]) || "";
-  const othersPool = words.filter(x=>x.id!==w.id).flatMap(x=> x.meanings || []).filter(nonEmpty);
-  shuffle(othersPool);
-  const opts = [correct];
-  for(const o of othersPool){ if(opts.length>=4) break; if(!opts.includes(o)) opts.push(o); }
-  shuffle(opts);
-  return { word:w, ask:'foreign', answer:correct, options:opts, type:'mc' };
-}
-function makeTypingQuestion(w){
-  const answers = (w.meanings || []).filter(nonEmpty);
-  return { word:w, ask:'foreign', answerSet:answers, answer:answers[0] || "", type:'typing' };
-}
+      function makeMCQuestion(w){
+        const correct = (w.meanings && w.meanings[0]) || "";
+        const othersPool = words.filter(x=>x.id!==w.id).flatMap(x=> x.meanings || []).filter(nonEmpty);
+        shuffle(othersPool);
+        const opts = [correct];
+        for(const o of othersPool){ if(opts.length>=4) break; if(!opts.includes(o)) opts.push(o); }
+        shuffle(opts);
+        return { word:w, ask:'foreign', answer:correct, options:opts, type:'mc' };
+      }
+      function makeTypingQuestion(w){
+        const answers = (w.meanings || []).filter(nonEmpty);
+        return { word:w, ask:'foreign', answerSet:answers, answer:answers[0] || "", type:'typing' };
+      }
 
-function toggleHints(){
-  const label = CONFIG.infiniteHints ? '∞' : '';
-  if(testMode==='mc'){ hintBtn.style.display='inline-block'; clueBtn.style.display='none'; checkBtn.style.display='none'; answerEl.blur(); }
-  else{ hintBtn.style.display='none'; clueBtn.style.display='inline-block'; checkBtn.style.display='inline-block'; }
-  hintBtn.textContent = `⚡ 50/50 (${label})`; clueBtn.textContent = `💡 Clue (${label})`;
+      function toggleHints(){
+        const label = CONFIG.infiniteHints ? '∞' : '';
+        if(testMode==='mc'){ hintBtn.style.display='inline-block'; clueBtn.style.display='none'; checkBtn.style.display='none'; answerEl.blur(); }
+        else{ hintBtn.style.display='none'; clueBtn.style.display='inline-block'; checkBtn.style.display='inline-block'; }
+        hintBtn.textContent = `⚡ 50/50 (${label})`; clueBtn.textContent = `💡 Clue (${label})`;
 
-  // aynı soruda yalnızca 1 ipucu
-  const disable = usedHintThisQuestion;
-  [hintBtn, clueBtn].forEach(btn=>{
-    btn.disabled = disable;
-    btn.style.filter = disable ? "grayscale(1)" : "";
-    btn.style.cursor  = disable ? "not-allowed" : "pointer";
-    btn.setAttribute('aria-disabled', String(disable));
-  });
-}
+        const disable = usedHintThisQuestion;
+        [hintBtn, clueBtn].forEach(btn=>{
+          btn.disabled = disable;
+          btn.style.filter = disable ? "grayscale(1)" : "";
+          btn.style.cursor  = disable ? "not-allowed" : "pointer";
+          btn.setAttribute('aria-disabled', String(disable));
+        });
+      }
 
-function renderQuestion(){
-  if(!testQueue.length) return;
-  answered = false; lock=false; removedIdx=[]; usedHintThisQuestion = false;
-  checkBtn.textContent = "✔ Check"; checkBtn.style.filter = ""; checkBtn.disabled = false;
+      function renderQuestion(){
+        if(!testQueue.length) return;
+        answered = false; lock=false; removedIdx=[]; usedHintThisQuestion = false;
+        checkBtn.textContent = "✔ Check"; checkBtn.style.filter = ""; checkBtn.disabled = false;
 
-  const w = currentTestWord();
+        const w = currentTestWord();
 
-  // === OLASILIKLI SEÇİM: seviye GENEL oranına göre
-  const genAcc = computeGeneralAccPct();   // 0..100
-  const pMcWhenLow  = 0.60;                // genel < %60 ise MC %60
-  const pMcWhenHigh = 0.40;                // genel ≥ %60 ise MC %40
-  const pMC = (genAcc < 60) ? pMcWhenLow : pMcWhenHigh;
-  testMode = (Math.random() < pMC) ? 'mc' : 'typing';
+        const genAcc = computeGeneralAccPct();
+        const pMcWhenLow  = 0.60;
+        const pMcWhenHigh = 0.40;
+        const pMC = (genAcc < 60) ? pMcWhenLow : pMcWhenHigh;
+        testMode = (Math.random() < pMC) ? 'mc' : 'typing';
 
-  if(testMode==='mc'){
-    currentQ = makeMCQuestion(w);
-    qtextEl.textContent = `To Turkish  ➜  ${w.en}`;
-    choicesEl.style.display='grid';
-    typingEl.style.display='none';
-    choicesEl.innerHTML="";
-    currentQ.options.forEach((opt,i)=>{
-      const div = document.createElement('div');
-      div.className='choice'; div.textContent=opt; div.onclick = ()=> choose(i);
-      choicesEl.appendChild(div);
-    });
-  }else{
-    currentQ = makeTypingQuestion(w);
-    qtextEl.textContent = `To Turkish  ➜  ${w.en}`;
-    choicesEl.style.display='none';
-    typingEl.style.display='block';
-    answerEl.value=""; answerEl.focus();
-  }
+        if(testMode==='mc'){
+          currentQ = makeMCQuestion(w);
+          qtextEl.textContent = `To Turkish  ➜  ${w.en}`;
+          choicesEl.style.display='grid';
+          typingEl.style.display='none';
+          choicesEl.innerHTML="";
+          currentQ.options.forEach((opt,i)=>{
+            const div = document.createElement('div');
+            div.className='choice'; div.textContent=opt; div.onclick = ()=> choose(i);
+            choicesEl.appendChild(div);
+          });
+        }else{
+          currentQ = makeTypingQuestion(w);
+          qtextEl.textContent = `To Turkish  ➜  ${w.en}`;
+          choicesEl.style.display='none';
+          typingEl.style.display='block';
+          answerEl.value=""; answerEl.focus();
+        }
 
-  toggleHints();
-  updateStatsBar();
-}
+        toggleHints();
+        updateStatsBar();
+      }
 
-function finalize(ok){
-  answered = true; lock = true;
-  const w = currentTestWord();
-  const idx = idToIdx.get(w.id);
+      function finalize(ok){
+        answered = true; lock = true;
+        const w = currentTestWord();
+        const idx = idToIdx.get(w.id);
 
-  // puanlama: ipucu kullanıldıysa doğru=0.5, yoksa 1.0
-  const gain = ok ? (usedHintThisQuestion ? CONFIG.hintWeightOnCorrect : 1.0) : 0.0;
+        const gain = ok ? (usedHintThisQuestion ? CONFIG.hintWeightOnCorrect : 1.0) : 0.0;
 
-  // lokal istatistikler
-  words[idx].tries++; triesTotal++;
-  if(ok){ words[idx].correct = (words[idx].correct || 0) + gain; correctTotal += gain; }
+        words[idx].tries++; triesTotal++;
+        if(ok){ words[idx].correct = (w.correct || 0) + gain; correctTotal += gain; }
 
-  // GLOBAL istatistikler
-  const L = (w.level || selectedLevel || '').toUpperCase();
-  if(LEVELS.includes(L)){
-    const gs = globalStats[L];
-    const key = (w.en||'').toLowerCase();
-    let entry = gs.words.get(key);
-    if(!entry){
-      entry = { en: w.en, meanings: (w.meanings||[]).slice(), level: L, tries: 0, correct: 0 };
-      gs.words.set(key, entry);
-      gs.seen += 1;
-    }
-    entry.tries += 1; gs.tries += 1;
-    if(ok){ entry.correct += gain; gs.correct += gain; }
-  }
+        const L = (w.level || selectedLevel || '').toUpperCase();
+        if(LEVELS.includes(L)){
+          const gs = globalStats[L];
+          const key = (w.en||'').toLowerCase();
+          let entry = gs.words.get(key);
+          if(!entry){
+            entry = { en: w.en, meanings: (w.meanings||[]).slice(), level: L, tries: 0, correct: 0 };
+            gs.words.set(key, entry);
+            gs.seen += 1;
+          }
+          entry.tries += 1; gs.tries += 1;
+          if(ok){ entry.correct += gain; gs.correct += gain; }
+        }
 
-  // sıra yönetimi
-  const id = testQueue.shift();
-  if(ok){ testQueue.push(id); }
-  else{ const pos = Math.min(3, testQueue.length); testQueue.splice(pos, 0, id); }
+        const id = testQueue.shift();
+        if(ok){ testQueue.push(id); }
+        else{ const pos = Math.min(3, testQueue.length); testQueue.splice(pos, 0, id); }
 
-  updateLevelRings();
-  updateStatsBar();
-}
+        updateLevelRings();
+        updateStatsBar();
+      }
 
-function choose(i){
-  if(lock) return;
-  const nodes = [...choicesEl.children];
-  nodes.forEach(n => n.classList.remove('fx-correct','fx-wrong'));
-  const correctIdx = currentQ.options.findIndex(x=>x===currentQ.answer);
-  const ok = (i===correctIdx);
-  if(ok){ nodes[i].classList.add('correct','fx-correct'); Sound.trink(); }
-  else{ nodes[i].classList.add('wrong','fx-wrong'); nodes[correctIdx]?.classList.add('correct','fx-correct'); Sound.dat(); }
-  feedback(ok); finalize(ok);
-  setTimeout(()=> nodes.forEach(n => n.classList.remove('fx-correct','fx-wrong')), 700);
-}
+      function choose(i){
+        if(lock) return;
+        const nodes = [...choicesEl.children];
+        nodes.forEach(n => n.classList.remove('fx-correct','fx-wrong'));
+        const correctIdx = currentQ.options.findIndex(x=>x===currentQ.answer);
+        const ok = (i===correctIdx);
+        if(ok){ nodes[i].classList.add('correct','fx-correct'); Sound.trink(); }
+        else{ nodes[i].classList.add('wrong','fx-wrong'); nodes[correctIdx]?.classList.add('correct','fx-correct'); Sound.dat(); }
+        feedback(ok); finalize(ok);
+        setTimeout(()=> nodes.forEach(n => n.classList.remove('fx-correct','fx-wrong')), 700);
+      }
 
-/* Hints */
-hintBtn.onclick = ()=>{
-  if(testMode!=='mc' || lock || usedHintThisQuestion) return;
-  const nodes = [...choicesEl.children];
-  const correctIdx = currentQ.options.findIndex(x=>x===currentQ.answer);
-  const wrongs = nodes.map((n,idx)=>idx).filter(k=>k!==correctIdx && !removedIdx.includes(k));
-  let hidden=0; while(hidden<2 && wrongs.length){
-    const pick = wrongs.splice(Math.floor(Math.random()*(wrongs.length)),1)[0];
-    nodes[pick].style.visibility='hidden';
-    removedIdx.push(pick); hidden++;
-  }
-  usedHintThisQuestion = true; toggleHints();
-};
+      /* Hints */
+      hintBtn.onclick = ()=>{
+        if(testMode!=='mc' || lock || usedHintThisQuestion) return;
+        const nodes = [...choicesEl.children];
+        const correctIdx = currentQ.options.findIndex(x=>x===currentQ.answer);
+        const wrongs = nodes.map((n,idx)=>idx).filter(k=>k!==correctIdx && !removedIdx.includes(k));
+        let hidden=0; while(hidden<2 && wrongs.length){
+          const pick = wrongs.splice(Math.floor(Math.random()*(wrongs.length)),1)[0];
+          nodes[pick].style.visibility='hidden';
+          removedIdx.push(pick); hidden++;
+        }
+        usedHintThisQuestion = true; toggleHints();
+      };
 
-clueBtn.onclick = ()=>{
-  if(testMode!=='typing' || lock || usedHintThisQuestion) return;
-  const set = currentQ.answerSet || [];
-  const theTruth = (set[0]||"").trim(); if(!theTruth) return;
-  const revealLen = theTruth.length <= 4 ? 2 : 3;
-  answerEl.value = theTruth.slice(0, revealLen);
-  answerEl.focus(); answerEl.setSelectionRange(answerEl.value.length, answerEl.value.length);
-  usedHintThisQuestion = true; toggleHints();
-};
+      clueBtn.onclick = ()=>{
+        if(testMode!=='typing' || lock || usedHintThisQuestion) return;
+        const set = currentQ.answerSet || [];
+        const theTruth = (set[0]||"").trim(); if(!theTruth) return;
+        const revealLen = theTruth.length <= 4 ? 2 : 3;
+        answerEl.value = theTruth.slice(0, revealLen);
+        answerEl.focus(); answerEl.setSelectionRange(answerEl.value.length, answerEl.value.length);
+        usedHintThisQuestion = true; toggleHints();
+      };
 
-function checkTyping(){
-  if (lock || testMode!=='typing') return;
-  const ans = answerEl.value.trim();
-  if (ans === ""){
-    checkBtn.textContent = "Önce bir cevap yaz 🙂"; answerEl.focus();
-    const prevBorder = answerEl.style.borderColor; answerEl.style.borderColor = "#ef4444";
-    setTimeout(() => { checkBtn.textContent = "✔ Check"; answerEl.style.borderColor = prevBorder || ""; }, 900);
-    return;
-  }
+      function checkTyping(){
+        if (lock || testMode!=='typing') return;
+        const ans = answerEl.value.trim();
+        if (ans === ""){
+          checkBtn.textContent = "Önce bir cevap yaz 🙂"; answerEl.focus();
+          const prevBorder = answerEl.style.borderColor; answerEl.style.borderColor = "#ef4444";
+          setTimeout(() => { checkBtn.textContent = "✔ Check"; answerEl.style.borderColor = prevBorder || ""; }, 900);
+          return;
+        }
 
-  const w = currentTestWord();
-  const { ok, typo, suggestion } = matchesAnswer(ans, w);
+        const w = currentTestWord();
+        const { ok, typo, suggestion } = matchesAnswer(ans, w);
 
-  answerEl.classList.remove('fx-correct','fx-wrong');
-  if (ok){
-    answerEl.classList.add('fx-correct'); Sound.trink(); feedback(true);
-    if (typo && suggestion){ showToast(`✔ Doğru, ama ufak yazım hatası: “${ans}” → “${suggestion}”`, 'warning', 2600); }
-    checkBtn.textContent = typo ? "✔ Doğru (ufak yazım hatası)" : "✔ Doğru!";
-    checkBtn.style.filter = "saturate(1.15)";
-  } else {
-    answerEl.classList.add('fx-wrong'); Sound.dat(); feedback(false);
-    checkBtn.textContent = `Cevap(lar): ${joinMeanings(w)}`;
-    checkBtn.style.filter = "saturate(0.9)";
-  }
+        answerEl.classList.remove('fx-correct','fx-wrong');
+        if (ok){
+          answerEl.classList.add('fx-correct'); Sound.trink(); feedback(true);
+          if (typo && suggestion){ showToast(`✔ Doğru, ama ufak yazım hatası: “${ans}” → “${suggestion}”`, 'warning', 2600); }
+          checkBtn.textContent = typo ? "✔ Doğru (ufak yazım hatası)" : "✔ Doğru!";
+          checkBtn.style.filter = "saturate(1.15)";
+        } else {
+          answerEl.classList.add('fx-wrong'); Sound.dat(); feedback(false);
+          checkBtn.textContent = `Cevap(lar): ${joinMeanings(w)}`;
+          checkBtn.style.filter = "saturate(0.9)";
+        }
 
-  setTimeout(()=> answerEl.classList.remove('fx-correct','fx-wrong'), ok ? 650 : 500);
-  finalize(ok);
-}
-checkBtn && (checkBtn.onclick = checkTyping);
-answerEl && answerEl.addEventListener('keydown', (e)=>{ if(e.key==='Enter') checkTyping(); });
+        setTimeout(()=> answerEl.classList.remove('fx-correct','fx-wrong'), ok ? 650 : 500);
+        finalize(ok);
+      }
+      checkBtn && (checkBtn.onclick = checkTyping);
+      answerEl && answerEl.addEventListener('keydown', (e)=>{ if(e.key==='Enter') checkTyping(); });
 
-nextBtn && (nextBtn.onclick = ()=>{
-  if (!answered) { nextBtn.textContent = "Önce cevap ver!"; setTimeout(() => { nextBtn.textContent = "⏭ Next"; }, 900); return; }
-  renderQuestion();
-});
+      nextBtn && (nextBtn.onclick = ()=>{
+        if (!answered) { nextBtn.textContent = "Önce cevap ver!"; setTimeout(() => { nextBtn.textContent = "⏭ Next"; }, 900); return; }
+        renderQuestion();
+      });
 
-/* =========================================================
-   KEYBOARD SHORTCUTS & A11Y
-   ======================================================= */
-document.addEventListener('keydown', (e)=>{
-  const inInput = ['INPUT','TEXTAREA'].includes(document.activeElement?.tagName);
-  if(inInput) return;
-  if(e.key===' ' || e.key==='Enter'){ e.preventDefault(); flipCard(); }
-  else if(e.key==='ArrowLeft'){ e.preventDefault(); passCard(); }
-  else if(e.key==='ArrowRight'){ e.preventDefault(); if(answered) renderQuestion(); }
-  else if(e.key==='Escape'){
-    const modalOpen = qs('levelModalBackdrop').style.display==='flex';
-    if(modalOpen) return closeLevelDetail();
-    if(drawer && drawer.style.display==='block'){ drawerBtn.click(); }
-  }
-});
+      /* =========================================================
+         KEYBOARD SHORTCUTS & A11Y
+         ======================================================= */
+      document.addEventListener('keydown', (e)=>{
+        const inInput = ['INPUT','TEXTAREA'].includes(document.activeElement?.tagName);
+        if(inInput) return;
+        if(e.key===' ' || e.key==='Enter'){ e.preventDefault(); flipCard(); }
+        else if(e.key==='ArrowLeft'){ e.preventDefault(); passCard(); }
+        else if(e.key==='ArrowRight'){ e.preventDefault(); if(answered) renderQuestion(); }
+        else if(e.key==='Escape'){
+          const modalOpen = qs('levelModalBackdrop').style.display==='flex';
+          if(modalOpen) return closeLevelDetail();
+          if(drawer && drawer.style.display==='block'){ drawerBtn.click(); }
+        }
+      });
 
-/* =========================================================
-   GLOBALS
-   ======================================================= */
-window.flipCard = flipCard;
-window.passCard = passCard;
+      /* =========================================================
+         GLOBALS
+         ======================================================= */
+      window.flipCard = flipCard;
+      window.passCard = passCard;
 
-/* =========================================================
-   INIT
-   ======================================================= */
-function setLevelIndicator(visible, levelText){
-  const el = qs("currentLevelIndicator"); if(!el) return;
-  el.style.display = visible ? "inline-block" : "none";
-  if (typeof levelText !== 'undefined') { el.textContent = levelText ? `Seviye: ${levelText}` : "Seviye: —"; }
-}
-function updateCurrentLevelIndicator(level){ setLevelIndicator(!!level, level); }
+      /* =========================================================
+         INIT
+         ======================================================= */
+      function setLevelIndicator(visible, levelText){
+        const el = qs("currentLevelIndicator"); if(!el) return;
+        el.style.display = visible ? "inline-block" : "none";
+        if (typeof levelText !== 'undefined') { el.textContent = levelText ? `Seviye: ${levelText}` : "Seviye: —"; }
+      }
+      function updateCurrentLevelIndicator(level){ setLevelIndicator(!!level, level); }
 
-window.addEventListener('load', async ()=>{
-  setLevelIndicator(false);
-  await buildLevelSelect();
-});
-</script>
-</body>
+      // Navbar yüksekliği & tabs yüksekliği ölçümü (çakışmayı önlemek için)
+      function updateHeights(){
+        const nav = document.querySelector('.navbar');
+        const tabs = document.getElementById('tabs');
+        const navH = nav ? Math.ceil(nav.getBoundingClientRect().height) : 68;
+        const tabsH = tabs && getComputedStyle(tabs).display!=='none'
+          ? Math.ceil(tabs.getBoundingClientRect().height)
+          : 56;
+        document.documentElement.style.setProperty('--navH', navH + 'px');
+        document.documentElement.style.setProperty('--tabsH', tabsH + 'px');
+      }
+
+      window.addEventListener('load', async ()=>{
+        setLevelIndicator(false);
+        await buildLevelSelect();
+        updateHeights();
+      });
+
+      /* ===== NAVBAR JS BİNDINGS ===== */
+      (function(){
+        const $ = (id)=>document.getElementById(id);
+        const navFree = $("nav-free"), navTest=$("nav-test");
+        const mdFree=$("md-free"), mdTest=$("md-test");
+        const navTheme=$("nav-theme"), mdTheme=$("md-theme");
+        const mdResel=$("md-reselect");
+        const burger=$("nav-burger"), drawer=$("nav-drawer");
+        const levelBtn=$("nav-level"), levelBadge=$("nav-level-badge");
+        const dd = document.querySelector(".nav-dd");
+
+        function setActive(which){
+          [navFree, navTest].forEach(btn=>btn && btn.classList.remove("active"));
+          if(which==="free") navFree?.classList.add("active");
+          if(which==="test") navTest?.classList.add("active");
+        }
+
+        function showFree(){
+          const el = document.getElementById("tab-free");
+          if(el){ el.click(); setActive("free"); window.scrollTo({top:0,behavior:"smooth"}); }
+        }
+        function showTest(){
+          const el = document.getElementById("tab-test");
+          if(el){ el.click(); setActive("test"); window.scrollTo({top:0,behavior:"smooth"}); }
+        }
+
+        function toggleTheme(){
+          const t = document.getElementById("themeToggle");
+          if(t){ t.click(); }
+          const isDark = document.body.getAttribute("data-theme")==="dark";
+          if(navTheme) navTheme.textContent = isDark ? "☀️" : "🌙";
+          if(mdTheme)  mdTheme.textContent  = isDark ? "☀️" : "🌙";
+        }
+
+        function doReselect(){
+          const b = document.getElementById("reselectBtn");
+          if(b){ b.click(); closeDrawer(); }
+        }
+
+        function openDrawer(){ if(!drawer) return; drawer.style.display="block"; burger.setAttribute("aria-expanded","true"); }
+        function closeDrawer(){ if(!drawer) return; drawer.style.display="none"; burger.setAttribute("aria-expanded","false"); }
+        burger && burger.addEventListener("click", ()=>{ const isOpen = drawer && drawer.style.display==="block"; isOpen?closeDrawer():openDrawer(); });
+
+        navFree?.addEventListener("click", showFree);
+        navTest?.addEventListener("click", showTest);
+        mdFree?.addEventListener("click", ()=>{ showFree(); closeDrawer(); });
+        mdTest?.addEventListener("click", ()=>{ showTest(); closeDrawer(); });
+
+        navTheme?.addEventListener("click", toggleTheme);
+        mdTheme?.addEventListener("click", ()=>{ toggleTheme(); closeDrawer(); });
+
+        mdResel?.addEventListener("click", doReselect);
+
+        function closeDD(){ if(dd){ dd.style.display="none"; levelBtn?.setAttribute("aria-expanded","false"); } }
+        function openDD(){ if(dd){ dd.style.display="block"; levelBtn?.setAttribute("aria-expanded","true"); } }
+        levelBtn?.addEventListener("click", (e)=>{
+          e.stopPropagation();
+          const open = dd && dd.style.display==="block";
+          open ? closeDD() : openDD();
+        });
+        document.addEventListener("click", (e)=>{ if(dd && dd.style.display==="block" && !dd.contains(e.target)) closeDD(); });
+        document.addEventListener("keydown", (e)=>{ if(e.key==="Escape") { closeDD(); closeDrawer(); } });
+
+        function goLevel(lvl){
+          if(typeof pickLevel === "function"){ pickLevel(lvl); }
+          closeDD(); closeDrawer();
+        }
+        document.querySelectorAll(".nav-dd-item").forEach(btn=>{
+          btn.addEventListener("click", ()=> goLevel(btn.dataset.lvl));
+        });
+        document.querySelectorAll(".lvl-chip").forEach(btn=>{
+          btn.addEventListener("click", ()=> goLevel(btn.dataset.lvl));
+        });
+
+        function syncLevelBadge(){
+          const ind = document.getElementById("currentLevelIndicator");
+          const text = ind && ind.textContent ? ind.textContent.replace("Seviye:","").trim() : "—";
+          if(levelBadge) levelBadge.textContent = text || "—";
+        }
+
+        const tabFreeBtn = document.getElementById("tab-free");
+        const tabTestBtn = document.getElementById("tab-test");
+        tabFreeBtn?.addEventListener("click", ()=> setActive("free"));
+        tabTestBtn?.addEventListener("click", ()=> setActive("test"));
+
+        window.addEventListener("load", ()=>{
+          const isDark = document.body.getAttribute("data-theme")==="dark";
+          if(navTheme) navTheme.textContent = isDark ? "☀️" : "🌙";
+          if(mdTheme)  mdTheme.textContent  = isDark ? "☀️" : "🌙";
+          setActive("free");
+          syncLevelBadge();
+          const observer = new MutationObserver(syncLevelBadge);
+          const ind = document.getElementById("currentLevelIndicator");
+          if(ind) observer.observe(ind, {childList:true, subtree:true, characterData:true});
+        });
+      })();
+
+      // Bilinen kelimeler sandığı ikon senkronu
+      const navKnownIcon = document.getElementById("nav-known-icon");
+      const navChestImg  = document.getElementById("nav-chest-img");
+      function toggleKnownDrawer(){
+        const btn = document.getElementById("drawerBtn");
+        const drawer = document.getElementById("drawer");
+        if(!btn || !drawer) return;
+        const willOpen = (drawer.style.display==='none' || drawer.style.display==='');
+        btn.click();
+        if(navChestImg){
+          navChestImg.src = willOpen ? "../assets/images/open-chest.png"
+                                     : "../assets/images/off-chest.png";
+        }
+      }
+      navKnownIcon?.addEventListener("click", toggleKnownDrawer);
+      document.addEventListener("click", (e)=>{
+        const drawer = document.getElementById("drawer");
+        if(!drawer || !navChestImg) return;
+        if(drawer.style.display==='block') return;
+        navChestImg.src = "../assets/images/off-chest.png";
+      });
+      document.addEventListener("keydown", (e)=>{
+        if(e.key!=="Escape") return;
+        const drawer = document.getElementById("drawer");
+        if(!drawer || !navChestImg) return;
+        setTimeout(()=>{
+          if(drawer.style.display!=='block'){
+            navChestImg.src = "../assets/images/off-chest.png";
+          }
+        }, 0);
+      });
+    </script>
+  </body>
 </html>

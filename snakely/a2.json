@@ -805,7 +805,7 @@
 {"en": "hole", "meanings": ["delik"], "type": "noun", "level": "A2"},
 {"en": "holiday", "meanings": ["tatil"], "type": "noun", "level": "A1"},
 {"en": "holy", "meanings": ["kutsal"], "type": "adjective", "level": "A2"},
-{"en": "homework", "meanings": ["ev ödevi"], "type": "noun", "level": "A1"},
+{"en": "homework", "meanings": ["ödev", "ev ödevi"], "type": "noun", "level": "A1"},
 {"en": "honest", "meanings": ["dürüst"], "type": "adjective", "level": "A2"},
 {"en": "honour", "meanings": ["onur"], "type": "noun", "level": "A2"},
 {"en": "hope", "meanings": ["umut", "ummak"], "type": "noun/verb", "level": "A2"},
