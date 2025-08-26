@@ -618,6 +618,16 @@ body[data-theme="dark"] .drawer-item{ background: rgba(17,24,39,.85); color:#e5e
 /* Eski üst öğeleri gizle (yeni navbar ile çakışmasın) */
 /* .tabs artık MOBİLDE GÖRÜNECEK, bu yüzden listeden çıkardık */
 .logo, .title, .theme-toggle, .drawer-btn, .reselect-btn{ display:none !important; }
+
+.speak-btn{
+  position:absolute; right:56px; top:50%; transform:translateY(-50%);
+  border:none; border-radius:10px; padding:6px 10px; cursor:pointer;
+  font-weight:900; font-size:14px; color:#fff;
+  background:linear-gradient(45deg,#0ea5e9,#38bdf8);
+  box-shadow:0 8px 18px rgba(0,0,0,.20);
+}
+.speak-btn:active{ transform:translateY(-50%) scale(.96); }
+
 </style>
 </head>
 
@@ -726,6 +736,7 @@ body[data-theme="dark"] .drawer-item{ background: rgba(17,24,39,.85); color:#e5e
           <div class="card-meta">
             <span id="badgeFront" class="badge">Type</span>
             <div class="avatar">🐍</div>
+            <button id="speakBtn" class="speak-btn" type="button" aria-label="Seslendir (EN)">🔊</button>
           </div>
           <div class="word"><div id="frontWord">Kelime</div></div>
         </div>
@@ -1215,12 +1226,24 @@ function renderCard(){
   fWordDiv.textContent = w.en;
   bWordDiv.textContent = joinMeanings(w) || "—";
   paintCard(w);
+
+  // giriş animasyonları...
   const c = qs("cardInner");
   c.classList.remove("flipped","enter-right");
   void c.offsetWidth;
   c.classList.add("enter-right");
   c.addEventListener("animationend", () => c.classList.remove("enter-right"), { once:true });
+
+  // 🔊 TTS tuşu: tıklanınca önü çevirmesin diye event yayılımını durdur
+  const speakBtn = document.getElementById('speakBtn');
+  if(speakBtn){
+    speakBtn.onclick = (ev) => {
+      ev.stopPropagation();
+      TTS.speakEN(w.en);  // örn. "one" -> doğru İngilizce telaffuz
+    };
+  }
 }
+
       function flipCard(){
         if (suppressClick || isPassing) { suppressClick = false; return; }
         const c = qs("cardInner");
@@ -1629,6 +1652,82 @@ function renderCard(){
           }
         }, 0);
       });
+
+      /* ====== TTS / Speech Synthesis ====== */
+const TTS = (() => {
+  let ready = false;
+  let voiceEN = null;
+
+  const preferredByName = [
+    // Windows / Edge doğal sesler
+    'Microsoft Aria Online (Natural) - English (United States)',
+    'Microsoft Guy Online (Natural) - English (United States)',
+    'Microsoft Sonia Online (Natural) - English (United Kingdom)',
+    'Microsoft Ryan Online (Natural) - English (United Kingdom)',
+    // Chrome “Google” sesleri
+    'Google US English', 'Google UK English Female', 'Google UK English Male'
+  ];
+
+  async function init(){
+    if(!('speechSynthesis' in window)) return;
+    const list = await waitForVoices(2500);
+    // 1) İsme göre
+    for(const n of preferredByName){
+      const v = list.find(v => v.name === n);
+      if(v){ voiceEN = v; break; }
+    }
+    // 2) Dile göre yedek
+    if(!voiceEN){
+      voiceEN =
+        list.find(v => /^en-US/i.test(v.lang)) ||
+        list.find(v => /^en-GB/i.test(v.lang)) ||
+        list.find(v => /^en/i.test(v.lang)) || null;
+    }
+    ready = true;
+  }
+
+  function speakEN(text, opts={}){
+    if(!('speechSynthesis' in window)) { showToast('Cihaz konuşma sentezini desteklemiyor.', 'error'); return; }
+    if(!ready){ showToast('Sesler yükleniyor, tekrar dener misin?', 'warning'); return; }
+    if(!voiceEN){
+      showToast('İngilizce ses bulunamadı. Lütfen sistem dil ayarlarından İngilizce (US/UK) ses yükleyin.', 'error', 3500);
+      return;
+    }
+    if(!text || !text.trim()) return;
+
+    const u = new SpeechSynthesisUtterance(text.trim());
+    u.voice = voiceEN;                 // seçilen gerçek İngilizce ses
+    u.lang  = voiceEN.lang || 'en-US'; // dilini de ona sabitle
+    u.rate  = opts.rate ?? 0.95;
+    u.pitch = opts.pitch ?? 1.0;
+    u.volume= opts.volume ?? 1.0;
+
+    window.speechSynthesis.cancel();   // önceki okuma varsa iptal
+    window.speechSynthesis.speak(u);
+  }
+
+  // Sayfa yüklenirken hazırlan
+  init();
+
+  return { speakEN };
+})();
+
+
+async function waitForVoices(timeoutMs = 2000){
+  const synth = window.speechSynthesis;
+  let voices = synth.getVoices();
+  if (voices && voices.length) return voices;
+
+  return new Promise(resolve => {
+    const id = setTimeout(() => resolve(synth.getVoices()), timeoutMs);
+    synth.onvoiceschanged = () => {
+      clearTimeout(id);
+      resolve(synth.getVoices());
+    };
+  });
+}
+
+
     </script>
   </body>
 </html>
