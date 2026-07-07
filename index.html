@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Uygar Yılanlı</title>
+  <meta name="description" content="Uygar Yılanlı — Snakely'nin yaratıcısı. Fikirleri hayata geçirmek için çalışan bir üretici." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" type="image/png" href="assets/snakely-icon.png" />
+</head>
+<body>
+
+  <!-- Arka plan ışıltıları -->
+  <div class="bg-glow bg-glow--1" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow--2" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow--3" aria-hidden="true"></div>
+
+  <!-- ===== NAV ===== -->
+  <header class="nav" id="top">
+    <div class="nav__inner container">
+      <a href="#top" class="nav__brand">
+        <span class="nav__dot" aria-hidden="true"></span>
+        Uygar&nbsp;Yılanlı
+      </a>
+
+      <nav class="nav__links" id="navLinks" aria-label="Ana menü">
+        <a href="#about" data-i18n="nav.about">Hakkımda</a>
+        <a href="#education" data-i18n="nav.education">Eğitim</a>
+        <a href="#projects" data-i18n="nav.projects">Projeler</a>
+        <a href="#contact" class="btn btn--small btn--outline" data-i18n="nav.contact">İletişim</a>
+      </nav>
+
+      <div class="nav__actions">
+        <button class="lang-toggle" id="langToggle" type="button" aria-label="Dili değiştir / Change language">
+          <span class="lang-toggle__opt" data-lang="tr">TR</span>
+          <span class="lang-toggle__divider">/</span>
+          <span class="lang-toggle__opt" data-lang="en">EN</span>
+        </button>
+        <button class="nav__burger" id="navBurger" type="button" aria-label="Menüyü aç" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ===== HERO ===== -->
+    <section class="hero container">
+      <div class="hero__photo reveal">
+        <div class="hero__photo-ring" aria-hidden="true"></div>
+        <img src="assets/uygar.jpeg" alt="Uygar Yılanlı" width="360" height="360" />
+      </div>
+
+      <div class="hero__content">
+        <p class="hero__eyebrow reveal" data-i18n="hero.eyebrow">Merhaba, ben Uygar 👋</p>
+        <h1 class="hero__title reveal" data-i18n="hero.title">Büyük hayaller kuran ve fikirleri <span class="grad-text">hayata geçirmek</span> için yorulmadan çalışan biri.</h1>
+        <p class="hero__desc reveal" data-i18n="hero.desc"><strong>Snakely</strong>'nin yaratıcısıyım — kelime öğrenmeyi eğlenceli ve etkileşimli hâle getiren bir kelime öğrenme uygulaması. Kullanıcı deneyimi ve görsel tasarım üzerine kendimi sürekli geliştiriyorum.</p>
+        <div class="hero__cta reveal">
+          <a href="#projects" class="btn btn--primary" data-i18n="hero.ctaProjects">Projelerime Göz At</a>
+          <a href="#contact" class="btn btn--ghost" data-i18n="hero.ctaContact">Bana Ulaş</a>
+        </div>
+        <div class="hero__badges reveal">
+          <span class="chip"><img src="assets/snakely-icon.png" alt="" class="chip__icon" /> Snakely</span>
+          <span class="chip">UX</span>
+          <span class="chip">Flutter · Dart</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="section container" id="about">
+      <div class="section__head reveal">
+        <span class="section__kicker" data-i18n="about.kicker">Hakkımda</span>
+        <h2 class="section__title" data-i18n="about.title">Kısa bir <span class="grad-text">tanışma</span></h2>
+      </div>
+
+      <div class="about-grid">
+        <div class="card card--glass reveal">
+          <p data-i18n="about.p1">2000 yılında Çorlu, Tekirdağ'da doğdum. Eğitim hayatım boyunca öğrenmeye, keşfetmeye ve gelişmeye her zaman büyük önem verdim. Kelime öğrenimini daha etkileşimli ve keyifli hâle getirmeye odaklanan <strong>Snakely</strong> adlı kelime öğrenme uygulamasının yaratıcısıyım.</p>
+          <p data-i18n="about.p2">Araştırmaya meraklı ve yeniliğe açık biriyim. Akademik hayatımdan kalan zamanlarda kişisel projelerim üzerinde aktif olarak çalışıyor, yeni teknolojiler keşfetmekten keyif alıyorum. Kullanıcı deneyimi ve görsel gelişim alanındaki becerilerimi güçlendirmek için tasarım pratiklerine de düzenli olarak zaman ayırıyorum.</p>
+        </div>
+
+        <div class="about-facts">
+          <div class="card card--glass fact reveal">
+            <span class="fact__icon">📍</span>
+            <div>
+              <span class="fact__label" data-i18n="about.f1label">Nereden</span>
+              <span class="fact__value" data-i18n="about.f1value">Çorlu, Tekirdağ · 2000</span>
+            </div>
+          </div>
+          <div class="card card--glass fact reveal">
+            <span class="fact__icon">🚀</span>
+            <div>
+              <span class="fact__label" data-i18n="about.f2label">Ne yapıyorum</span>
+              <span class="fact__value" data-i18n="about.f2value">Snakely'yi geliştiriyorum</span>
+            </div>
+          </div>
+          <div class="card card--glass fact reveal">
+            <span class="fact__icon">🎯</span>
+            <div>
+              <span class="fact__label" data-i18n="about.f3label">Odak</span>
+              <span class="fact__value" data-i18n="about.f3value">UX · Görsel tasarım · Yeni teknolojiler</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== EDUCATION ===== -->
+    <section class="section container" id="education">
+      <div class="section__head reveal">
+        <span class="section__kicker" data-i18n="edu.kicker">Eğitim</span>
+        <h2 class="section__title" data-i18n="edu.title">Güncel programlar &amp; <span class="grad-text">odak alanları</span></h2>
+      </div>
+
+      <div class="edu-grid">
+        <article class="card card--glass edu-card reveal">
+          <div class="edu-card__icon" aria-hidden="true">🎓</div>
+          <h3 data-i18n="edu.u1name">Çanakkale Onsekiz Mart Üniversitesi</h3>
+          <p class="edu-card__degree" data-i18n="edu.u1degree">Lisans — İşletme (İngilizce) · <strong>Mezun · 2026</strong></p>
+          <p data-i18n="edu.u1desc">Küresel pazarları anlamak ve liderlik becerilerimi geliştirmek için İşletme okudum, 2026 yılında mezun oldum.</p>
+        </article>
+
+        <article class="card card--glass edu-card reveal">
+          <div class="edu-card__icon" aria-hidden="true">💻</div>
+          <h3 data-i18n="edu.u2name">İstanbul Üniversitesi (Açıköğretim)</h3>
+          <p class="edu-card__degree" data-i18n="edu.u2degree">Ön Lisans — Bilgisayar Programcılığı · <strong>2. Sınıf</strong></p>
+          <p data-i18n="edu.u2desc">Yazılım geliştirme ve programlama dillerinde güçlü bir altyapı kurmak için çalıştım, çalışıyorum ve çalışmaya devam edeceğim.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== PROJECTS ===== -->
+    <section class="section container" id="projects">
+      <div class="section__head reveal">
+        <span class="section__kicker" data-i18n="proj.kicker">Projeler</span>
+        <h2 class="section__title" data-i18n="proj.title">Seçili <span class="grad-text">çalışmalar</span></h2>
+      </div>
+
+      <div class="proj-grid">
+        <article class="card card--glass proj-card proj-card--featured reveal">
+          <div class="proj-card__info">
+            <div class="proj-card__top">
+              <img src="assets/snakely-icon.png" alt="Snakely logosu" class="proj-card__logo" />
+              <span class="chip chip--live" data-i18n="proj.p1status">Mağazalarda yayında</span>
+            </div>
+            <h3 data-i18n="proj.p1name">Snakely — Kelime Öğrenme Uygulaması</h3>
+            <p data-i18n="proj.p1desc">İngilizce ve Almanca kelime öğrenimini daha düzenli, motive edici ve kalıcı hâle getiren oyunlaştırılmış bir mobil uygulama. Kart Gezinimi, Öğrenim, Blitz, Eşleştirme ve Sınav gibi farklı çalışma modlarıyla App Store ve Google Play'de yayında, birçok aktif kullanıcıya sahip.</p>
+            <div class="proj-card__tags">
+              <span class="chip" data-i18n="proj.p1tag1">Eğitim</span>
+              <span class="chip" data-i18n="proj.p1tag2">Kelime Öğrenimi</span>
+              <span class="chip" data-i18n="proj.p1tag3">Oyunlaştırma</span>
+              <span class="chip" data-i18n="proj.p1tag4">🇬🇧 İngilizce</span>
+              <span class="chip" data-i18n="proj.p1tag5">🇩🇪 Almanca</span>
+              <span class="chip">iOS &amp; Android</span>
+            </div>
+            <div class="store-btns">
+              <a href="https://apps.apple.com/tr/app/snakely/id6756029541" class="store-btn" target="_blank" rel="noopener" aria-label="App Store'dan indir">
+                <svg viewBox="0 0 384 512" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+                <span class="store-btn__text">
+                  <small data-i18n="proj.storeCta">İndir</small>
+                  <strong>App Store</strong>
+                </span>
+              </a>
+              <a href="https://play.google.com/store/apps/details?id=net.snakely.app" class="store-btn" target="_blank" rel="noopener" aria-label="Google Play'den indir">
+                <svg viewBox="0 0 512 512" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"/></svg>
+                <span class="store-btn__text">
+                  <small data-i18n="proj.storeCta">İndir</small>
+                  <strong>Google Play</strong>
+                </span>
+              </a>
+            </div>
+          </div>
+          <div class="snakely-shots" aria-label="Snakely ekran görüntüleri">
+            <img src="assets/snakely-study.png" alt="Snakely çalışma oturumu ekranı" loading="lazy" />
+            <img src="assets/snakely-levels.png" alt="Snakely seviye seçim ekranı" loading="lazy" />
+            <img src="assets/snakely-quiz.png" alt="Snakely sınav ekranı" loading="lazy" />
+          </div>
+        </article>
+
+        <article class="card card--glass proj-card proj-card--featured reveal">
+          <div class="proj-card__info">
+            <div class="proj-card__top">
+              <img src="assets/cubomb-icon.png" alt="Cubomb logosu" class="proj-card__logo" />
+              <span class="chip chip--live" data-i18n="proj.p1status">Mağazalarda yayında</span>
+            </div>
+            <h3 data-i18n="proj.p2name">Cubomb — Renkli Küp Patlatma Oyunu</h3>
+            <p data-i18n="proj.p2desc">Basit kuralları ve derinlikli oynanışıyla saatlerce oynatan bağımlılık yapıcı bir küp patlatma bulmaca oyunu. Farklı hedeflere sahip 100 bölüm, jetonlarla oynanan sınırsız Yarış Modu, şans çarkı ve küresel liderlik tablosuyla 13 dilde yayında. Eskiden çok sevdiğim bir oyundan ilham alarak, boş vakitlerde keyifle oynamak için geliştirdim.</p>
+            <div class="proj-card__tags">
+              <span class="chip">Puzzle</span>
+              <span class="chip">Arcade</span>
+              <span class="chip">iOS &amp; Android</span>
+            </div>
+            <div class="store-btns">
+            <a href="https://apps.apple.com/tr/app/cubomb/id6757989671" class="store-btn" target="_blank" rel="noopener" aria-label="Cubomb'u App Store'dan indir">
+              <svg viewBox="0 0 384 512" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+              <span class="store-btn__text">
+                <small data-i18n="proj.storeCta">İndir</small>
+                <strong>App Store</strong>
+              </span>
+            </a>
+            <a href="https://play.google.com/store/apps/details?id=com.cubomb.app" class="store-btn" target="_blank" rel="noopener" aria-label="Cubomb'u Google Play'den indir">
+              <svg viewBox="0 0 512 512" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"/></svg>
+              <span class="store-btn__text">
+                <small data-i18n="proj.storeCta">İndir</small>
+                <strong>Google Play</strong>
+              </span>
+            </a>
+            </div>
+          </div>
+          <div class="snakely-shots" aria-label="Cubomb ekran görüntüleri">
+            <img src="assets/cubomb-mainmenu.png" alt="Cubomb ana menü ekranı" loading="lazy" />
+            <img src="assets/cubomb-game.png" alt="Cubomb oyun ekranı" loading="lazy" />
+            <img src="assets/cubomb-gamerule.png" alt="Cubomb oyun kuralları ekranı" loading="lazy" />
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section class="section container" id="contact">
+      <div class="card card--glass contact reveal">
+        <h2 class="contact__title" data-i18n="contact.title">Birlikte harika bir şey <span class="grad-text">inşa edelim</span></h2>
+        <p class="contact__desc" data-i18n="contact.desc">İş birliklerine, yeni fırsatlara ve geri bildirimlere açığım.</p>
+        <div class="contact__actions">
+          <a href="mailto:u.yilanli2000@gmail.com" class="btn btn--primary" data-i18n="contact.email">✉️ E-posta Gönder</a>
+          <a href="https://www.linkedin.com/in/uygaryilanli" class="btn btn--ghost" target="_blank" rel="noopener">in&nbsp;&nbsp;LinkedIn</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="year">2026</span> Uygar Yılanlı. <span data-i18n="footer.rights">Tüm hakları saklıdır.</span></p>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
