@@ -571,6 +571,103 @@ main, .nav, .footer { position: relative; z-index: 1; }
 
 .proj-card .btn { align-self: flex-start; }
 
+/* YouTube otomasyonu: logo, "kişisel araç" etiketi ve akış şeması */
+.proj-card__logo--yt {
+  display: grid;
+  place-items: center;
+  background: var(--grad-accent);
+  color: #03130c;
+}
+
+.chip--private {
+  color: #e8f7b8;
+  background: rgba(163, 230, 53, 0.12);
+  border-color: rgba(163, 230, 53, 0.4);
+}
+.chip--private::before { content: "🔒"; font-size: 0.72rem; }
+
+.flow__body {
+  position: relative;
+  padding-right: 34px;
+}
+
+.flow__steps {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.flow__step {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgba(52, 211, 153, 0.06);
+  border: 1px solid var(--card-border);
+  transition: border-color 0.25s, background 0.25s;
+}
+.flow__step:hover {
+  border-color: rgba(52, 211, 153, 0.4);
+  background: rgba(52, 211, 153, 0.1);
+}
+
+/* Adımlar arası bağlantı çizgisi */
+.flow__step + .flow__step::before {
+  content: "";
+  position: absolute;
+  left: 32px;
+  top: -11px;
+  width: 2px;
+  height: 10px;
+  background: rgba(52, 211, 153, 0.5);
+}
+
+.flow__icon {
+  width: 38px;
+  height: 38px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: rgba(52, 211, 153, 0.12);
+  border: 1px solid rgba(52, 211, 153, 0.3);
+  font-size: 1.15rem;
+}
+
+.flow__text { display: flex; flex-direction: column; line-height: 1.3; }
+.flow__text strong { font-family: var(--font-head); font-size: 0.95rem; font-weight: 600; }
+.flow__text small { font-size: 0.75rem; color: var(--ink-faint); letter-spacing: 0.3px; }
+
+/* Son adımdan ilk adıma dönen döngü oku */
+.flow__loop {
+  position: absolute;
+  top: 29px;
+  bottom: 29px;
+  right: 6px;
+  width: 22px;
+  border: 2px dashed rgba(52, 211, 153, 0.55);
+  border-left: none;
+  border-radius: 0 18px 18px 0;
+}
+.flow__loop::before {
+  content: "";
+  position: absolute;
+  top: -7px;
+  left: -10px;
+  border: 6px solid transparent;
+  border-right-color: var(--accent-1);
+}
+
+.flow__note {
+  margin-top: 14px;
+  text-align: center;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--accent-1);
+}
+
 /* ---------- CONTACT ---------- */
 .contact {
   text-align: center;
