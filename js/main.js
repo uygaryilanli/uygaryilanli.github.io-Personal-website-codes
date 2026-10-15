@@ -71,7 +71,32 @@ const translations = {
     "contact.desc": "İş birliklerine, yeni fırsatlara ve geri bildirimlere açığım.",
     "contact.email": "✉️ E-posta Gönder",
 
-    "footer.rights": "Tüm hakları saklıdır."
+    "footer.rights": "Tüm hakları saklıdır.",
+
+    "aria.mainNav": "Ana menü",
+    "aria.menu": "Menüyü aç",
+    "aria.snakelyAppStore": "Snakely'yi App Store'dan indir",
+    "aria.snakelyPlay": "Snakely'yi Google Play'den indir",
+    "aria.cubombAppStore": "Cubomb'u App Store'dan indir",
+    "aria.cubombPlay": "Cubomb'u Google Play'den indir",
+    "aria.snakelyShots": "Snakely ekran görüntüleri",
+    "aria.cubombShots": "Cubomb ekran görüntüleri",
+    "aria.prevProject": "Önceki proje",
+    "aria.nextProject": "Sonraki proje",
+    "aria.project": "Proje {n} / {total}",
+    "aria.lightbox": "Ekran görüntüsü",
+    "aria.close": "Kapat",
+    "aria.prevImage": "Önceki görsel",
+    "aria.nextImage": "Sonraki görsel",
+    "aria.zoom": "Büyüt: {alt}",
+    "aria.moreApps": "2 uygulama daha",
+
+    "shot.s1": "Snakely çalışma oturumu ekranı",
+    "shot.s2": "Snakely seviye seçim ekranı",
+    "shot.s3": "Snakely sınav ekranı",
+    "shot.c1": "Cubomb ana sayfa ve seviye haritası",
+    "shot.c2": "Cubomb oyun ekranı",
+    "shot.c3": "Cubomb nasıl oynanır ekranı"
   },
 
   en: {
@@ -141,11 +166,42 @@ const translations = {
     "contact.desc": "Open to collaborations, new opportunities, and feedback.",
     "contact.email": "✉️ Send an Email",
 
-    "footer.rights": "All rights reserved."
+    "footer.rights": "All rights reserved.",
+
+    "aria.mainNav": "Main menu",
+    "aria.menu": "Open menu",
+    "aria.snakelyAppStore": "Download Snakely on the App Store",
+    "aria.snakelyPlay": "Get Snakely on Google Play",
+    "aria.cubombAppStore": "Download Cubomb on the App Store",
+    "aria.cubombPlay": "Get Cubomb on Google Play",
+    "aria.snakelyShots": "Snakely screenshots",
+    "aria.cubombShots": "Cubomb screenshots",
+    "aria.prevProject": "Previous project",
+    "aria.nextProject": "Next project",
+    "aria.project": "Project {n} of {total}",
+    "aria.lightbox": "Screenshot",
+    "aria.close": "Close",
+    "aria.prevImage": "Previous image",
+    "aria.nextImage": "Next image",
+    "aria.zoom": "Enlarge: {alt}",
+    "aria.moreApps": "2 more apps",
+
+    "shot.s1": "Snakely study session screen",
+    "shot.s2": "Snakely level selection screen",
+    "shot.s3": "Snakely quiz screen",
+    "shot.c1": "Cubomb home screen and level map",
+    "shot.c2": "Cubomb gameplay screen",
+    "shot.c3": "Cubomb how-to-play screen"
   }
 };
 
 /* ---------- Dil değiştirme ---------- */
+function t(key, vars = {}) {
+  const lang = document.documentElement.lang === "en" ? "en" : "tr";
+  const str = (translations[lang] && translations[lang][key]) || translations.tr[key] || key;
+  return str.replace(/\{(\w+)\}/g, (_, k) => (vars[k] !== undefined ? vars[k] : ""));
+}
+
 const langToggle = document.getElementById("langToggle");
 const langOpts = langToggle.querySelectorAll(".lang-toggle__opt");
 
@@ -155,7 +211,16 @@ function setLanguage(lang) {
     const key = el.getAttribute("data-i18n");
     if (dict[key] !== undefined) el.innerHTML = dict[key];
   });
+  document.querySelectorAll("[data-i18n-aria]").forEach((el) => {
+    const key = el.getAttribute("data-i18n-aria");
+    if (dict[key] !== undefined) el.setAttribute("aria-label", dict[key]);
+  });
+  document.querySelectorAll("[data-i18n-alt]").forEach((el) => {
+    const key = el.getAttribute("data-i18n-alt");
+    if (dict[key] !== undefined) el.alt = dict[key];
+  });
   document.documentElement.lang = lang;
+  document.dispatchEvent(new CustomEvent("languagechange", { detail: dict }));
   langOpts.forEach((opt) => opt.classList.toggle("active", opt.dataset.lang === lang));
   try { localStorage.setItem("lang", lang); } catch (_) {}
 }
@@ -201,6 +266,145 @@ const observer = new IntersectionObserver(
 );
 
 document.querySelectorAll(".reveal").forEach((el) => observer.observe(el));
+
+/* ---------- Projeler carousel ---------- */
+const projTrack = document.getElementById("projTrack");
+const projSlides = Array.from(projTrack.children);
+const projDots = document.getElementById("projDots");
+
+projSlides.forEach((_, i) => {
+  const dot = document.createElement("button");
+  dot.type = "button";
+  dot.className = "proj-nav__dot";
+  dot.setAttribute("aria-label", t("aria.project", { n: i + 1, total: projSlides.length }));
+  dot.addEventListener("click", () => goToProject(i));
+  projDots.appendChild(dot);
+});
+
+function currentProject() {
+  const step = projSlides[1].offsetLeft - projSlides[0].offsetLeft;
+  return Math.round(projTrack.scrollLeft / step);
+}
+
+function goToProject(i) {
+  const n = projSlides.length;
+  const index = (i + n) % n;
+  projTrack.scrollTo({ left: projSlides[index].offsetLeft - projSlides[0].offsetLeft });
+}
+
+function updateProjectDots() {
+  const active = currentProject();
+  projDots.querySelectorAll(".proj-nav__dot").forEach((dot, i) => {
+    dot.classList.toggle("active", i === active);
+    dot.setAttribute("aria-current", i === active ? "true" : "false");
+  });
+}
+
+document.getElementById("projPrev").addEventListener("click", () => goToProject(currentProject() - 1));
+document.getElementById("projNext").addEventListener("click", () => goToProject(currentProject() + 1));
+// Bölüm yüksekliği o an görünen projeye uyar (kısa kartların altında boşluk kalmaz)
+function fitProjectHeight() {
+  const pad = parseFloat(getComputedStyle(projTrack).paddingTop) + parseFloat(getComputedStyle(projTrack).paddingBottom);
+  projTrack.style.height = `${projSlides[currentProject()].offsetHeight + pad}px`;
+}
+
+let fitTimer;
+projTrack.addEventListener("scroll", () => {
+  updateProjectDots();
+  clearTimeout(fitTimer);
+  fitTimer = setTimeout(fitProjectHeight, 80);
+}, { passive: true });
+new ResizeObserver(fitProjectHeight).observe(projTrack);
+projSlides.forEach((slide) => slide.querySelectorAll("img").forEach((img) => img.addEventListener("load", fitProjectHeight)));
+updateProjectDots();
+fitProjectHeight();
+
+// Klavye: carousel odaktayken ← → ile projeler arasında geçiş
+projTrack.addEventListener("keydown", (e) => {
+  if (e.key === "ArrowRight") { e.preventDefault(); goToProject(currentProject() + 1); }
+  if (e.key === "ArrowLeft") { e.preventDefault(); goToProject(currentProject() - 1); }
+});
+
+document.addEventListener("languagechange", () => {
+  projDots.querySelectorAll(".proj-nav__dot").forEach((dot, i) => {
+    dot.setAttribute("aria-label", t("aria.project", { n: i + 1, total: projSlides.length }));
+  });
+  document.querySelectorAll(".snakely-shots img").forEach((img) => {
+    img.setAttribute("aria-label", t("aria.zoom", { alt: img.alt }));
+  });
+});
+
+/* ---------- Ekran görüntüsü büyütme (lightbox) ---------- */
+const lightbox = document.getElementById("lightbox");
+const lbImg = document.getElementById("lbImg");
+const lbCaption = document.getElementById("lbCaption");
+let lbGroup = [];
+let lbIndex = 0;
+let lbReturnFocus = null;
+
+function showLightboxImage(i) {
+  lbIndex = (i + lbGroup.length) % lbGroup.length;
+  const img = lbGroup[lbIndex];
+  lbImg.src = img.currentSrc || img.src;
+  lbImg.alt = img.alt;
+  lbCaption.textContent = `${img.alt} · ${lbIndex + 1} / ${lbGroup.length}`;
+}
+
+function openLightbox(img) {
+  lbGroup = Array.from(img.closest(".snakely-shots").querySelectorAll("img"));
+  lbReturnFocus = img;
+  showLightboxImage(lbGroup.indexOf(img));
+  lightbox.hidden = false;
+  document.body.classList.add("no-scroll");
+  requestAnimationFrame(() => lightbox.classList.add("open"));
+  document.getElementById("lbClose").focus();
+}
+
+function closeLightbox() {
+  lightbox.classList.remove("open");
+  document.body.classList.remove("no-scroll");
+  setTimeout(() => { lightbox.hidden = true; }, 250);
+  if (lbReturnFocus) lbReturnFocus.focus();
+}
+
+document.querySelectorAll(".snakely-shots img").forEach((img) => {
+  img.tabIndex = 0;
+  img.setAttribute("role", "button");
+  img.setAttribute("aria-label", t("aria.zoom", { alt: img.alt }));
+  img.addEventListener("click", () => openLightbox(img));
+  img.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openLightbox(img); }
+  });
+});
+
+document.getElementById("lbClose").addEventListener("click", closeLightbox);
+document.getElementById("lbPrev").addEventListener("click", () => showLightboxImage(lbIndex - 1));
+document.getElementById("lbNext").addEventListener("click", () => showLightboxImage(lbIndex + 1));
+lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
+
+document.addEventListener("keydown", (e) => {
+  if (lightbox.hidden) return;
+  if (e.key === "Escape") closeLightbox();
+  if (e.key === "ArrowRight") showLightboxImage(lbIndex + 1);
+  if (e.key === "ArrowLeft") showLightboxImage(lbIndex - 1);
+  if (e.key === "Tab") {
+    // Odak lightbox içinde kalsın
+    const items = Array.from(lightbox.querySelectorAll("button"));
+    const idx = items.indexOf(document.activeElement);
+    e.preventDefault();
+    items[(idx + (e.shiftKey ? -1 : 1) + items.length) % items.length].focus();
+  }
+});
+
+// Mobilde parmakla kaydırarak görsel değiştirme
+let lbTouchX = null;
+lightbox.addEventListener("touchstart", (e) => { lbTouchX = e.touches[0].clientX; }, { passive: true });
+lightbox.addEventListener("touchend", (e) => {
+  if (lbTouchX === null) return;
+  const dx = e.changedTouches[0].clientX - lbTouchX;
+  if (Math.abs(dx) > 50) showLightboxImage(lbIndex + (dx < 0 ? 1 : -1));
+  lbTouchX = null;
+});
 
 /* ---------- Yıl ---------- */
 document.getElementById("year").textContent = new Date().getFullYear();

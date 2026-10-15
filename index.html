@@ -5,11 +5,82 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Uygar Yılanlı</title>
   <meta name="description" content="Uygar Yılanlı — Snakely ve Cubomb'un yaratıcısı. Fikirleri hayata geçirmek için çalışan bir üretici." />
+  <link rel="canonical" href="https://www.uygaryilanli.com/" />
+
+  <!-- Paylaşım önizlemesi (WhatsApp, LinkedIn, X vb.) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Uygar Yılanlı" />
+  <meta property="og:url" content="https://www.uygaryilanli.com/" />
+  <meta property="og:title" content="Uygar Yılanlı" />
+  <meta property="og:description" content="Snakely ve Cubomb'un yaratıcısı. Projelerim, eğitimim ve iletişim bilgilerim." />
+  <meta property="og:image" content="https://www.uygaryilanli.com/assets/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Uygar Yılanlı — Snakely ve Cubomb" />
+  <meta property="og:locale" content="tr_TR" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Uygar Yılanlı" />
+  <meta name="twitter:description" content="Snakely ve Cubomb'un yaratıcısı. Projelerim, eğitimim ve iletişim bilgilerim." />
+  <meta name="twitter:image" content="https://www.uygaryilanli.com/assets/og-image.jpg" />
+  <meta name="theme-color" content="#04070a" />
+
+  <!-- Google için yapılandırılmış veri -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://www.uygaryilanli.com/#person",
+        "name": "Uygar Yılanlı",
+        "url": "https://www.uygaryilanli.com/",
+        "image": "https://www.uygaryilanli.com/assets/uygar.jpeg",
+        "birthPlace": "Çorlu, Tekirdağ",
+        "alumniOf": [
+          { "@type": "CollegeOrUniversity", "name": "Çanakkale Onsekiz Mart Üniversitesi" },
+          { "@type": "CollegeOrUniversity", "name": "İstanbul Üniversitesi" }
+        ],
+        "sameAs": ["https://www.linkedin.com/in/uygaryilanli"]
+      },
+      {
+        "@type": "MobileApplication",
+        "name": "Snakely",
+        "operatingSystem": "iOS, Android",
+        "applicationCategory": "EducationalApplication",
+        "description": "İngilizce ve Almanca kelime öğrenimini oyunlaştıran mobil uygulama.",
+        "image": "https://www.uygaryilanli.com/assets/snakely-icon.png",
+        "author": { "@id": "https://www.uygaryilanli.com/#person" },
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TRY" },
+        "sameAs": [
+          "https://apps.apple.com/tr/app/snakely/id6756029541",
+          "https://play.google.com/store/apps/details?id=net.snakely.app"
+        ]
+      },
+      {
+        "@type": "MobileApplication",
+        "name": "Cubomb",
+        "operatingSystem": "iOS, Android",
+        "applicationCategory": "GameApplication",
+        "description": "Sevimli küplerle dolu, sonsuz seviyeli eşleştirme bulmacası.",
+        "image": "https://www.uygaryilanli.com/assets/cubomb-icon.png",
+        "author": { "@id": "https://www.uygaryilanli.com/#person" },
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TRY" },
+        "sameAs": [
+          "https://apps.apple.com/tr/app/cubomb/id6757989671",
+          "https://play.google.com/store/apps/details?id=com.cubomb.app"
+        ]
+      }
+    ]
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20260913" />
-  <link rel="icon" type="image/png" href="assets/snakely-icon.png" />
+  <link rel="stylesheet" href="css/style.css?v=20261015f" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/favicon.png" />
 </head>
 <body>
 
@@ -22,11 +93,11 @@
   <header class="nav" id="top">
     <div class="nav__inner container">
       <a href="#top" class="nav__brand">
-        <span class="nav__dot" aria-hidden="true"></span>
+        <img src="assets/favicon.png" alt="" class="nav__avatar" width="34" height="34" />
         Uygar&nbsp;Yılanlı
       </a>
 
-      <nav class="nav__links" id="navLinks" aria-label="Ana menü">
+      <nav class="nav__links" id="navLinks" aria-label="Ana menü" data-i18n-aria="aria.mainNav">
         <a href="#about" data-i18n="nav.about">Hakkımda</a>
         <a href="#education" data-i18n="nav.education">Eğitim</a>
         <a href="#projects" data-i18n="nav.projects">Projeler</a>
@@ -39,7 +110,7 @@
           <span class="lang-toggle__divider">/</span>
           <span class="lang-toggle__opt" data-lang="en">EN</span>
         </button>
-        <button class="nav__burger" id="navBurger" type="button" aria-label="Menüyü aç" aria-expanded="false">
+        <button class="nav__burger" id="navBurger" type="button" aria-label="Menüyü aç" data-i18n-aria="aria.menu" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
       </div>
@@ -65,6 +136,7 @@
         <div class="hero__badges reveal">
           <span class="chip"><img src="assets/snakely-icon.png" alt="" class="chip__icon" /> Snakely</span>
           <span class="chip"><img src="assets/cubomb-icon.png?v=2" alt="" class="chip__icon" /> Cubomb</span>
+          <span class="chip chip--more" title="2 uygulama daha" aria-label="2 uygulama daha" data-i18n-aria="aria.moreApps">+2</span>
           <span class="chip">UX</span>
           <span class="chip">Flutter · Dart</span>
         </div>
@@ -141,8 +213,9 @@
         <h2 class="section__title" data-i18n="proj.title">Seçili <span class="grad-text">çalışmalar</span></h2>
       </div>
 
-      <div class="proj-grid">
-        <article class="card card--glass proj-card proj-card--featured reveal">
+      <div class="proj-carousel reveal">
+      <div class="proj-grid" id="projTrack" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Projeler" data-i18n-aria="nav.projects">
+        <article class="card card--glass proj-card proj-card--featured">
           <div class="proj-card__info">
             <div class="proj-card__top">
               <img src="assets/snakely-icon.png" alt="Snakely logosu" class="proj-card__logo" />
@@ -159,14 +232,14 @@
               <span class="chip">iOS &amp; Android</span>
             </div>
             <div class="store-btns">
-              <a href="https://apps.apple.com/tr/app/snakely/id6756029541" class="store-btn" target="_blank" rel="noopener" aria-label="App Store'dan indir">
+              <a href="https://apps.apple.com/tr/app/snakely/id6756029541" class="store-btn" target="_blank" rel="noopener" aria-label="Snakely'yi App Store'dan indir" data-i18n-aria="aria.snakelyAppStore">
                 <svg viewBox="0 0 384 512" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
                 <span class="store-btn__text">
                   <small data-i18n="proj.storeCta">İndir</small>
                   <strong>App Store</strong>
                 </span>
               </a>
-              <a href="https://play.google.com/store/apps/details?id=net.snakely.app" class="store-btn" target="_blank" rel="noopener" aria-label="Google Play'den indir">
+              <a href="https://play.google.com/store/apps/details?id=net.snakely.app" class="store-btn" target="_blank" rel="noopener" aria-label="Snakely'yi Google Play'den indir" data-i18n-aria="aria.snakelyPlay">
                 <svg viewBox="0 0 512 512" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"/></svg>
                 <span class="store-btn__text">
                   <small data-i18n="proj.storeCta">İndir</small>
@@ -175,14 +248,14 @@
               </a>
             </div>
           </div>
-          <div class="snakely-shots" aria-label="Snakely ekran görüntüleri">
-            <img src="assets/snakely-study.png" alt="Snakely çalışma oturumu ekranı" loading="lazy" />
-            <img src="assets/snakely-levels.png" alt="Snakely seviye seçim ekranı" loading="lazy" />
-            <img src="assets/snakely-quiz.png" alt="Snakely sınav ekranı" loading="lazy" />
+          <div class="snakely-shots" role="group" aria-label="Snakely ekran görüntüleri" data-i18n-aria="aria.snakelyShots">
+            <img src="assets/snakely-study.png" alt="Snakely çalışma oturumu ekranı" data-i18n-alt="shot.s1" loading="lazy" />
+            <img src="assets/snakely-levels.png" alt="Snakely seviye seçim ekranı" data-i18n-alt="shot.s2" loading="lazy" />
+            <img src="assets/snakely-quiz.png" alt="Snakely sınav ekranı" data-i18n-alt="shot.s3" loading="lazy" />
           </div>
         </article>
 
-        <article class="card card--glass proj-card proj-card--featured reveal">
+        <article class="card card--glass proj-card proj-card--featured">
           <div class="proj-card__info">
             <div class="proj-card__top">
               <img src="assets/cubomb-icon.png?v=2" alt="Cubomb logosu" class="proj-card__logo" />
@@ -196,14 +269,14 @@
               <span class="chip">iOS &amp; Android</span>
             </div>
             <div class="store-btns">
-            <a href="https://apps.apple.com/tr/app/cubomb/id6757989671" class="store-btn" target="_blank" rel="noopener" aria-label="Cubomb'u App Store'dan indir">
+            <a href="https://apps.apple.com/tr/app/cubomb/id6757989671" class="store-btn" target="_blank" rel="noopener" aria-label="Cubomb'u App Store'dan indir" data-i18n-aria="aria.cubombAppStore">
               <svg viewBox="0 0 384 512" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
               <span class="store-btn__text">
                 <small data-i18n="proj.storeCta">İndir</small>
                 <strong>App Store</strong>
               </span>
             </a>
-            <a href="https://play.google.com/store/apps/details?id=com.cubomb.app" class="store-btn" target="_blank" rel="noopener" aria-label="Cubomb'u Google Play'den indir">
+            <a href="https://play.google.com/store/apps/details?id=com.cubomb.app" class="store-btn" target="_blank" rel="noopener" aria-label="Cubomb'u Google Play'den indir" data-i18n-aria="aria.cubombPlay">
               <svg viewBox="0 0 512 512" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"/></svg>
               <span class="store-btn__text">
                 <small data-i18n="proj.storeCta">İndir</small>
@@ -212,14 +285,14 @@
             </a>
             </div>
           </div>
-          <div class="snakely-shots" aria-label="Cubomb ekran görüntüleri">
-            <img src="assets/cubomb-mainmenu.png?v=2" alt="Cubomb ana sayfa ve seviye haritası" loading="lazy" />
-            <img src="assets/cubomb-game.png?v=2" alt="Cubomb oyun ekranı" loading="lazy" />
-            <img src="assets/cubomb-gamerule.png?v=2" alt="Cubomb nasıl oynanır ekranı" loading="lazy" />
+          <div class="snakely-shots" role="group" aria-label="Cubomb ekran görüntüleri" data-i18n-aria="aria.cubombShots">
+            <img src="assets/cubomb-mainmenu.png?v=2" alt="Cubomb ana sayfa ve seviye haritası" data-i18n-alt="shot.c1" loading="lazy" />
+            <img src="assets/cubomb-game.png?v=2" alt="Cubomb oyun ekranı" data-i18n-alt="shot.c2" loading="lazy" />
+            <img src="assets/cubomb-gamerule.png?v=2" alt="Cubomb nasıl oynanır ekranı" data-i18n-alt="shot.c3" loading="lazy" />
           </div>
         </article>
 
-        <article class="card card--glass proj-card proj-card--featured reveal">
+        <article class="card card--glass proj-card proj-card--featured">
           <div class="proj-card__info">
             <div class="proj-card__top">
               <div class="proj-card__logo proj-card__logo--yt" aria-hidden="true">
@@ -256,6 +329,16 @@
           </div>
         </article>
       </div>
+      <div class="proj-nav">
+        <button class="proj-nav__btn" id="projPrev" type="button" aria-label="Önceki proje" data-i18n-aria="aria.prevProject">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <div class="proj-nav__dots" id="projDots"></div>
+        <button class="proj-nav__btn" id="projNext" type="button" aria-label="Sonraki proje" data-i18n-aria="aria.nextProject">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+      </div>
     </section>
 
     <!-- ===== CONTACT ===== -->
@@ -275,6 +358,23 @@
     <p>© <span id="year">2026</span> Uygar Yılanlı. <span data-i18n="footer.rights">Tüm hakları saklıdır.</span></p>
   </footer>
 
-  <script src="js/main.js?v=20260913"></script>
+  <!-- ===== EKRAN GÖRÜNTÜSÜ BÜYÜTME ===== -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Ekran görüntüsü" data-i18n-aria="aria.lightbox" hidden>
+    <button class="lightbox__close" id="lbClose" type="button" aria-label="Kapat" data-i18n-aria="aria.close">
+      <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <button class="lightbox__nav lightbox__nav--prev" id="lbPrev" type="button" aria-label="Önceki görsel" data-i18n-aria="aria.prevImage">
+      <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <figure class="lightbox__figure">
+      <img class="lightbox__img" id="lbImg" src="" alt="" />
+      <figcaption class="lightbox__caption" id="lbCaption"></figcaption>
+    </figure>
+    <button class="lightbox__nav lightbox__nav--next" id="lbNext" type="button" aria-label="Sonraki görsel" data-i18n-aria="aria.nextImage">
+      <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+  </div>
+
+  <script src="js/main.js?v=20261015d"></script>
 </body>
 </html>
