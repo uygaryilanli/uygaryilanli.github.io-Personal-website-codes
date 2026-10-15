@@ -302,11 +302,19 @@ function updateProjectDots() {
 
 document.getElementById("projPrev").addEventListener("click", () => goToProject(currentProject() - 1));
 document.getElementById("projNext").addEventListener("click", () => goToProject(currentProject() + 1));
-// Bölüm yüksekliği o an görünen projeye uyar (kısa kartların altında boşluk kalmaz)
+// Masaüstünde tüm proje kartları aynı boyda (CSS hepsini en uzun karta eşitler);
+// mobilde bölüm yüksekliği o an görünen projeye uyar (kısa kartların altında boşluk kalmaz)
+const projDesktop = window.matchMedia("(min-width: 961px)");
+
 function fitProjectHeight() {
+  if (projDesktop.matches) {
+    projTrack.style.height = "";
+    return;
+  }
   const pad = parseFloat(getComputedStyle(projTrack).paddingTop) + parseFloat(getComputedStyle(projTrack).paddingBottom);
   projTrack.style.height = `${projSlides[currentProject()].offsetHeight + pad}px`;
 }
+projDesktop.addEventListener("change", fitProjectHeight);
 
 let fitTimer;
 projTrack.addEventListener("scroll", () => {
