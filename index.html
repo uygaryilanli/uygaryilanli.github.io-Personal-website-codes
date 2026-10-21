@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Uygar Yılanlı</title>
-  <meta name="description" content="Uygar Yılanlı — Snakely ve Cubomb'un yaratıcısı. Fikirleri hayata geçirmek için çalışan bir üretici." />
+  <meta name="description" content="Uygar Yılanlı — creator of Snakely and Cubomb. A maker who works tirelessly to bring ideas to life." />
   <link rel="canonical" href="https://www.uygaryilanli.com/" />
 
   <!-- Paylaşım önizlemesi (WhatsApp, LinkedIn, X vb.) -->
@@ -12,16 +12,15 @@
   <meta property="og:site_name" content="Uygar Yılanlı" />
   <meta property="og:url" content="https://www.uygaryilanli.com/" />
   <meta property="og:title" content="Uygar Yılanlı" />
-  <meta property="og:description" content="Snakely ve Cubomb'un yaratıcısı. Projelerim, eğitimim ve iletişim bilgilerim." />
+  <meta property="og:description" content="Creator of Snakely and Cubomb. My projects, education and contact details." />
   <meta property="og:image" content="https://www.uygaryilanli.com/assets/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Uygar Yılanlı — Snakely ve Cubomb" />
-  <meta property="og:locale" content="tr_TR" />
-  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:image:alt" content="Uygar Yılanlı — Snakely and Cubomb" />
+  <meta property="og:locale" content="en_US" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Uygar Yılanlı" />
-  <meta name="twitter:description" content="Snakely ve Cubomb'un yaratıcısı. Projelerim, eğitimim ve iletişim bilgilerim." />
+  <meta name="twitter:description" content="Creator of Snakely and Cubomb. My projects, education and contact details." />
   <meta name="twitter:image" content="https://www.uygaryilanli.com/assets/og-image.jpg" />
   <meta name="theme-color" content="#04070a" />
 
@@ -38,8 +37,8 @@
         "image": "https://www.uygaryilanli.com/assets/uygar.jpeg",
         "birthPlace": "Çorlu, Tekirdağ",
         "alumniOf": [
-          { "@type": "CollegeOrUniversity", "name": "Çanakkale Onsekiz Mart Üniversitesi" },
-          { "@type": "CollegeOrUniversity", "name": "İstanbul Üniversitesi" }
+          { "@type": "CollegeOrUniversity", "name": "Çanakkale Onsekiz Mart University" },
+          { "@type": "CollegeOrUniversity", "name": "Istanbul University" }
         ],
         "sameAs": ["https://www.linkedin.com/in/uygaryilanli"]
       },
@@ -48,10 +47,10 @@
         "name": "Snakely",
         "operatingSystem": "iOS, Android",
         "applicationCategory": "EducationalApplication",
-        "description": "İngilizce ve Almanca kelime öğrenimini oyunlaştıran mobil uygulama.",
+        "description": "A gamified mobile app for learning English and German vocabulary.",
         "image": "https://www.uygaryilanli.com/assets/snakely-icon.png",
         "author": { "@id": "https://www.uygaryilanli.com/#person" },
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TRY" },
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
         "sameAs": [
           "https://apps.apple.com/tr/app/snakely/id6756029541",
           "https://play.google.com/store/apps/details?id=net.snakely.app"
@@ -62,10 +61,10 @@
         "name": "Cubomb",
         "operatingSystem": "iOS, Android",
         "applicationCategory": "GameApplication",
-        "description": "Sevimli küplerle dolu, sonsuz seviyeli eşleştirme bulmacası.",
+        "description": "A cute, endless-level cube-matching puzzle game.",
         "image": "https://www.uygaryilanli.com/assets/cubomb-icon.png",
         "author": { "@id": "https://www.uygaryilanli.com/#person" },
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "TRY" },
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
         "sameAs": [
           "https://apps.apple.com/tr/app/cubomb/id6757989671",
           "https://play.google.com/store/apps/details?id=com.cubomb.app"
@@ -78,7 +77,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20261016" />
+  <link rel="stylesheet" href="css/style.css?v=20261021c" />
   <link rel="icon" href="/favicon.ico" sizes="48x48" />
   <link rel="icon" type="image/png" sizes="180x180" href="assets/favicon.png" />
   <link rel="apple-touch-icon" href="assets/favicon.png" />
@@ -98,20 +97,15 @@
         Uygar&nbsp;Yılanlı
       </a>
 
-      <nav class="nav__links" id="navLinks" aria-label="Ana menü" data-i18n-aria="aria.mainNav">
-        <a href="#about" data-i18n="nav.about">Hakkımda</a>
-        <a href="#education" data-i18n="nav.education">Eğitim</a>
-        <a href="#projects" data-i18n="nav.projects">Projeler</a>
-        <a href="#contact" class="btn btn--small btn--outline" data-i18n="nav.contact">İletişim</a>
+      <nav class="nav__links" id="navLinks" aria-label="Main menu">
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact" class="btn btn--small btn--outline">Contact</a>
       </nav>
 
       <div class="nav__actions">
-        <button class="lang-toggle" id="langToggle" type="button" aria-label="Dili değiştir / Change language">
-          <span class="lang-toggle__opt" data-lang="tr">TR</span>
-          <span class="lang-toggle__divider">/</span>
-          <span class="lang-toggle__opt" data-lang="en">EN</span>
-        </button>
-        <button class="nav__burger" id="navBurger" type="button" aria-label="Menüyü aç" data-i18n-aria="aria.menu" aria-expanded="false">
+        <button class="nav__burger" id="navBurger" type="button" aria-label="Open menu" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
       </div>
@@ -127,17 +121,17 @@
       </div>
 
       <div class="hero__content">
-        <p class="hero__eyebrow reveal" data-i18n="hero.eyebrow">Merhaba, ben Uygar 👋</p>
-        <h1 class="hero__title reveal" data-i18n="hero.title">Büyük hayaller kuran ve fikirleri <span class="grad-text">hayata geçirmek</span> için yorulmadan çalışan biri.</h1>
-        <p class="hero__desc reveal" data-i18n="hero.desc"><strong>Snakely</strong> ve <strong>Cubomb</strong>'un yaratıcısıyım — kelime öğrenmeyi eğlenceli ve etkileşimli hâle getiren bir kelime öğrenme uygulaması ile sevimli küplerle dolu, sonsuz seviyeli bir bulmaca oyunu. Kullanıcı deneyimi ve görsel tasarım üzerine kendimi sürekli geliştiriyorum.</p>
+        <p class="hero__eyebrow reveal">Hi, I'm Uygar 👋</p>
+        <h1 class="hero__title reveal">Someone who dares to dream big and works tirelessly to <span class="grad-text">bring ideas to life</span>.</h1>
+        <p class="hero__desc reveal">I'm the creator of <strong>Snakely</strong> and <strong>Cubomb</strong> — a vocabulary learning app that makes memorizing words fun and interactive, and a puzzle game with endless levels full of cute cubes. I constantly sharpen my skills in user experience and visual design.</p>
         <div class="hero__cta reveal">
-          <a href="#projects" class="btn btn--primary" data-i18n="hero.ctaProjects">Projelerime Göz At</a>
-          <a href="#contact" class="btn btn--ghost" data-i18n="hero.ctaContact">Bana Ulaş</a>
+          <a href="#projects" class="btn btn--primary">See My Projects</a>
+          <a href="#contact" class="btn btn--ghost">Get in Touch</a>
         </div>
         <div class="hero__badges reveal">
           <span class="chip"><img src="assets/snakely-icon.png" alt="" class="chip__icon" /> Snakely</span>
           <span class="chip"><img src="assets/cubomb-icon.png?v=2" alt="" class="chip__icon" /> Cubomb</span>
-          <span class="chip chip--more" title="2 uygulama daha" aria-label="2 uygulama daha" data-i18n-aria="aria.moreApps">+2</span>
+          <span class="chip chip--more" title="2 more apps" aria-label="2 more apps">+2</span>
           <span class="chip">UX</span>
           <span class="chip">Flutter · Dart</span>
         </div>
@@ -147,36 +141,36 @@
     <!-- ===== ABOUT ===== -->
     <section class="section container" id="about">
       <div class="section__head reveal">
-        <span class="section__kicker" data-i18n="about.kicker">Hakkımda</span>
-        <h2 class="section__title" data-i18n="about.title">Kısa bir <span class="grad-text">tanışma</span></h2>
+        <span class="section__kicker">About</span>
+        <h2 class="section__title">A quick <span class="grad-text">intro</span></h2>
       </div>
 
       <div class="about-grid">
         <div class="card card--glass reveal">
-          <p data-i18n="about.p1">2000 yılında Çorlu, Tekirdağ'da doğdum. Eğitim hayatım boyunca öğrenmeye, keşfetmeye ve gelişmeye her zaman büyük önem verdim. Kelime öğrenimini daha etkileşimli ve keyifli hâle getirmeye odaklanan <strong>Snakely</strong> adlı kelime öğrenme uygulamasının ve sevimli küplerle dolu bulmaca oyunu <strong>Cubomb</strong>'un yaratıcısıyım.</p>
-          <p data-i18n="about.p2">Araştırmaya meraklı ve yeniliğe açık biriyim. Akademik hayatımdan kalan zamanlarda kişisel projelerim üzerinde aktif olarak çalışıyor, yeni teknolojiler keşfetmekten keyif alıyorum. Kullanıcı deneyimi ve görsel gelişim alanındaki becerilerimi güçlendirmek için tasarım pratiklerine de düzenli olarak zaman ayırıyorum.</p>
+          <p>I was born in 2000 in Çorlu, Tekirdağ. Throughout my education, I have always placed great importance on learning, exploring, and developing. I am the creator of <strong>Snakely</strong>, a vocabulary learning app focused on making word acquisition more interactive and enjoyable, and <strong>Cubomb</strong>, a puzzle game full of cute cubes.</p>
+          <p>I am a research enthusiast and open to innovation. In the time left after my academic life, I actively work on my personal projects and enjoy discovering new technologies. I also dedicate time to design practices to strengthen my skills in user experience and visual development.</p>
         </div>
 
         <div class="about-facts">
           <div class="card card--glass fact reveal">
             <span class="fact__icon">📍</span>
             <div>
-              <span class="fact__label" data-i18n="about.f1label">Nereden</span>
-              <span class="fact__value" data-i18n="about.f1value">Çorlu, Tekirdağ · 2000</span>
+              <span class="fact__label">From</span>
+              <span class="fact__value">Çorlu, Tekirdağ · 2000</span>
             </div>
           </div>
           <div class="card card--glass fact reveal">
             <span class="fact__icon">🚀</span>
             <div>
-              <span class="fact__label" data-i18n="about.f2label">Ne yapıyorum</span>
-              <span class="fact__value" data-i18n="about.f2value">Snakely ve Cubomb'u geliştiriyorum</span>
+              <span class="fact__label">What I do</span>
+              <span class="fact__value">Building Snakely & Cubomb</span>
             </div>
           </div>
           <div class="card card--glass fact reveal">
             <span class="fact__icon">🎯</span>
             <div>
-              <span class="fact__label" data-i18n="about.f3label">Odak</span>
-              <span class="fact__value" data-i18n="about.f3value">UX · Görsel tasarım · Yeni teknolojiler</span>
+              <span class="fact__label">Focus</span>
+              <span class="fact__value">UX · Visual design · New technologies</span>
             </div>
           </div>
         </div>
@@ -186,23 +180,23 @@
     <!-- ===== EDUCATION ===== -->
     <section class="section container" id="education">
       <div class="section__head reveal">
-        <span class="section__kicker" data-i18n="edu.kicker">Eğitim</span>
-        <h2 class="section__title" data-i18n="edu.title">Güncel programlar &amp; <span class="grad-text">odak alanları</span></h2>
+        <span class="section__kicker">Education</span>
+        <h2 class="section__title">Current programs &amp; <span class="grad-text">focus areas</span></h2>
       </div>
 
       <div class="edu-grid">
         <article class="card card--glass edu-card reveal">
           <div class="edu-card__icon" aria-hidden="true">🎓</div>
-          <h3 data-i18n="edu.u1name">Çanakkale Onsekiz Mart Üniversitesi</h3>
-          <p class="edu-card__degree" data-i18n="edu.u1degree">Lisans — İşletme (İngilizce) · <strong>Mezun · 2026</strong></p>
-          <p data-i18n="edu.u1desc">Küresel pazarları anlamak ve liderlik becerilerimi geliştirmek için İşletme okudum, 2026 yılında mezun oldum.</p>
+          <h3>Çanakkale Onsekiz Mart University</h3>
+          <p class="edu-card__degree">Bachelor's Degree — Business Administration (English) · <strong>Graduated · 2026</strong></p>
+          <p>I studied Business Administration to understand global markets and develop leadership skills, graduating in 2026.</p>
         </article>
 
         <article class="card card--glass edu-card reveal">
           <div class="edu-card__icon" aria-hidden="true">💻</div>
-          <h3 data-i18n="edu.u2name">İstanbul Üniversitesi (Açıköğretim)</h3>
-          <p class="edu-card__degree" data-i18n="edu.u2degree">Ön Lisans — Bilgisayar Programcılığı · <strong>2. Sınıf</strong></p>
-          <p data-i18n="edu.u2desc">Yazılım geliştirme ve programlama dillerinde güçlü bir altyapı kurmak için çalıştım, çalışıyorum ve çalışmaya devam edeceğim.</p>
+          <h3>İstanbul University (Open Education)</h3>
+          <p class="edu-card__degree">Associate Degree — Computer Programming · <strong>2nd Year</strong></p>
+          <p>I have worked, am working, and will continue working to build a strong background in software development and programming languages.</p>
         </article>
       </div>
     </section>
@@ -210,86 +204,86 @@
     <!-- ===== PROJECTS ===== -->
     <section class="section container" id="projects">
       <div class="section__head reveal">
-        <span class="section__kicker" data-i18n="proj.kicker">Projeler</span>
-        <h2 class="section__title" data-i18n="proj.title">Seçili <span class="grad-text">çalışmalar</span></h2>
+        <span class="section__kicker">Projects</span>
+        <h2 class="section__title">Selected <span class="grad-text">work</span></h2>
       </div>
 
       <div class="proj-carousel reveal">
-      <div class="proj-grid" id="projTrack" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Projeler" data-i18n-aria="nav.projects">
+      <div class="proj-grid" id="projTrack" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Projects">
         <article class="card card--glass proj-card proj-card--featured">
           <div class="proj-card__info">
             <div class="proj-card__top">
-              <img src="assets/snakely-icon.png" alt="Snakely logosu" class="proj-card__logo" />
-              <span class="chip chip--live" data-i18n="proj.p1status">Mağazalarda yayında</span>
+              <img src="assets/snakely-icon.png" alt="Snakely logo" class="proj-card__logo" />
+              <span class="chip chip--live">Live on the stores</span>
             </div>
-            <h3 data-i18n="proj.p1name">Snakely — Kelime Öğrenme Uygulaması</h3>
-            <p data-i18n="proj.p1desc">İngilizce ve Almanca kelime öğrenimini daha düzenli, motive edici ve kalıcı hâle getiren oyunlaştırılmış bir mobil uygulama. Kart Gezinimi, Öğrenim, Blitz, Eşleştirme ve Sınav gibi farklı çalışma modlarıyla App Store ve Google Play'de yayında, birçok aktif kullanıcıya sahip.</p>
+            <h3>Snakely — Vocabulary Learning App</h3>
+            <p>A gamified mobile app that makes English and German vocabulary learning more organized, motivating, and lasting. With study modes like Card Browsing, Learning, Blitz, Matching, and Exam, it is live on the App Store and Google Play with many active users.</p>
             <div class="proj-card__tags">
-              <span class="chip" data-i18n="proj.p1tag1">Eğitim</span>
-              <span class="chip" data-i18n="proj.p1tag2">Kelime Öğrenimi</span>
-              <span class="chip" data-i18n="proj.p1tag3">Oyunlaştırma</span>
-              <span class="chip" data-i18n="proj.p1tag4">🇬🇧 İngilizce</span>
-              <span class="chip" data-i18n="proj.p1tag5">🇩🇪 Almanca</span>
+              <span class="chip">Education</span>
+              <span class="chip">Vocabulary</span>
+              <span class="chip">Gamification</span>
+              <span class="chip">🇬🇧 English</span>
+              <span class="chip">🇩🇪 German</span>
               <span class="chip">iOS &amp; Android</span>
             </div>
             <div class="store-btns">
-              <a href="https://apps.apple.com/tr/app/snakely/id6756029541" class="store-btn" target="_blank" rel="noopener" aria-label="Snakely'yi App Store'dan indir" data-i18n-aria="aria.snakelyAppStore">
+              <a href="https://apps.apple.com/tr/app/snakely/id6756029541" class="store-btn" target="_blank" rel="noopener" aria-label="Download Snakely on the App Store">
                 <svg viewBox="0 0 384 512" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
                 <span class="store-btn__text">
-                  <small data-i18n="proj.storeCta">İndir</small>
+                  <small>Download</small>
                   <strong>App Store</strong>
                 </span>
               </a>
-              <a href="https://play.google.com/store/apps/details?id=net.snakely.app" class="store-btn" target="_blank" rel="noopener" aria-label="Snakely'yi Google Play'den indir" data-i18n-aria="aria.snakelyPlay">
+              <a href="https://play.google.com/store/apps/details?id=net.snakely.app" class="store-btn" target="_blank" rel="noopener" aria-label="Get Snakely on Google Play">
                 <svg viewBox="0 0 512 512" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"/></svg>
                 <span class="store-btn__text">
-                  <small data-i18n="proj.storeCta">İndir</small>
+                  <small>Download</small>
                   <strong>Google Play</strong>
                 </span>
               </a>
             </div>
           </div>
-          <div class="snakely-shots" role="group" aria-label="Snakely ekran görüntüleri" data-i18n-aria="aria.snakelyShots">
-            <img src="assets/snakely-study.png" alt="Snakely çalışma oturumu ekranı" data-i18n-alt="shot.s1" loading="lazy" />
-            <img src="assets/snakely-levels.png" alt="Snakely seviye seçim ekranı" data-i18n-alt="shot.s2" loading="lazy" />
-            <img src="assets/snakely-quiz.png" alt="Snakely sınav ekranı" data-i18n-alt="shot.s3" loading="lazy" />
+          <div class="snakely-shots" role="group" aria-label="Snakely screenshots">
+            <img src="assets/snakely-study.png" alt="Snakely study session screen" loading="lazy" />
+            <img src="assets/snakely-levels.png" alt="Snakely level selection screen" loading="lazy" />
+            <img src="assets/snakely-quiz.png" alt="Snakely quiz screen" loading="lazy" />
           </div>
         </article>
 
         <article class="card card--glass proj-card proj-card--featured">
           <div class="proj-card__info">
             <div class="proj-card__top">
-              <img src="assets/cubomb-icon.png?v=2" alt="Cubomb logosu" class="proj-card__logo" />
-              <span class="chip chip--live" data-i18n="proj.p1status">Mağazalarda yayında</span>
+              <img src="assets/cubomb-icon.png?v=2" alt="Cubomb logo" class="proj-card__logo" />
+              <span class="chip chip--live">Live on the stores</span>
             </div>
-            <h3 data-i18n="proj.p2name">Cubomb — Sevimli Küp Patlatma Bulmacası</h3>
-            <p data-i18n="proj.p2desc">Sevimli küp karakterlerle dolu, sonsuz seviyeli rengarenk bir eşleştirme bulmacası. Küpleri kaydır, aynı renkten en az 3 küpü birleştir; roket, bomba ve disko topuyla dev kombolar yap. Her seviye oyuncuya özel üretiliyor: yeni bir harita şekli, yeni bir renk teması, farklı hedefler ve sürpriz kurallar. 2.0 sürümüyle oyunu baştan tasarladım; telefon ve tabletlerde, Türkçe ve İngilizce olarak App Store ve Google Play'de.</p>
+            <h3>Cubomb — Cute Cube Blast Puzzle</h3>
+            <p>A colorful match puzzle full of cute cube characters, with endless levels. Swipe cubes, connect 3 or more of the same color, and build giant combos with rockets, bombs, and disco balls. Every level is generated for each player: a new board shape, a new color theme, varied goals, and surprise rules. I redesigned the game from scratch for version 2.0; it's on the App Store and Google Play for phones and tablets, in English and Turkish.</p>
             <div class="proj-card__tags">
-              <span class="chip" data-i18n="proj.p2tag1">Bulmaca</span>
-              <span class="chip" data-i18n="proj.p2tag2">Sonsuz Seviye</span>
+              <span class="chip">Puzzle</span>
+              <span class="chip">Endless Levels</span>
               <span class="chip">iOS &amp; Android</span>
             </div>
             <div class="store-btns">
-            <a href="https://apps.apple.com/tr/app/cubomb/id6757989671" class="store-btn" target="_blank" rel="noopener" aria-label="Cubomb'u App Store'dan indir" data-i18n-aria="aria.cubombAppStore">
+            <a href="https://apps.apple.com/tr/app/cubomb/id6757989671" class="store-btn" target="_blank" rel="noopener" aria-label="Download Cubomb on the App Store">
               <svg viewBox="0 0 384 512" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
               <span class="store-btn__text">
-                <small data-i18n="proj.storeCta">İndir</small>
+                <small>Download</small>
                 <strong>App Store</strong>
               </span>
             </a>
-            <a href="https://play.google.com/store/apps/details?id=com.cubomb.app" class="store-btn" target="_blank" rel="noopener" aria-label="Cubomb'u Google Play'den indir" data-i18n-aria="aria.cubombPlay">
+            <a href="https://play.google.com/store/apps/details?id=com.cubomb.app" class="store-btn" target="_blank" rel="noopener" aria-label="Get Cubomb on Google Play">
               <svg viewBox="0 0 512 512" width="24" height="24" fill="currentColor" aria-hidden="true"><path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1zM47 0C34 6.8 25.3 19.2 25.3 35.3v441.3c0 16.1 8.7 28.5 21.7 35.3l256.6-256L47 0zm425.2 225.6l-58.9-34.1-65.7 64.5 65.7 64.5 60.1-34.1c18-14.3 18-46.5-1.2-60.8zM104.6 499l280.8-161.2-60.1-60.1L104.6 499z"/></svg>
               <span class="store-btn__text">
-                <small data-i18n="proj.storeCta">İndir</small>
+                <small>Download</small>
                 <strong>Google Play</strong>
               </span>
             </a>
             </div>
           </div>
-          <div class="snakely-shots" role="group" aria-label="Cubomb ekran görüntüleri" data-i18n-aria="aria.cubombShots">
-            <img src="assets/cubomb-mainmenu.png?v=2" alt="Cubomb ana sayfa ve seviye haritası" data-i18n-alt="shot.c1" loading="lazy" />
-            <img src="assets/cubomb-game.png?v=2" alt="Cubomb oyun ekranı" data-i18n-alt="shot.c2" loading="lazy" />
-            <img src="assets/cubomb-gamerule.png?v=2" alt="Cubomb nasıl oynanır ekranı" data-i18n-alt="shot.c3" loading="lazy" />
+          <div class="snakely-shots" role="group" aria-label="Cubomb screenshots">
+            <img src="assets/cubomb-mainmenu.png?v=2" alt="Cubomb home screen and level map" loading="lazy" />
+            <img src="assets/cubomb-game.png?v=2" alt="Cubomb gameplay screen" loading="lazy" />
+            <img src="assets/cubomb-gamerule.png?v=2" alt="Cubomb how-to-play screen" loading="lazy" />
           </div>
         </article>
 
@@ -299,43 +293,43 @@
               <div class="proj-card__logo proj-card__logo--yt" aria-hidden="true">
                 <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11.04-6.86a1 1 0 0 0 0-1.72L9.5 4.28A1 1 0 0 0 8 5.14z"/></svg>
               </div>
-              <span class="chip chip--private" data-i18n="proj.p3status">Kişisel araç</span>
+              <span class="chip chip--private">Personal tool</span>
             </div>
-            <h3 data-i18n="proj.p3name">YouTube İçerik Otomasyonu</h3>
-            <p data-i18n="proj.p3desc">Farklı YouTube kanalları için videoları baştan sona otomatik hazırlayan, kendi kullanımım için geliştirdiğim bir sistem. Kanala özel konu üretiyor, içeriği yazıyor, seslendiriyor, altyazı ekliyor ve arka planda kullanılacak görsel ve videoları hazırlıyor. Kanal analizlerini API üzerinden değerlendirip neyin değişmesi gerektiğini tespit ediyor ve sonraki videoları buna göre şekillendiriyor. Şu anda binlerce izlenmeye sahip kanallarda aktif olarak çalışmaya devam ediyor.</p>
+            <h3>YouTube Content Automation</h3>
+            <p>A system I built for my own use that prepares videos end to end for different YouTube channels. It generates channel-specific topics, writes the content, voices it, adds subtitles, and prepares the background images and footage. It reviews each channel's analytics through APIs, spots what needs to change, and shapes the next videos accordingly. It is actively running on channels with thousands of views.</p>
             <div class="proj-card__tags">
               <span class="chip">Python</span>
               <span class="chip">Codex</span>
               <span class="chip">YouTube API</span>
-              <span class="chip" data-i18n="proj.p3tag1">Otomasyon</span>
-              <span class="chip" data-i18n="proj.p3tag2">Seslendirme</span>
-              <span class="chip" data-i18n="proj.p3tag3">Analitik</span>
+              <span class="chip">Automation</span>
+              <span class="chip">Voiceover</span>
+              <span class="chip">Analytics</span>
             </div>
           </div>
           <div class="flow">
             <div class="flow__body">
               <ol class="flow__steps">
-                <li class="flow__step"><span class="flow__icon" aria-hidden="true">📊</span><span class="flow__text"><strong data-i18n="proj.p3f1">Kanal analizi</strong><small>YouTube API</small></span></li>
-                <li class="flow__step"><span class="flow__icon" aria-hidden="true">💡</span><span class="flow__text"><strong data-i18n="proj.p3f2">Konu üretimi</strong><small>Codex</small></span></li>
-                <li class="flow__step"><span class="flow__icon" aria-hidden="true">✍️</span><span class="flow__text"><strong data-i18n="proj.p3f3">Senaryo</strong><small>Codex</small></span></li>
-                <li class="flow__step"><span class="flow__icon" aria-hidden="true">🎙️</span><span class="flow__text"><strong data-i18n="proj.p3f4">Seslendirme</strong></span></li>
-                <li class="flow__step"><span class="flow__icon" aria-hidden="true">💬</span><span class="flow__text"><strong data-i18n="proj.p3f5">Altyazı</strong></span></li>
-                <li class="flow__step"><span class="flow__icon" aria-hidden="true">🖼️</span><span class="flow__text"><strong data-i18n="proj.p3f6">Arka plan görsel ve videoları</strong></span></li>
-                <li class="flow__step"><span class="flow__icon" aria-hidden="true">🎬</span><span class="flow__text"><strong data-i18n="proj.p3f7">Montaj</strong><small>Python</small></span></li>
-                <li class="flow__step"><span class="flow__icon" aria-hidden="true">✅</span><span class="flow__text"><strong data-i18n="proj.p3f8">Video hazır</strong></span></li>
+                <li class="flow__step"><span class="flow__icon" aria-hidden="true">📊</span><span class="flow__text"><strong>Channel analytics</strong><small>YouTube API</small></span></li>
+                <li class="flow__step"><span class="flow__icon" aria-hidden="true">💡</span><span class="flow__text"><strong>Topic ideas</strong><small>Codex</small></span></li>
+                <li class="flow__step"><span class="flow__icon" aria-hidden="true">✍️</span><span class="flow__text"><strong>Script</strong><small>Codex</small></span></li>
+                <li class="flow__step"><span class="flow__icon" aria-hidden="true">🎙️</span><span class="flow__text"><strong>Voiceover</strong></span></li>
+                <li class="flow__step"><span class="flow__icon" aria-hidden="true">💬</span><span class="flow__text"><strong>Subtitles</strong></span></li>
+                <li class="flow__step"><span class="flow__icon" aria-hidden="true">🖼️</span><span class="flow__text"><strong>Background visuals & footage</strong></span></li>
+                <li class="flow__step"><span class="flow__icon" aria-hidden="true">🎬</span><span class="flow__text"><strong>Video editing</strong><small>Python</small></span></li>
+                <li class="flow__step"><span class="flow__icon" aria-hidden="true">✅</span><span class="flow__text"><strong>Video ready</strong></span></li>
               </ol>
               <div class="flow__loop" aria-hidden="true"></div>
             </div>
-            <p class="flow__note" data-i18n="proj.p3loop">↻ Her videonun analizleri bir sonrakini şekillendirir</p>
+            <p class="flow__note">↻ Each video's analytics shape the next one</p>
           </div>
         </article>
       </div>
       <div class="proj-nav">
-        <button class="proj-nav__btn" id="projPrev" type="button" aria-label="Önceki proje" data-i18n-aria="aria.prevProject">
+        <button class="proj-nav__btn" id="projPrev" type="button" aria-label="Previous project">
           <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
         </button>
         <div class="proj-nav__dots" id="projDots"></div>
-        <button class="proj-nav__btn" id="projNext" type="button" aria-label="Sonraki proje" data-i18n-aria="aria.nextProject">
+        <button class="proj-nav__btn" id="projNext" type="button" aria-label="Next project">
           <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
         </button>
       </div>
@@ -345,10 +339,10 @@
     <!-- ===== CONTACT ===== -->
     <section class="section container" id="contact">
       <div class="card card--glass contact reveal">
-        <h2 class="contact__title" data-i18n="contact.title">Birlikte harika bir şey <span class="grad-text">inşa edelim</span></h2>
-        <p class="contact__desc" data-i18n="contact.desc">İş birliklerine, yeni fırsatlara ve geri bildirimlere açığım.</p>
+        <h2 class="contact__title">Let's build something <span class="grad-text">great together</span></h2>
+        <p class="contact__desc">Open to collaborations, new opportunities, and feedback.</p>
         <div class="contact__actions">
-          <a href="mailto:u.yilanli2000@gmail.com" class="btn btn--primary" data-i18n="contact.email">✉️ E-posta Gönder</a>
+          <a href="mailto:u.yilanli2000@gmail.com" class="btn btn--primary">✉️ Send an Email</a>
           <a href="https://www.linkedin.com/in/uygaryilanli" class="btn btn--ghost" target="_blank" rel="noopener">in&nbsp;&nbsp;LinkedIn</a>
         </div>
       </div>
@@ -356,26 +350,26 @@
   </main>
 
   <footer class="footer">
-    <p>© <span id="year">2026</span> Uygar Yılanlı. <span data-i18n="footer.rights">Tüm hakları saklıdır.</span></p>
+    <p>© <span id="year">2026</span> Uygar Yılanlı. <span>All rights reserved.</span></p>
   </footer>
 
   <!-- ===== EKRAN GÖRÜNTÜSÜ BÜYÜTME ===== -->
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Ekran görüntüsü" data-i18n-aria="aria.lightbox" hidden>
-    <button class="lightbox__close" id="lbClose" type="button" aria-label="Kapat" data-i18n-aria="aria.close">
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Screenshot" hidden>
+    <button class="lightbox__close" id="lbClose" type="button" aria-label="Close">
       <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
     </button>
-    <button class="lightbox__nav lightbox__nav--prev" id="lbPrev" type="button" aria-label="Önceki görsel" data-i18n-aria="aria.prevImage">
+    <button class="lightbox__nav lightbox__nav--prev" id="lbPrev" type="button" aria-label="Previous image">
       <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
     </button>
     <figure class="lightbox__figure">
       <img class="lightbox__img" id="lbImg" src="" alt="" />
       <figcaption class="lightbox__caption" id="lbCaption"></figcaption>
     </figure>
-    <button class="lightbox__nav lightbox__nav--next" id="lbNext" type="button" aria-label="Sonraki görsel" data-i18n-aria="aria.nextImage">
+    <button class="lightbox__nav lightbox__nav--next" id="lbNext" type="button" aria-label="Next image">
       <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
     </button>
   </div>
 
-  <script src="js/main.js?v=20261016"></script>
+  <script src="js/main.js?v=20261021b"></script>
 </body>
 </html>

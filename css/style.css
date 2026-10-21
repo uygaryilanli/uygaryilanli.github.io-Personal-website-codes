@@ -130,31 +130,6 @@ main, .nav, .footer { position: relative; z-index: 1; }
 
 .nav__actions { display: flex; align-items: center; gap: 14px; }
 
-/* Dil değiştirici */
-.lang-toggle {
-  font-family: var(--font-head);
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  background: rgba(52, 211, 153, 0.08);
-  border: 1px solid var(--card-border);
-  color: var(--ink-faint);
-  border-radius: 999px;
-  padding: 7px 14px;
-  cursor: pointer;
-  display: inline-flex;
-  gap: 6px;
-  transition: border-color 0.25s, background 0.25s;
-}
-.lang-toggle:hover { border-color: rgba(52, 211, 153, 0.4); background: rgba(52, 211, 153, 0.14); }
-.lang-toggle__opt.active {
-  background: var(--grad-accent);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-.lang-toggle__divider { opacity: 0.4; }
-
 /* Hamburger */
 .nav__burger {
   display: none;
@@ -439,10 +414,8 @@ main, .nav, .footer { position: relative; z-index: 1; }
   grid-auto-flow: column;
   grid-auto-columns: 100%;
   gap: 22px;
-  align-items: start;
+  align-items: stretch;
   overflow-x: auto;
-  overflow-y: hidden;
-  transition: height 0.35s ease;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
   overscroll-behavior-x: contain;
@@ -450,9 +423,6 @@ main, .nav, .footer { position: relative; z-index: 1; }
   padding: 18px 0 8px;
 }
 .proj-grid::-webkit-scrollbar { display: none; }
-@media (min-width: 961px) {
-  .proj-grid { align-items: stretch; }
-}
 .proj-grid > .proj-card { scroll-snap-align: start; scroll-snap-stop: always; }
 
 .proj-nav {
@@ -725,16 +695,32 @@ main, .nav, .footer { position: relative; z-index: 1; }
   color: var(--accent-1);
 }
 
-/* Masaüstünde diyagram daha kompakt: proje kartları aynı boyda kalsın */
-@media (min-width: 961px) {
-  .flow__steps { gap: 6px; }
-  .flow__step { padding: 6px 12px; gap: 12px; border-radius: 12px; }
-  .flow__step + .flow__step::before { left: 26px; top: -7px; height: 6px; }
-  .flow__icon { width: 30px; height: 30px; border-radius: 9px; font-size: 0.95rem; }
-  .flow__text { flex-direction: row; align-items: baseline; gap: 8px; line-height: 1.2; }
-  .flow__text strong { font-size: 0.9rem; }
-  .flow__loop { top: 22px; bottom: 22px; }
-  .flow__note { margin-top: 10px; }
+/* Kompakt diyagram: proje kartları aynı boyda kalsın */
+.flow__steps { gap: 6px; }
+.flow__step { padding: 6px 12px; gap: 12px; border-radius: 12px; }
+.flow__step + .flow__step::before { left: 26px; top: -7px; height: 6px; }
+.flow__icon { width: 30px; height: 30px; border-radius: 9px; font-size: 0.95rem; }
+.flow__text { flex-direction: row; align-items: baseline; gap: 8px; line-height: 1.2; }
+.flow__text strong { font-size: 0.9rem; }
+.flow__loop { top: 22px; bottom: 22px; }
+.flow__note { margin-top: 10px; }
+
+/* Mobilde diyagram iki sütun (1–4 solda, 5–8 sağda): kart diğer projelerle aynı boyda kalır */
+@media (max-width: 720px) {
+  .flow__body { padding-right: 0; }
+  .flow__loop { display: none; }
+  .flow__steps {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(4, auto);
+    grid-auto-flow: column;
+  }
+  .flow__step { padding: 6px 8px; gap: 8px; }
+  .flow__step:nth-child(5)::before { display: none; }
+  .flow__step + .flow__step::before { left: 22px; }
+  .flow__icon { width: 28px; height: 28px; font-size: 0.85rem; }
+  .flow__text { flex-direction: column; align-items: flex-start; gap: 0; }
+  .flow__text strong { font-size: 0.8rem; }
+  .flow__text small { font-size: 0.68rem; }
 }
 
 /* ---------- CONTACT ---------- */
