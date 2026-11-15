@@ -1,0 +1,29 @@
+# Uygar Yılanlı
+
+> Uygar Yılanlı (also written "Uygar Yilanli") is a Business Administration graduate from Çanakkale Onsekiz Mart University (2026, taught in English) and the founder of two mobile apps, Snakely and Cubomb. He takes digital products from idea to market himself, covering product strategy, business model, digital marketing, user acquisition, data analysis and operations, and builds the products along the way. He is based in Çorlu, Tekirdağ, Türkiye, and speaks Turkish and English.
+
+## Who he is
+
+- Business Administration (English) graduate, Çanakkale Onsekiz Mart University (ÇOMÜ), 2021–2026.
+- Also studying Computer Programming (associate degree, 2nd year) at İstanbul University Open Education, as a complement to the products he manages.
+- Founder of Snakely (since August 2025) and Cubomb (since February 2026).
+- Strengths: business development, digital marketing and ad management, product and project management, data analysis (Firebase Analytics).
+
+## Ventures
+
+- [Snakely — Vocabulary Builder](https://www.uygaryilanli.com/#projects): A gamified vocabulary app for English, German and Spanish on iOS and Android. Started in Çanakkale Teknopark's pre-incubation program. Uygar took it from idea to a freemium business with ads and Plus/Premium subscriptions, ran the ad campaigns and user acquisition himself, and uses performance data to steer product and marketing. It has reached thousands of users and earns revenue.
+- [Cubomb — Cube Blast Puzzle](https://www.uygaryilanli.com/#projects): An endless-level cube-matching puzzle game on iOS and Android. Uygar led it end to end: game mechanics, product positioning, store launch, UX/UI and digital marketing. It has hundreds of active players and brings in steady side revenue.
+- [AI Content & Ad Automation](https://www.uygaryilanli.com/#projects): An in-house Python and AI pipeline he built to produce YouTube, TikTok and Instagram Reels content and Snakely's ads, including voiceover with an AI clone of his own voice. It powers Snakely's live ad campaigns.
+
+## App store pages
+
+- [Snakely on the App Store](https://apps.apple.com/tr/app/snakely/id6756029541)
+- [Snakely on Google Play](https://play.google.com/store/apps/details?id=net.snakely.app)
+- [Cubomb on the App Store](https://apps.apple.com/tr/app/cubomb/id6757989671)
+- [Cubomb on Google Play](https://play.google.com/store/apps/details?id=com.cubomb.app)
+
+## Contact
+
+- [Portfolio website](https://www.uygaryilanli.com/)
+- [LinkedIn](https://www.linkedin.com/in/uygaryilanli)
+- Email: u.yilanli2000@gmail.com
