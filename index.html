@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Uygar Yılanlı</title>
-  <meta name="description" content="Uygar Yılanlı — creator of Snakely and Cubomb. A maker who works tirelessly to bring ideas to life." />
+  <meta name="description" content="Uygar Yılanlı — Business Administration graduate (ÇOMÜ, 2026) and founder of Snakely and Cubomb. Business development, digital marketing, product management and data analysis." />
   <link rel="canonical" href="https://www.uygaryilanli.com/" />
 
   <!-- Paylaşım önizlemesi (WhatsApp, LinkedIn, X vb.) -->
@@ -12,7 +12,7 @@
   <meta property="og:site_name" content="Uygar Yılanlı" />
   <meta property="og:url" content="https://www.uygaryilanli.com/" />
   <meta property="og:title" content="Uygar Yılanlı" />
-  <meta property="og:description" content="Creator of Snakely and Cubomb. My projects, education and contact details." />
+  <meta property="og:description" content="Business Administration graduate and founder of Snakely and Cubomb. The products I founded and how I grew them." />
   <meta property="og:image" content="https://www.uygaryilanli.com/assets/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -20,9 +20,9 @@
   <meta property="og:locale" content="en_US" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Uygar Yılanlı" />
-  <meta name="twitter:description" content="Creator of Snakely and Cubomb. My projects, education and contact details." />
+  <meta name="twitter:description" content="Business Administration graduate and founder of Snakely and Cubomb. The products I founded and how I grew them." />
   <meta name="twitter:image" content="https://www.uygaryilanli.com/assets/og-image.jpg" />
-  <meta name="theme-color" content="#04070a" />
+  <meta name="theme-color" content="#e8ebe5" />
 
   <!-- Google için yapılandırılmış veri -->
   <script type="application/ld+json">
@@ -36,6 +36,10 @@
         "url": "https://www.uygaryilanli.com/",
         "image": "https://www.uygaryilanli.com/assets/uygar.jpeg",
         "birthPlace": "Çorlu, Tekirdağ",
+        "jobTitle": "Founder of Snakely and Cubomb",
+        "description": "Business Administration graduate (Çanakkale Onsekiz Mart University, 2026) and founder of the mobile apps Snakely and Cubomb.",
+        "knowsAbout": ["Business development", "Digital marketing", "Advertising management", "Market research", "Product management", "Project management", "Data analysis"],
+        "knowsLanguage": ["tr", "en"],
         "alumniOf": [
           { "@type": "CollegeOrUniversity", "name": "Çanakkale Onsekiz Mart University" },
           { "@type": "CollegeOrUniversity", "name": "Istanbul University" }
@@ -47,7 +51,7 @@
         "name": "Snakely",
         "operatingSystem": "iOS, Android",
         "applicationCategory": "EducationalApplication",
-        "description": "A gamified mobile app for learning English and German vocabulary.",
+        "description": "A gamified vocabulary app for learning English, German and Spanish with a personal daily plan and spaced repetition.",
         "image": "https://www.uygaryilanli.com/assets/snakely-icon.png",
         "author": { "@id": "https://www.uygaryilanli.com/#person" },
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
@@ -76,18 +80,21 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css?v=20261021c" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=20261116b" />
   <link rel="icon" href="/favicon.ico" sizes="48x48" />
   <link rel="icon" type="image/png" sizes="180x180" href="assets/favicon.png" />
   <link rel="apple-touch-icon" href="assets/favicon.png" />
 </head>
 <body>
 
-  <!-- Arka plan ışıltıları -->
-  <div class="bg-glow bg-glow--1" aria-hidden="true"></div>
-  <div class="bg-glow bg-glow--2" aria-hidden="true"></div>
-  <div class="bg-glow bg-glow--3" aria-hidden="true"></div>
+  <!-- Arka plan: yumuşak renk lekeleri + doku -->
+  <div class="backdrop" aria-hidden="true">
+    <span class="blob blob--green"></span>
+    <span class="blob blob--lilac"></span>
+    <span class="blob blob--peach"></span>
+    <span class="blob blob--sky"></span>
+  </div>
 
   <!-- ===== NAV ===== -->
   <header class="nav" id="top">
@@ -99,8 +106,8 @@
 
       <nav class="nav__links" id="navLinks" aria-label="Main menu">
         <a href="#about">About</a>
+        <a href="#projects">Ventures</a>
         <a href="#education">Education</a>
-        <a href="#projects">Projects</a>
         <a href="#contact" class="btn btn--small btn--outline">Contact</a>
       </nav>
 
@@ -115,88 +122,89 @@
   <main>
     <!-- ===== HERO ===== -->
     <section class="hero container">
-      <div class="hero__photo reveal">
-        <div class="hero__photo-ring" aria-hidden="true"></div>
-        <img src="assets/uygar.jpeg" alt="Uygar Yılanlı" width="360" height="360" />
-      </div>
-
       <div class="hero__content">
-        <p class="hero__eyebrow reveal">Hi, I'm Uygar 👋</p>
-        <h1 class="hero__title reveal">Someone who dares to dream big and works tirelessly to <span class="grad-text">bring ideas to life</span>.</h1>
-        <p class="hero__desc reveal">I'm the creator of <strong>Snakely</strong> and <strong>Cubomb</strong> — a vocabulary learning app that makes memorizing words fun and interactive, and a puzzle game with endless levels full of cute cubes. I constantly sharpen my skills in user experience and visual design.</p>
+        <p class="hero__eyebrow reveal"><span class="hero__status" aria-hidden="true"></span>Hi, I'm Uygar · Business Administration graduate</p>
+        <h1 class="hero__title reveal">A business graduate who takes ideas all the way <span class="grad-text">to market</span>.</h1>
+        <p class="hero__desc reveal">Founder of <strong>Snakely</strong> and <strong>Cubomb</strong>. I take products from a first idea to the App Store and Google Play — strategy, marketing, growth, data and operations — and build them myself along the way.</p>
         <div class="hero__cta reveal">
-          <a href="#projects" class="btn btn--primary">See My Projects</a>
-          <a href="#contact" class="btn btn--ghost">Get in Touch</a>
+          <a href="#projects" class="btn btn--primary">See my ventures</a>
+          <a href="#contact" class="btn btn--ghost">Get in touch</a>
         </div>
         <div class="hero__badges reveal">
           <span class="chip"><img src="assets/snakely-icon.png" alt="" class="chip__icon" /> Snakely</span>
           <span class="chip"><img src="assets/cubomb-icon.png?v=2" alt="" class="chip__icon" /> Cubomb</span>
           <span class="chip chip--more" title="2 more apps" aria-label="2 more apps">+2</span>
-          <span class="chip">UX</span>
-          <span class="chip">Flutter · Dart</span>
+          <span class="chip">Business development</span>
+          <span class="chip">Digital marketing</span>
+          <span class="chip">Product management</span>
+          <span class="chip">Data analysis</span>
         </div>
       </div>
+
+      <figure class="hero__photo reveal">
+        <img src="assets/uygar.jpeg" alt="Uygar Yılanlı" width="360" height="360" />
+        <figcaption class="hero__tag">
+          <img src="assets/snakely-icon.png" alt="" width="36" height="36" />
+          <span><small>Founder</small>Snakely</span>
+        </figcaption>
+      </figure>
     </section>
 
     <!-- ===== ABOUT ===== -->
     <section class="section container" id="about">
       <div class="section__head reveal">
         <span class="section__kicker">About</span>
-        <h2 class="section__title">A quick <span class="grad-text">intro</span></h2>
+        <h2 class="section__title">Business mind, <span class="grad-text">builder's habits</span></h2>
       </div>
 
       <div class="about-grid">
         <div class="card card--glass reveal">
-          <p>I was born in 2000 in Çorlu, Tekirdağ. Throughout my education, I have always placed great importance on learning, exploring, and developing. I am the creator of <strong>Snakely</strong>, a vocabulary learning app focused on making word acquisition more interactive and enjoyable, and <strong>Cubomb</strong>, a puzzle game full of cute cubes.</p>
-          <p>I am a research enthusiast and open to innovation. In the time left after my academic life, I actively work on my personal projects and enjoy discovering new technologies. I also dedicate time to design practices to strengthen my skills in user experience and visual development.</p>
+          <p>I studied Business Administration, but I learn best by building. Instead of only reading case studies, I started my own: <strong>Snakely</strong> began in Çanakkale Teknopark's pre-incubation program and grew into a live, revenue-generating app, and <strong>Cubomb</strong> followed.</p>
+          <p>On every product I wear all the hats — spotting the idea, shaping the business model, marketing and winning users, reading the data and running day-to-day operations. Writing the code is just one of those hats; the real work is turning an idea into something people actually use.</p>
         </div>
 
-        <div class="about-facts">
-          <div class="card card--glass fact reveal">
-            <span class="fact__icon">📍</span>
+        <div class="about-facts card card--glass reveal">
+          <div class="fact">
             <div>
-              <span class="fact__label">From</span>
-              <span class="fact__value">Çorlu, Tekirdağ · 2000</span>
+              <span class="fact__label">Degree</span>
+              <span class="fact__value">Business Administration · ÇOMÜ, 2026</span>
             </div>
           </div>
-          <div class="card card--glass fact reveal">
-            <span class="fact__icon">🚀</span>
+          <div class="fact">
             <div>
-              <span class="fact__label">What I do</span>
-              <span class="fact__value">Building Snakely & Cubomb</span>
+              <span class="fact__label">Ventures</span>
+              <span class="fact__value">Founder of Snakely &amp; Cubomb</span>
             </div>
           </div>
-          <div class="card card--glass fact reveal">
-            <span class="fact__icon">🎯</span>
+          <div class="fact">
             <div>
-              <span class="fact__label">Focus</span>
-              <span class="fact__value">UX · Visual design · New technologies</span>
+              <span class="fact__label">Based in</span>
+              <span class="fact__value">Çorlu, Tekirdağ · Turkish &amp; English</span>
             </div>
           </div>
         </div>
       </div>
-    </section>
 
-    <!-- ===== EDUCATION ===== -->
-    <section class="section container" id="education">
-      <div class="section__head reveal">
-        <span class="section__kicker">Education</span>
-        <h2 class="section__title">Current programs &amp; <span class="grad-text">focus areas</span></h2>
-      </div>
-
-      <div class="edu-grid">
-        <article class="card card--glass edu-card reveal">
-          <div class="edu-card__icon" aria-hidden="true">🎓</div>
-          <h3>Çanakkale Onsekiz Mart University</h3>
-          <p class="edu-card__degree">Bachelor's Degree — Business Administration (English) · <strong>Graduated · 2026</strong></p>
-          <p>I studied Business Administration to understand global markets and develop leadership skills, graduating in 2026.</p>
+      <div class="caps">
+        <article class="cap card card--glass reveal">
+          <span class="cap__num" aria-hidden="true">01</span>
+          <h3 class="cap__title">Product &amp; strategy</h3>
+          <p class="cap__text">From a Teknopark pre-incubation idea to a freemium business with ads and subscriptions — positioning, pricing and roadmap decided by me.</p>
         </article>
-
-        <article class="card card--glass edu-card reveal">
-          <div class="edu-card__icon" aria-hidden="true">💻</div>
-          <h3>İstanbul University (Open Education)</h3>
-          <p class="edu-card__degree">Associate Degree — Computer Programming · <strong>2nd Year</strong></p>
-          <p>I have worked, am working, and will continue working to build a strong background in software development and programming languages.</p>
+        <article class="cap card card--glass reveal">
+          <span class="cap__num" aria-hidden="true">02</span>
+          <h3 class="cap__title">Marketing &amp; growth</h3>
+          <p class="cap__text">Planned and ran Snakely's Meta ad campaigns, localized store listings and an AI pipeline that produces the ads and social videos.</p>
+        </article>
+        <article class="cap card card--glass reveal">
+          <span class="cap__num" aria-hidden="true">03</span>
+          <h3 class="cap__title">Data &amp; analysis</h3>
+          <p class="cap__text">Track retention, funnels and ad revenue in Firebase Analytics and turn what the numbers say into the next product and marketing move.</p>
+        </article>
+        <article class="cap card card--glass reveal">
+          <span class="cap__num" aria-hidden="true">04</span>
+          <h3 class="cap__title">Operations</h3>
+          <p class="cap__text">Two apps live on iOS and Android with regular releases, store reviews, monetization and user feedback handled end to end.</p>
         </article>
       </div>
     </section>
@@ -204,28 +212,30 @@
     <!-- ===== PROJECTS ===== -->
     <section class="section container" id="projects">
       <div class="section__head reveal">
-        <span class="section__kicker">Projects</span>
-        <h2 class="section__title">Selected <span class="grad-text">work</span></h2>
+        <span class="section__kicker">Ventures</span>
+        <h2 class="section__title">Products I founded &amp; <span class="grad-text">grew</span></h2>
       </div>
 
       <div class="proj-carousel reveal">
-      <div class="proj-grid" id="projTrack" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Projects">
+      <div class="proj-grid" id="projTrack" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Ventures">
         <article class="card card--glass proj-card proj-card--featured">
           <div class="proj-card__info">
             <div class="proj-card__top">
               <img src="assets/snakely-icon.png" alt="Snakely logo" class="proj-card__logo" />
               <span class="chip chip--live">Live on the stores</span>
             </div>
-            <h3>Snakely — Vocabulary Learning App</h3>
-            <p>A gamified mobile app that makes English and German vocabulary learning more organized, motivating, and lasting. With study modes like Card Browsing, Learning, Blitz, Matching, and Exam, it is live on the App Store and Google Play with many active users.</p>
-            <div class="proj-card__tags">
-              <span class="chip">Education</span>
-              <span class="chip">Vocabulary</span>
-              <span class="chip">Gamification</span>
-              <span class="chip">🇬🇧 English</span>
-              <span class="chip">🇩🇪 German</span>
-              <span class="chip">iOS &amp; Android</span>
-            </div>
+            <h3>Snakely — Vocabulary Builder</h3>
+            <p class="proj-card__role">Founder · Aug 2025 – present · Çanakkale Teknopark pre-incubation</p>
+            <p>A gamified vocabulary app for English, German and Spanish. I took it from idea to a freemium business with ads and Plus/Premium subscriptions, ran the ad campaigns and user acquisition myself, and used performance data to steer product and marketing. It has reached thousands of users on iOS and Android and keeps earning revenue.</p>
+            <ul class="proj-card__roles" aria-label="My role">
+              <li>Idea &amp; strategy</li>
+              <li>Business model</li>
+              <li>Marketing &amp; ads</li>
+              <li>User acquisition</li>
+              <li>Data analysis</li>
+              <li>Product &amp; development</li>
+              <li>Operations</li>
+            </ul>
             <div class="store-btns">
               <a href="https://apps.apple.com/tr/app/snakely/id6756029541" class="store-btn" target="_blank" rel="noopener" aria-label="Download Snakely on the App Store">
                 <svg viewBox="0 0 384 512" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
@@ -256,13 +266,18 @@
               <img src="assets/cubomb-icon.png?v=2" alt="Cubomb logo" class="proj-card__logo" />
               <span class="chip chip--live">Live on the stores</span>
             </div>
-            <h3>Cubomb — Cute Cube Blast Puzzle</h3>
-            <p>A colorful match puzzle full of cute cube characters, with endless levels. Swipe cubes, connect 3 or more of the same color, and build giant combos with rockets, bombs, and disco balls. Every level is generated for each player: a new board shape, a new color theme, varied goals, and surprise rules. I redesigned the game from scratch for version 2.0; it's on the App Store and Google Play for phones and tablets, in English and Turkish.</p>
-            <div class="proj-card__tags">
-              <span class="chip">Puzzle</span>
-              <span class="chip">Endless Levels</span>
-              <span class="chip">iOS &amp; Android</span>
-            </div>
+            <h3>Cubomb — Cube Blast Puzzle</h3>
+            <p class="proj-card__role">Founder · Feb 2026 – present</p>
+            <p>An endless-level cube-matching puzzle game. I led it end to end on my own, from the first idea to launch on both stores: game mechanics, product positioning, store listings, UX/UI and digital marketing, with AI tools built into the design and development workflow. It has hundreds of active players and brings in steady side revenue.</p>
+            <ul class="proj-card__roles" aria-label="My role">
+              <li>Idea &amp; positioning</li>
+              <li>Product planning</li>
+              <li>Store launch</li>
+              <li>Digital marketing</li>
+              <li>UX/UI</li>
+              <li>Development</li>
+              <li>Operations</li>
+            </ul>
             <div class="store-btns">
             <a href="https://apps.apple.com/tr/app/cubomb/id6757989671" class="store-btn" target="_blank" rel="noopener" aria-label="Download Cubomb on the App Store">
               <svg viewBox="0 0 384 512" width="26" height="26" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
@@ -293,34 +308,33 @@
               <div class="proj-card__logo proj-card__logo--yt" aria-hidden="true">
                 <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor"><path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11.04-6.86a1 1 0 0 0 0-1.72L9.5 4.28A1 1 0 0 0 8 5.14z"/></svg>
               </div>
-              <span class="chip chip--private">Personal tool</span>
+              <span class="chip chip--private">In-house tool</span>
             </div>
-            <h3>YouTube Content Automation</h3>
-            <p>A system I built for my own use that prepares videos end to end for different YouTube channels. It generates channel-specific topics, writes the content, voices it, adds subtitles, and prepares the background images and footage. It reviews each channel's analytics through APIs, spots what needs to change, and shapes the next videos accordingly. It is actively running on channels with thousands of views.</p>
-            <div class="proj-card__tags">
-              <span class="chip">Python</span>
-              <span class="chip">Codex</span>
-              <span class="chip">YouTube API</span>
-              <span class="chip">Automation</span>
-              <span class="chip">Voiceover</span>
-              <span class="chip">Analytics</span>
-            </div>
+            <h3>AI Content &amp; Ad Automation</h3>
+            <p class="proj-card__role">Built &amp; run by me · Apr 2026 – present</p>
+            <p>To cut the cost and time of marketing, I built a Python and AI pipeline that produces content for YouTube, TikTok and Instagram Reels as well as Snakely's ads. It combines content analysis, ideas and scripts, voiceover with an AI clone of my own voice, subtitles, visuals and editing in one workflow. It now powers Snakely's live ad campaigns and has automated most of the content and ad production.</p>
+            <ul class="proj-card__roles" aria-label="My role">
+              <li>Marketing automation</li>
+              <li>Content strategy</li>
+              <li>Ad creative</li>
+              <li>Python &amp; APIs</li>
+            </ul>
           </div>
           <div class="flow">
             <div class="flow__body">
               <ol class="flow__steps">
-                <li class="flow__step"><span class="flow__icon" aria-hidden="true">📊</span><span class="flow__text"><strong>Channel analytics</strong><small>YouTube API</small></span></li>
-                <li class="flow__step"><span class="flow__icon" aria-hidden="true">💡</span><span class="flow__text"><strong>Topic ideas</strong><small>Codex</small></span></li>
-                <li class="flow__step"><span class="flow__icon" aria-hidden="true">✍️</span><span class="flow__text"><strong>Script</strong><small>Codex</small></span></li>
-                <li class="flow__step"><span class="flow__icon" aria-hidden="true">🎙️</span><span class="flow__text"><strong>Voiceover</strong></span></li>
-                <li class="flow__step"><span class="flow__icon" aria-hidden="true">💬</span><span class="flow__text"><strong>Subtitles</strong></span></li>
-                <li class="flow__step"><span class="flow__icon" aria-hidden="true">🖼️</span><span class="flow__text"><strong>Background visuals & footage</strong></span></li>
-                <li class="flow__step"><span class="flow__icon" aria-hidden="true">🎬</span><span class="flow__text"><strong>Video editing</strong><small>Python</small></span></li>
-                <li class="flow__step"><span class="flow__icon" aria-hidden="true">✅</span><span class="flow__text"><strong>Video ready</strong></span></li>
+                <li class="flow__step"><span class="flow__icon" aria-hidden="true">01</span><span class="flow__text"><strong>Content analytics</strong><small>YouTube API</small></span></li>
+                <li class="flow__step"><span class="flow__icon" aria-hidden="true">02</span><span class="flow__text"><strong>Ideas</strong><small>AI</small></span></li>
+                <li class="flow__step"><span class="flow__icon" aria-hidden="true">03</span><span class="flow__text"><strong>Script</strong><small>AI</small></span></li>
+                <li class="flow__step"><span class="flow__icon" aria-hidden="true">04</span><span class="flow__text"><strong>Voiceover</strong><small>my cloned voice</small></span></li>
+                <li class="flow__step"><span class="flow__icon" aria-hidden="true">05</span><span class="flow__text"><strong>Subtitles</strong></span></li>
+                <li class="flow__step"><span class="flow__icon" aria-hidden="true">06</span><span class="flow__text"><strong>Visuals &amp; footage</strong></span></li>
+                <li class="flow__step"><span class="flow__icon" aria-hidden="true">07</span><span class="flow__text"><strong>Video editing</strong><small>Python</small></span></li>
+                <li class="flow__step"><span class="flow__icon" aria-hidden="true">08</span><span class="flow__text"><strong>Published</strong><small>YouTube · TikTok · Reels · Ads</small></span></li>
               </ol>
               <div class="flow__loop" aria-hidden="true"></div>
             </div>
-            <p class="flow__note">↻ Each video's analytics shape the next one</p>
+            <p class="flow__note">↻ Each video's results shape the next one</p>
           </div>
         </article>
       </div>
@@ -336,21 +350,37 @@
       </div>
     </section>
 
-    <!-- ===== CONTACT ===== -->
-    <section class="section container" id="contact">
-      <div class="card card--glass contact reveal">
-        <h2 class="contact__title">Let's build something <span class="grad-text">great together</span></h2>
-        <p class="contact__desc">Open to collaborations, new opportunities, and feedback.</p>
-        <div class="contact__actions">
-          <a href="mailto:u.yilanli2000@gmail.com" class="btn btn--primary">✉️ Send an Email</a>
-          <a href="https://www.linkedin.com/in/uygaryilanli" class="btn btn--ghost" target="_blank" rel="noopener">in&nbsp;&nbsp;LinkedIn</a>
-        </div>
+    <!-- ===== EDUCATION ===== -->
+    <section class="section container" id="education">
+      <div class="section__head reveal">
+        <span class="section__kicker">Education</span>
+        <h2 class="section__title">Where I <span class="grad-text">studied</span></h2>
+      </div>
+
+      <div class="edu-grid">
+        <article class="card card--glass edu-card reveal">
+          <span class="edu-card__mark" aria-hidden="true">2026</span>
+          <h3>Çanakkale Onsekiz Mart University</h3>
+          <p class="edu-card__degree">Bachelor's Degree — Business Administration (English) · <strong>2021 – 2026 · Graduated</strong></p>
+          <p>Management, marketing, finance and strategy, taught in English. Alongside the degree I served on the board of the Entrepreneurship &amp; Visionary Leadership Club and started Snakely through Çanakkale Teknopark's pre-incubation program.</p>
+        </article>
+
+        <article class="card card--glass edu-card reveal">
+          <span class="edu-card__mark" aria-hidden="true">Now</span>
+          <h3>İstanbul University (Open Education)</h3>
+          <p class="edu-card__degree">Associate Degree — Computer Programming · <strong>2nd Year</strong></p>
+          <p>A complementary program that deepens the technical side of the products I manage, so I can plan features, estimate effort and work with developers on equal terms.</p>
+        </article>
       </div>
     </section>
   </main>
 
-  <footer class="footer">
+  <footer class="footer" id="contact">
     <p>© <span id="year">2026</span> Uygar Yılanlı. <span>All rights reserved.</span></p>
+    <nav class="footer__links" aria-label="Contact">
+      <a href="mailto:u.yilanli2000@gmail.com">Email</a>
+      <a href="https://www.linkedin.com/in/uygaryilanli" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </nav>
   </footer>
 
   <!-- ===== EKRAN GÖRÜNTÜSÜ BÜYÜTME ===== -->
